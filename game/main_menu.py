@@ -1,7 +1,10 @@
+import os
 from utils.functions import ask_int
 
-TITLE_FILEPATH = "utils/assets/title.txt"
-CREDITS_FILEPATH = "utils/assets/credits.txt"
+TITLE_FILEPATH = os.path.join(os.getcwd(), "utils", "assets", "title.txt")
+CREDITS_FILEPATH = os.path.join(os.getcwd(), "utils", "assets", "credits.txt")
+
+print(TITLE_FILEPATH, CREDITS_FILEPATH)
 
 NEW_GAME = 1
 ACHIEVEMENTS = 2
