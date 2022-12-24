@@ -29,7 +29,7 @@ def ask_options(opts):
     return selection
 
 
-def ask_int(start, end, msg):
+def ask_int(start=0, end=0, msg='Selection: '):
     """
     Asks the user for an integer in range [start, end].
 
@@ -50,10 +50,6 @@ def ask_int(start, end, msg):
     int
         Integer selected.
     """
-
-    start = start if start else float('-inf')
-    end = end if end else float('inf')
-    msg = msg if msg else ''
 
     selection = ''
     while not (selection.lstrip('-').isdigit() and start <= int(selection) <= end):

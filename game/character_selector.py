@@ -1,70 +1,11 @@
-from utils import ask_options, ask_int
-
-# TODO: Documentation
-
-# Characters
-CHARACTERS = [
-    {
-        'name': 'Sam',
-        'blood': 'AB+',
-        'traits': {
-            'swiftness': 1,
-            'sneak': -1
-        }
-    },
-    {
-        'name': 'Sarah',
-        'blood': '0-',
-        'traits': {
-            'strength': 1,
-            'maxhp': -1
-        }
-    },
-    {
-        'name': 'Christa',
-        'blood': '0+',
-        'traits': {
-            'sneak': 1,
-            'swiftness': -1
-        }
-    },
-    {
-        'name': 'Mike',
-        'blood': 'A+',
-        'traits': {
-            'maxhp': 1,
-            'strength': -1
-        }
-    }
-]
-
-# Dificulties
-DIFFICULTIES = [
-    {
-        'name': 'Easy',
-        'maxhp': 0,
-        'strength': 0,
-        'sneak': 0,
-        'swiftness': 0
-    },
-    {
-        'name': 'Medium',
-        'maxhp': 0,
-        'strength': 0,
-        'sneak': 0,
-        'swiftness': 0
-    },
-    {
-        'name': 'Hard',
-        'maxhp': 0,
-        'strength': 0,
-        'sneak': 0,
-        'swiftness': 0
-    }
-]
+from utils.functions import ask_options, ask_int
+from opts import KEYS, CHARACTERS, DIFFICULTIES
 
 
 def difficulties_print():
+    """
+    Prints all the difficulties.
+    """
     print('----- DIFFICULTY SELECTION -----')
     print()
 
@@ -76,6 +17,14 @@ def difficulties_print():
 
 
 def character_print(character):
+    """
+    Prints the provided character.
+
+    Parameters
+    ----------
+    character : dict[str, Any]
+        The character to print.
+    """
     print('----- CHARACTER SELECTION -----')
     print()
 
@@ -90,9 +39,17 @@ def character_print(character):
 
 # Public
 def character_selector():
+    """
+    Module in charge of difficulty and character selection.
+
+    Returns
+    -------
+    dict[str, Any]
+        Returns the chosen character dict.
+    """
     # Difficulty
     difficulties_print()
-    difficulty = DIFFICULTIES[ask_int(1, len(DIFFICULTIES), 'Selection: ') - 1]
+    difficulty = DIFFICULTIES[ask_int(1, len(DIFFICULTIES)) - 1]
     print()
 
     character = {
@@ -110,33 +67,36 @@ def character_selector():
     id = 0
     selection = ''
 
-    while selection != 'S':
+    while selection != KEYS['select']:
         # Character stats
         character_print(CHARACTERS[id])
 
         # Asks for selection
         selection = ask_options({
-            'S': 'Select',
-            'D': 'Next',
-            'A': 'Previous',
-            'E': 'Exit'
+            KEYS['select']: 'Select',
+            KEYS['next']: 'Next',
+            KEYS['previous']: 'Previous',
+            KEYS['exit']: 'Exit'
         })
 
         # CHECK SELECTION
         # Select -> ends loop
         # Previous
-        if selection == 'D' and id < (len(CHARACTERS) - 1):
+        if selection == KEYS['next'] and id < (len(CHARACTERS) - 1):
             id += 1
         # Next
-        elif selection == 'A' and id > 0:
+        elif selection == KEYS['previous'] and id > 0:
             id -= 1
         # Exit
-        elif selection == 'E':
-            exit()
+        elif selection == KEYS['exit']:
+            return
 
         print()
 
+    # applies traits and name and initializes hp
     for trait, val in CHARACTERS[id]['traits'].items():
         character[trait] += (val / 100) * character[trait]
+    character['name'] = CHARACTERS[id]['name']
+    character['hp'] = character['maxhp']
 
     return character
