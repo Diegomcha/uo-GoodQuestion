@@ -32,7 +32,7 @@ def character_print(character):
     print(f"\t{character['name']} ({character['blood']})")
     # traits
     for trait_name, trait_value in character['traits'].items():
-        print(f"\t{'+' if trait_value >= 0 else '-'} {str(trait_value).lstrip('-')} {trait_name}")
+        print(f"\t{'+' if trait_value >= 0 else '-'} {str(trait_value).lstrip('-')}% {trait_name}")
 
     print()
 
