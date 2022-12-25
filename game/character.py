@@ -1,44 +1,42 @@
 from utils.functions import ask_options, ask_int
-from opts import KEYS, CHARACTERS, DIFFICULTIES
+from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES
+import game.item as it
 
 
-def difficulties_print():
+def display_difficulties():
     """
     Prints all the difficulties.
     """
-    print('----- DIFFICULTY SELECTION -----')
+    print("----- DIFFICULTY SELECTION -----")
     print()
-
     # prints number and difficulties
     for i, diff in enumerate(DIFFICULTIES):
         print(f"{i+1} - {diff['name']}")
-
     print()
 
 
-def character_print(character):
+def display_base_character(baseCharacter):
     """
-    Prints the provided character.
+    Prints the provided base character.
 
     Parameters
     ----------
-    character : dict[str, Any]
-        The character to print.
+    baseCharacter : dict[str, Any]
+        The base character to print.
     """
     print('----- CHARACTER SELECTION -----')
     print()
 
     # name (blood)
-    print(f"\t{character['name']} ({character['blood']})")
+    print(f"\t{baseCharacter['name']} ({baseCharacter['blood']})")
     # traits
-    for trait_name, trait_value in character['traits'].items():
+    for trait_name, trait_value in baseCharacter['traits'].items():
         print(f"\t{'+' if trait_value >= 0 else '-'} {str(trait_value).lstrip('-')}% {trait_name}")
-
     print()
 
 
-# Public
-def character_selector():
+# Main methods
+def select():
     """
     Module in charge of difficulty and character selection.
 
@@ -48,9 +46,8 @@ def character_selector():
         Returns the chosen character dict.
     """
     # Difficulty
-    difficulties_print()
+    display_difficulties()
     difficulty = DIFFICULTIES[ask_int(1, len(DIFFICULTIES)) - 1]
-    print()
 
     character = {
         'name': '',
@@ -60,6 +57,8 @@ def character_selector():
         'sneak': difficulty['sneak'],
         'swiftness': difficulty['swiftness'],
         'room': 0,
+        'last_room': 0,
+        'remaining': difficulty['remaining'],
         'inventory': []
     }
 
@@ -69,7 +68,7 @@ def character_selector():
 
     while selection != KEYS['select']:
         # Character stats
-        character_print(CHARACTERS[id])
+        display_base_character(BASE_CHARACTERS[id])
 
         # Asks for selection
         selection = ask_options({
@@ -82,7 +81,7 @@ def character_selector():
         # CHECK SELECTION
         # Select -> ends loop
         # Previous
-        if selection == KEYS['next'] and id < (len(CHARACTERS) - 1):
+        if selection == KEYS['next'] and id < (len(BASE_CHARACTERS) - 1):
             id += 1
         # Next
         elif selection == KEYS['previous'] and id > 0:
@@ -91,12 +90,32 @@ def character_selector():
         elif selection == KEYS['exit']:
             return
 
-        print()
-
     # applies traits and name and initializes hp
-    for trait, val in CHARACTERS[id]['traits'].items():
+    for trait, val in BASE_CHARACTERS[id]['traits'].items():
         character[trait] += (val / 100) * character[trait]
-    character['name'] = CHARACTERS[id]['name']
+    character['name'] = BASE_CHARACTERS[id]['name']
     character['hp'] = character['maxhp']
 
     return character
+
+
+def display(character):
+    """
+    Prints the provided character.
+
+    Parameters
+    ----------
+    character : dict[str, Any]
+        Character to display.
+    """
+    title = f"----- {character['name']} ({character['remaining']} turn left) -----"
+
+    print(title)
+    print(f" - Health: {character['hp']} / {character['maxhp']}")
+    print(f" - Strength: {character['strength']}")
+    print(f" - Inventory:{' Empty' if len(character['inventory']) == 0 else ''}")
+
+    # TODO: CHANGE
+    for item in character['inventory']:
+        it.display(item)
+    print("-"*len(title))

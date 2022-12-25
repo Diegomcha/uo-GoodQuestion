@@ -1,34 +1,19 @@
 import os
-from utils.functions import ask_int
+from utils.functions import ask_int, print_file
 
 TITLE_FILEPATH = os.path.join(os.path.curdir, "utils", "assets", "title.txt")
 CREDITS_FILEPATH = os.path.join(os.path.curdir, "utils", "assets", "credits.txt")
-
-print(TITLE_FILEPATH, CREDITS_FILEPATH)
+LORE_FILEPATH = os.path.join(os.path.curdir, "utils", "assets", "lore.txt")
 
 NEW_GAME = 1
 ACHIEVEMENTS = 2
 CREDITS = 3
 EXIT = 4
 
-
-def print_file(file):
-    """
-    Prints the contents of the file.
-
-    Parameters
-    ----------
-    file : str
-        Path to the file whose contents to print.
-    """
-
-    f = open(file, 'r')
-    for line in f:
-        print(line)
-    f.close()
+# Main methods
 
 
-def main_menu():
+def display():
     """
     Displays main menu.
 
@@ -47,13 +32,25 @@ def main_menu():
     print('\t\t4 - [Exit] 🥲')
     print()
     selection = ask_int(1, 4)
-    print()
 
     if selection == CREDITS:
         print_file(CREDITS_FILEPATH)
         input()
-        return main_menu()
+        return display()
     if selection == EXIT:
         exit()
 
     return selection
+
+
+def display_lore():
+    """
+    Displays the lore.
+    """
+    f = open(LORE_FILEPATH, 'r')
+    for line in f:
+        if line == '\n':
+            input()
+        else:
+            print(line, end='')
+    f.close()

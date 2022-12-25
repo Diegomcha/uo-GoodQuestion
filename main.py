@@ -1,23 +1,39 @@
-from game.main_menu import main_menu, NEW_GAME
-from game.character_selector import character_selector
-from game.achievement_display import start_painting
+import game.main_menu as menu
+import game.character as char
+import game.achievement_display as achiev
+import game.room as rm
 
 
 def main():
     """
     Main game loop
     """
-    selection = main_menu()
-    if selection == NEW_GAME:
-        character = character_selector()
-        if character == None:
-            main()
-        else:
-            # TODO: Continue...
-            print(character)
+    # Shows main menu
+    selection = menu.display()
+
+    # If achievements is selected
+    if selection == menu.ACHIEVEMENTS:
+        # Displays achievements menu and when the user leaves returns to the main menu
+        achiev.display()
+        return main()
+
+    # If newgame is selected
     else:
-        start_painting()
-        main()
+        # Creates the character
+        character = char.select()
+        # If character creation is cancelled returns to main menu
+        if character == None:
+            return main()
+
+        # Displays starting text (lore)
+        menu.display_lore()
+
+        # while character['remaining'] > 0:
+        char.display(character)
+        room = rm.generate(character['room'], character['sneak'])
+        rm.display(room)
+
+        # TODO: Continue...
 
 
 main()

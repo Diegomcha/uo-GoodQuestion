@@ -23,7 +23,6 @@ def paint(count, total, index, name_from_index, description):
         KEYS['previous']: 'Previous',
         KEYS['exit']: 'Exit'
     })
-    print()
 
     if result == KEYS['next']:
         if index < count - 1:
@@ -55,5 +54,5 @@ def paint_logic(index_to_paint):
     paint(count, TOTAL, index_to_paint, name_from_index, description)
 
 
-def start_painting():
+def display():
     paint_logic(0)
