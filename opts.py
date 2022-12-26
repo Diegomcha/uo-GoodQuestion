@@ -146,7 +146,7 @@ ITEMS = {
         'traits': [
             {
                 # quality id: 0
-                'strength': 4
+                'strength': 4 
             },
             {
                 # quality id: 1
@@ -167,7 +167,32 @@ ITEMS = {
 List of the types of items.
 """
 
-MONSTERS = [
+MONSTERS = [ ##stats are provisional
+    {
+        'name': 'Ghoul',
+        'maxhp': 0,
+        'strength': +5,
+        'swiftness': -5
+        },
+    {
+        'name': 'Giant rat',
+        'maxhp': +5,
+        'strength': -5,
+        'swiftness': 0
+        },
+     {
+        'name': 'Viper',
+        'maxhp': 0,
+        'strength': 0,
+        'swiftness': +5
+        },
+    {
+        'name': 'Ghost',
+        'maxhp': 0,
+        'strength': 0,
+        'swiftness': 0
+        
+        },
 ]
 """
 List of monsters.
