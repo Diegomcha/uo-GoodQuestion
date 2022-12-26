@@ -23,7 +23,7 @@ def is_in_file(path, name):
         return -1
 
 
-def write_achievement(path, name, description, index):
+def write_achievement(path, name, description):
     """ Checks if the given achivement is in the file, and in case it is not, it writes
 
         Args:
@@ -39,7 +39,7 @@ def write_achievement(path, name, description, index):
         return 1
     elif is_in_file(path, name) == False:
         write_file = open(path, "a")
-        write_file.write(name + ": "+description + " -" + index+"\n")
+        write_file.write(name + ": "+description +"\n")
         write_file.close()
         return 0
     else:
