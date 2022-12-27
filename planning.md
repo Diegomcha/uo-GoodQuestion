@@ -40,8 +40,23 @@ A - Previous
 E - Exit
 Selection: █
 ```
-
-Continue...
+```
+Lore....
+█
+```
+```
+----- CHARACTER (? turn left) -----
+ - Health: ? / ?
+ - Strength: ?
+ - Inventory: Empty
+-----------------------------------
+You enter into a room that resembles a ???.
+You find a monster!
+<!--TODO...-->
+You find an item!
+· uwu [Common]
+  weapon
+```
 
 ### 2 - [Achievements]
 

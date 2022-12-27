@@ -202,15 +202,13 @@ ROOMS = [
     {
         # id: 0
         'resemblance': 'entrance',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
         'items': {
+            'rate': 100,
             'available': ['weapon', 'medicine'],
             'forced': []
         },
         'monsters': {
+            'rate': 0,
             'available': [],
             'forced': [],
             'base_stats': {
@@ -219,13 +217,6 @@ ROOMS = [
         },
         'connections': [],
         'locked': None  # None or number of key
-    },
-    {
-        # id: 1
-        'resemblance': 'living room',
-        'items': {
-
-        }
     }
 ]
 """
