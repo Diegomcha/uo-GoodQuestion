@@ -1,7 +1,9 @@
 from opts import ROOMS
-from utils.functions import decide
+import character
+from utils.functions import decide, ask_int
 import game.item as it
 
+actual_room = 0
 
 # Main methods
 def display(room):
@@ -19,12 +21,36 @@ def display(room):
             it.display(room['item'])
             print()
 
+def check_movable(room_to):
+    if room_to['locked'] == None:
+        return True
+    else:
+        if room_to['locked'] in character['inventory']['keys']:
+            return True
+        return False
+            
+def move(room):
+    print(f"----- {room} -----")
+    counter = 1
+    print()
+    print("Where to move?: ")
+    print()
+    for connection in room['conections']:
+        print(f"\t{counter} - {connection['resemblance']}")
+        counter += 1
+    where_to = room['connections'][ask_int(1,len(room['conections']))-1]
+    
+    if check_movable(where_to):
+        actual_room = where_to
+    else:
+        print("Seems to be locked")
+
 
 # Main
 def generate(id, sneak):
     room = ROOMS[id]
-    item_rate = room['items']['rate']
-    monster_rate = room['monsters']['rate'] - sneak
+    item_rate = room['rates']['item']
+    monster_rate = room['rates']['monster'] - sneak
 
     item = None
     monster = None
@@ -44,3 +70,4 @@ def generate(id, sneak):
         'item': item,
         'monster': monster
     }
+
