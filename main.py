@@ -2,6 +2,8 @@ import game.main_menu as menu
 import game.character as char
 import game.achievement_display as achiev
 import game.room as rm
+import game.options as opt
+from opts import ROOMS
 
 
 def main():
@@ -32,6 +34,7 @@ def main():
         char.display(character)
         room = rm.generate(character['room'], character['sneak'])
         rm.display(room)
+        opt.display(ROOMS[character['room']]['special options'], character)
 
         # TODO: Continue...
 

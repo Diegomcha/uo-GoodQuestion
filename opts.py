@@ -202,6 +202,7 @@ ROOMS = [
     # Floor 0
     {
         # id: 0
+        'special options' : ['Pet cat'],
         'resemblance': 'entrance',
         'items': {
             'rate': 100,
