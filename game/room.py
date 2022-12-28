@@ -33,7 +33,7 @@ def move(character, room):
     print()
 
     for i, id in enumerate(room['connections']):
-        print(f"{i+1} - Door {i+1} [{'????' if (id in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
+        print(f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
     where_to = room['connections'][ask_int(1, len(room['connections']))-1]
 
     if unlock(character, ROOMS[where_to]):
