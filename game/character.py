@@ -58,6 +58,7 @@ def select():
         'swiftness': difficulty['swiftness'],
         'room': 0,
         'last_room': 0,
+        'visited_rooms': [],
         'remaining': difficulty['remaining'],
         'inventory': []
     }

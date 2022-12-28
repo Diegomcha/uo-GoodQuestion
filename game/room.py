@@ -23,8 +23,8 @@ def display(room):
 # Main
 def generate(id, sneak):
     room = ROOMS[id]
-    item_rate = room['rates']['item']
-    monster_rate = room['rates']['monster'] - sneak
+    item_rate = room['items']['rate']
+    monster_rate = room['monsters']['rate'] - sneak
 
     item = None
     monster = None
