@@ -97,6 +97,7 @@ def select():
     character['name'] = BASE_CHARACTERS[id]['name']
     character['hp'] = character['maxhp']
     character['room'] = rm.generate(0, character['sneak'])
+    character['last_room'] = character['room']
 
     return character
 
