@@ -30,12 +30,14 @@ def main():
         # Displays starting text (lore)
         menu.display_lore()
 
-        # while character['remaining'] > 0:
-        char.display(character)
-        rm.display(character['room'])
-        opt.display(ROOMS[character['room']['id']]['special options'], character)
+        while character['remaining'] > 0:
+            char.display(character)
+            if character['last_room'] != character['room']:
+                rm.display(character['room'])
+            opt.display(ROOMS[character['room']['id']]['special options'], character)
 
         # TODO: Continue...
 
 
 main()
+
