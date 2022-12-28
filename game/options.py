@@ -22,8 +22,8 @@ def display(special_options, character):
         rm.move(character, character['room'])
 
     elif selection == 2:
-        # Display iventory
-        print()
+        print(character['inventory'])
+        input()
     else:
         selection -= 3
         if special_options[selection] == "Pet cat":
