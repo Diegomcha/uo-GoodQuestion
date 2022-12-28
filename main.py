@@ -32,8 +32,7 @@ def main():
 
         # while character['remaining'] > 0:
         char.display(character)
-        room = rm.generate(character['room'], character['sneak'])
-        rm.display(room)
+        rm.display(character['room'])
         opt.display(ROOMS[character['room']]['special options'], character)
 
         # TODO: Continue...
