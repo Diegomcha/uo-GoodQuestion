@@ -1,5 +1,6 @@
 from opts import ROOMS
-from utils.functions import decide
+import game.character as char
+from utils.functions import decide, ask_int
 import game.item as it
 
 
@@ -20,11 +21,31 @@ def display(room):
             print()
 
 
+def unlock(character, room):  # TODO: Change where the keys are stored
+    return True if (room['locked'] == None) else (room['locked'] in character['inventory']['keys'])
+
+
+def move(character, room):
+    print(f"----- {room['resemblance'].upper()} -----")
+    print()
+    print("Where to move?: ")
+    print()
+
+    for i, connection in enumerate(room['conections']):
+        print(f"\t{i} - {connection['resemblance']}")
+    where_to = room['connections'][ask_int(1, len(room['conections']))-1]
+
+    if unlock(where_to):
+        character['room'] = where_to
+    else:
+        print("Seems to be locked")
+
+
 # Main
 def generate(id, sneak):
     room = ROOMS[id]
     item_rate = room['items']['rate']
-    monster_rate = room['monsters']['rate'] - sneak
+    # monster_rate = room['monsters']['rate'] - sneak
 
     item = None
     monster = None
