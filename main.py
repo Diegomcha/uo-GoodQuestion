@@ -33,7 +33,7 @@ def main():
         # while character['remaining'] > 0:
         char.display(character)
         rm.display(character['room'])
-        opt.display(ROOMS[character['room']]['special options'], character)
+        opt.display(ROOMS[character['room']['id']]['special options'], character)
 
         # TODO: Continue...
 

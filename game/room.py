@@ -60,6 +60,7 @@ def generate(id, sneak):
             # monster = generate_monster(room['monsters']['available'], room['monsters']['base_stats'])
 
     return {
+        'id': id,
         'resemblance': room['resemblance'],
         'connections': room['connections'],
         'item': item,
