@@ -1,7 +1,8 @@
-from opts import ROOMS
-import game.character as char
-from utils.functions import decide, ask_int
 import game.item as it
+import game.room as rm
+
+from opts import ROOMS
+from utils.functions import decide, ask_int
 
 
 # Main methods
@@ -21,7 +22,7 @@ def display(room):
             print()
 
 
-def unlock(character, room):  # TODO: Change where the keys are stored
+def unlock(character, room):  # TODO: Change where the keys are stored and remove it when used
     return True if (room['locked'] == None) else (room['locked'] in character['inventory']['keys'])
 
 
@@ -31,12 +32,12 @@ def move(character, room):
     print("Where to move?: ")
     print()
 
-    for i, connection in enumerate(room['conections']):
-        print(f"\t{i} - {connection['resemblance']}")
-    where_to = room['connections'][ask_int(1, len(room['conections']))-1]
+    for i, id in enumerate(room['connections']):
+        print(f"{i+1} - Door {i+1} [{'????' if (id in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
+    where_to = room['connections'][ask_int(1, len(room['connections']))-1]
 
-    if unlock(where_to):
-        character['room'] = where_to
+    if unlock(character, ROOMS[where_to]):
+        character['room'] = rm.generate(where_to, character['sneak'])
     else:
         print("Seems to be locked")
 
