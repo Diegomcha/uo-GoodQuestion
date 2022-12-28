@@ -56,6 +56,7 @@ def select():
         'strength': difficulty['strength'],
         'sneak': difficulty['sneak'],
         'swiftness': difficulty['swiftness'],
+        'shield': 0,
         'room': 0,
         'last_room': 0,
         'visited_rooms': [],
