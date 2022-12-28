@@ -197,3 +197,19 @@ ROOMS = [
 """
 List of rooms (Map of the house).
 """
+
+"""
+List of achievements.
+"""
+ACHIEVEMENTS = {
+"PACIFIST": ["PACIFIST", "Complete the game but no enemy was harmed during the proccess"],
+"UNARMED" : ["UNARMED", "Complete the game without collecting any weapon"],
+"SNEAKY PEAKY" : ["SNEAKY PEAKY", "Complete the game without finding an enemy (lucky you)"],
+"ROOKIE TREASURE HUNTER" : ["ROOKIE TREASURE HUNTER", "Collect your first item"],
+"ADVANCED TREASURE HUNTER" : ["ADVANCED TREASURE HUNTER", "Collect the halve of the items in one run"],
+"GOD-LIKE TREASURE HUNTER" : ["GOD-LIKE-TREASURE HUNTER", "Collect all the items in one run"],
+"SAVIOUR" : ["SAVIOUR", "Complete the game once"],
+"MULTIPLE" : ["MULTIPLE", "Complete the game using all characters"],
+"VOLATIN" : ["VOLATIN", "Save your mate and jump through the window to scape"],
+"HERO" : ["HERO", "Defeat a total of 30 enemies in one run"]
+}
