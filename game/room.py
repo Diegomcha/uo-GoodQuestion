@@ -1,9 +1,8 @@
 from opts import ROOMS
-import character
+import game.character as char
 from utils.functions import decide, ask_int
 import game.item as it
 
-actual_room = 0
 
 # Main methods
 def display(room):
@@ -21,27 +20,23 @@ def display(room):
             it.display(room['item'])
             print()
 
-def check_movable(room_to):
-    if room_to['locked'] == None:
-        return True
-    else:
-        if room_to['locked'] in character['inventory']['keys']:
-            return True
-        return False
-            
-def move(room):
-    print(f"----- {room} -----")
-    counter = 1
+
+def unlock(character, room):  # TODO: Change where the keys are stored
+    return True if (room['locked'] == None) else (room['locked'] in character['inventory']['keys'])
+
+
+def move(character, room):
+    print(f"----- {room['resemblance'].upper()} -----")
     print()
     print("Where to move?: ")
     print()
-    for connection in room['conections']:
-        print(f"\t{counter} - {connection['resemblance']}")
-        counter += 1
-    where_to = room['connections'][ask_int(1,len(room['conections']))-1]
-    
-    if check_movable(where_to):
-        actual_room = where_to
+
+    for i, connection in enumerate(room['conections']):
+        print(f"\t{i} - {connection['resemblance']}")
+    where_to = room['connections'][ask_int(1, len(room['conections']))-1]
+
+    if unlock(where_to):
+        character['room'] = where_to
     else:
         print("Seems to be locked")
 
@@ -49,8 +44,8 @@ def move(room):
 # Main
 def generate(id, sneak):
     room = ROOMS[id]
-    item_rate = room['rates']['item']
-    monster_rate = room['rates']['monster'] - sneak
+    item_rate = room['items']['rate']
+    # monster_rate = room['monsters']['rate'] - sneak
 
     item = None
     monster = None
@@ -70,4 +65,3 @@ def generate(id, sneak):
         'item': item,
         'monster': monster
     }
-

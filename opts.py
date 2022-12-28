@@ -146,7 +146,7 @@ ITEMS = {
         'traits': [
             {
                 # quality id: 0
-                'strength': 4 
+                'strength': 4
             },
             {
                 # quality id: 1
@@ -167,368 +167,171 @@ ITEMS = {
 List of the types of items.
 """
 
-MONSTERS = [ ##stats are provisional
+# Puse los traits en un dictionario asi no hay que poner todas las stats even if no hay changes
+MONSTERS = [  # stats are provisional
     {
         'name': 'Ghoul',
-        'maxhp': 0,
-        'strength': +5,
-        'swiftness': -5
-        },
+        'traits': {
+            'strength': 5,
+            'swiftness': -5
+        }
+    },
     {
         'name': 'Giant rat',
-        'maxhp': +5,
-        'strength': -5,
-        'swiftness': 0
-        },
-     {
+        'traits': {
+            'maxhp': 5,
+            'strength': -5
+        }
+    },
+    {
         'name': 'Viper',
-        'maxhp': 0,
-        'strength': 0,
-        'swiftness': +5
-        },
+        'traits': {
+            'swiftness': 5
+        }
+    },
     {
         'name': 'Ghost',
-        'maxhp': 0,
-        'strength': 0,
-        'swiftness': 0
-        
-        },
+        'traits': {}
+    },
 ]
 """
 List of monsters.
 """
+
 ROOMS = [
-    #Floor 0
+    # Floor 0
     {
         # id: 0
         'resemblance': 'entrance',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
         'items': {
+            'rate': 100,
             'available': ['weapon', 'medicine'],
             'forced': []
         },
         'monsters': {
+            'rate': 0,
             'available': [],
             'forced': [],
             'base_stats': {
 
             }
         },
-        'connections': [1,2,3,4,5],
+        'connections': [1, 2, 3, 4, 5],
         'locked': None  # None or number of key
     },
     {
         # id: 1
         'resemblance': 'living room',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
-        'connections': [0,5],
+        # TODO: Add items and monster
+        'connections': [0, 5],
         'locked': None  # None or number of key
     },
     {
         # id: 2
         'resemblance': 'kitchen',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
-        'connections': [0,3],
+        # TODO: Add items and monster
+        'connections': [0, 3],
         'locked': None  # None or number of key
     },
     {
         # id: 3
         'resemblance': 'bathroom',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
-        'connections': [0,2],
+        # TODO: Add items and monster
+        'connections': [0, 2],
         'locked': None  # None or number of key
     },
     {
         # id: 4
         'resemblance': 'stairs',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
+        # TODO: Add items and monster
         'connections': [0],
         'locked': None  # None or number of key
     },
     {
         # id: 5
         'resemblance': 'guests bedroom',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
-        'connections': [0,1],
+        # TODO: Add items and monster
+        'connections': [0, 1],
         'locked': None  # None or number of key
     },
-    #Floor 1
+    # Floor 1
     {
         # id: 6
         'resemblance': 'hall2',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
-        'connections': [4,7,8,9,10,11,12],
+        # TODO: Add items and monster
+        'connections': [4, 7, 8, 9, 10, 11, 12],
         'locked': None  # None or number of key
     },
     {
         # id: 7
         'resemblance': 'bathroom',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
+        # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
-    },{
+    }, {
         # id: 8
         'resemblance': 'diner',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
+        # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
-    },{
+    }, {
         # id: 9
         'resemblance': 'main bedroom',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
-        'connections': [6,12],
+        # TODO: Add items and monster
+        'connections': [6, 12],
         'locked': None  # None or number of key
-    },{
+    }, {
         # id: 10
         'resemblance': 'bedroom',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
+        # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
-    },{
+    }, {
         # id: 11
         'resemblance': 'toys room',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
+        # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
-    },{
+    }, {
         # id: 12
         'resemblance': 'main bedroom bathroom',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
+        # TODO: Add items and monster
         'connections': [9],
         'locked': None  # None or number of key
     },
-    #Floor 3
+    # Floor 3
     {
         # id: 13
         'resemblance': 'atic',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
+        # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
     },
-    #Basement
+    # Basement
     {
         # id: 14
         'resemblance': 'basement',
-        'rates': {
-            'item': 100,
-            'monster': 0
-        },
-        'items': {
-            'available': ['weapon', 'medicine'],
-            'forced': []
-        },
-        'monsters': {
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
-        },
+        # TODO: Add items and monster
         'connections': [4],
         'locked': 1  # None or number of key
     }
-    ]
+]
 """
 List of rooms (Map of the house).
 """
 
+ACHIEVEMENTS = {
+    "PACIFIST": ["PACIFIST", "Complete the game but no enemy was harmed during the proccess"],
+    "UNARMED": ["UNARMED", "Complete the game without collecting any weapon"],
+    "SNEAKY PEAKY": ["SNEAKY PEAKY", "Complete the game without finding an enemy (lucky you)"],
+    "ROOKIE TREASURE HUNTER": ["ROOKIE TREASURE HUNTER", "Collect your first item"],
+    "ADVANCED TREASURE HUNTER": ["ADVANCED TREASURE HUNTER", "Collect the halve of the items in one run"],
+    "GOD-LIKE TREASURE HUNTER": ["GOD-LIKE-TREASURE HUNTER", "Collect all the items in one run"],
+    "SAVIOUR": ["SAVIOUR", "Complete the game once"],
+    "MULTIPLE": ["MULTIPLE", "Complete the game using all characters"],
+    "VOLATIN": ["VOLATIN", "Save your mate and jump through the window to scape"],
+    "HERO": ["HERO", "Defeat a total of 30 enemies in one run"]
+}
 """
 List of achievements.
 """
-ACHIEVEMENTS = {
-"PACIFIST": ["PACIFIST", "Complete the game but no enemy was harmed during the proccess"],
-"UNARMED" : ["UNARMED", "Complete the game without collecting any weapon"],
-"SNEAKY PEAKY" : ["SNEAKY PEAKY", "Complete the game without finding an enemy (lucky you)"],
-"ROOKIE TREASURE HUNTER" : ["ROOKIE TREASURE HUNTER", "Collect your first item"],
-"ADVANCED TREASURE HUNTER" : ["ADVANCED TREASURE HUNTER", "Collect the halve of the items in one run"],
-"GOD-LIKE TREASURE HUNTER" : ["GOD-LIKE-TREASURE HUNTER", "Collect all the items in one run"],
-"SAVIOUR" : ["SAVIOUR", "Complete the game once"],
-"MULTIPLE" : ["MULTIPLE", "Complete the game using all characters"],
-"VOLATIN" : ["VOLATIN", "Save your mate and jump through the window to scape"],
-"HERO" : ["HERO", "Defeat a total of 30 enemies in one run"]
-}
