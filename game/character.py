@@ -1,7 +1,8 @@
-from utils.functions import ask_options, ask_int
 import game.room as rm
-from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES
 import game.item as it
+
+from utils.functions import ask_options, ask_int
+from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES
 
 
 def display_difficulties():
@@ -54,13 +55,14 @@ def select():
         'name': '',
         'maxhp': difficulty['maxhp'],
         'hp': 0,
+        'shield': 0,
         'strength': difficulty['strength'],
         'sneak': difficulty['sneak'],
         'swiftness': difficulty['swiftness'],
         'last_room': 0,
         'visited_rooms': [],
         'remaining': difficulty['remaining'],
-        'inventory': {'keys': [], 'medicine': [], 'items': [], 'clothes': {'shirt': None, 'pants': None, 'feet': None, 'pjama': None}, 'faith item':None, 'weapon': None }
+        'inventory': {'keys': [], 'medicine': [], 'items': [], 'clothes': {'shirt': None, 'pants': None, 'feet': None, 'pijama': None}, 'faith_item': None, 'weapon': None}
     }
 
     # Character

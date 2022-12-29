@@ -16,4 +16,3 @@ def generate(available):
 def display(item):
     print(f"· {item['name']} [{QUALITIES[item['quality']]['name']}]")
     print(f"  {item['type']}{' - CONSUMABLE' if item['consumable'] else ''}")
-    # print(f"\t")

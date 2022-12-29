@@ -1,6 +1,8 @@
 import game.achievement_manager as am
+
 from opts import KEYS, ACHIEVEMENTS_SAVE_PATH
 from utils.functions import ask_options
+
 TOTAL = 10
 
 

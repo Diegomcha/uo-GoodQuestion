@@ -13,28 +13,28 @@ def display(room, character):
         if room['monster'] == room['item'] == None:
             print("You find nothing inside.")
         else:
-            # TODO:
-            # if room['monster'] != None:
-            #     print(f"You find a monster!")
-            #     print()
+            if room['monster'] != None:
+                print(f"You find a monster!")
+                # TODO: Display monster
+                # mon.display(room['monster'])
+                print()
             if room['item'] != None:
                 print(f"You find an item!")
                 it.display(room['item'])
                 print()
 
 
-def unlock(character, room):  
+def unlock(character, room):
     if room['locked'] == None:
         return True
-    
-    for key in character['inventory']['keys']:    
+
+    for key in character['inventory']['keys']:
         if key == room['locked']:
             character['inventory']['keys'].remove(key)
             room['locked'] = None
             return True
-            
-    return False
 
+    return False
 
 
 def move(character, room):
@@ -46,14 +46,13 @@ def move(character, room):
     for i, id in enumerate(room['connections']):
         print(f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
     print(f"{len(room['connections']) +1 } - Exit")
-    
+
     ask = ask_int(1, len(room['connections']) + 1)
-    
-    if( ask == len(room['connections']) + 1):
+
+    if (ask == len(room['connections']) + 1):
         return 0
     else:
-        where_to = room['connections'][ask -1] 
-        
+        where_to = room['connections'][ask - 1]
 
     if unlock(character, ROOMS[where_to]):
         character['last_room'] = character['room']['id']
@@ -67,21 +66,24 @@ def move(character, room):
 # Main
 def generate(id, sneak):
     room = ROOMS[id]
-    #item_rate = room['items']['rate']
-    item_rate = 0
-    # monster_rate = room['monsters']['rate'] - sneak
+    item_rate = room['items']['rate']
+    monster_rate = room['monsters']['rate'] - sneak
 
     item = None
     monster = None
 
     # generate item
     if item_rate > 0:
-        if decide(item_rate):
+        room['items']['rate'] = 0  # removes the possibility of an item appearing when the room has already been visited
+        if decide(item_rate):  # if item is gonna be generated
             item = it.generate(room['items']['available'])
+
     # TODO: generate monster
-    # if monster_rate > 0:
-        # if decide(monster_rate):
-            # monster = generate_monster(room['monsters']['available'], room['monsters']['base_stats'])
+    if monster_rate > 0:
+        if decide(monster_rate):
+            # TODO: generate monster & remove pass
+            pass
+            # monster = mon.generate(room['monsters']['available'], room['monsters']['base_stats'])
 
     return {
         'id': id,
@@ -90,4 +92,3 @@ def generate(id, sneak):
         'item': item,
         'monster': monster
     }
-

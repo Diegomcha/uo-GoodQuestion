@@ -115,50 +115,122 @@ List of all the available qualities.
 
 ITEMS = {
     'weapon': {
-        'names': ['uwu'],
-        'legendary_names': ['special'],
+        'names': ['knife', 'fork', 'machete', 'spike'],
+        'legendary_names': ["cat's sword"],  # TODO: new names
         'consumable': False,
-        'pickable': True,
-        'traits': [
+        'duration': -1,
+        'traits': [  # TODO: change rates
             {
-                # qualit'id': 0,
+                # quality id: 0
                 'strength': 4
             },
             {
-                # qualit'id': 1,
+                # quality id: 1
                 'strength': 3
             },
             {
-                # qualit'id': 2,
+                # quality id: 2
                 'strength': 2
             },
             {
-                # qualit'id': 3,
+                # quality id: 3
                 'strength': 1
             }
         ]
     },
     'medicine': {
-        'names': ['uwu'],
-        'special_names': ['special'],
+        'names': ['half-filled syringe', 'unknown pills', 'inhaler'],
+        'special_names': ['glass of glowing liquid'],
         'consumable': True,
-        'pickable': True,
-        'traits': [
+        'duration': -1,
+        'traits': [  # TODO: Change rates
             {
-                # qualit'id': 0,
-                'strength': 4
+                # quality id: 0
+                'hp': 4,
             },
             {
-                # qualit'id': 1,
-                'strength': 3
+                # quality id: 1
+                'hp': 3
             },
             {
-                # qualit'id': 2,
-                'strength': 2
+                # quality id: 2
+                'hp': 2
             },
             {
-                # qualit'id': 3,
-                'strength': 1
+                # quality id: 3
+                'hp': 1
+            }
+        ],
+    },
+    'clothes': {
+        'names': ['broken t-shirt', 'shorts', 'sleepers'],
+        'special_names': ['dino pijama'],
+        'consumable': False,
+        'duration': -1,
+        'traits': [  # TODO: Change rates
+            {
+                # quality id: 0
+                'sneak': 4
+            },
+            {
+                # quality id: 1
+                'sneak': 3
+            },
+            {
+                # quality id: 2
+                'sneak': 2
+            },
+            {
+                # quality id: 3
+                'sneak': 1
+            }
+        ]
+    },
+    'energetic_drinks': {
+        'names': ['PinkBull', 'NotMonster', 'Popstar', 'Freeze'],
+        'special_names': ['Frosty Freezy Freeze'],
+        'consumable': True,
+        'duration': 1,
+        'traits': [  # TODO: Change rates
+            {
+                # quality id: 0
+                'swiftness': 4
+            },
+            {
+                # quality id: 1
+                'swiftness': 3
+            },
+            {
+                # quality id: 2
+                'swiftness': 2
+            },
+            {
+                # quality id: 3
+                'swiftness': 1
+            }
+        ]
+    },
+    'faith_shields': {
+        'names': ['wristband', 'cross', 'necklace', 'old watch'],
+        'special_names': ["cat's necklace"],
+        'consumable': False,
+        'duration': -1,
+        'traits': [  # TODO: Change rates
+            {
+                # quality id: 0
+                'shield': 4
+            },
+            {
+                # quality id: 1
+                'shield': 3
+            },
+            {
+                # quality id: 2
+                'shield': 2
+            },
+            {
+                # quality id: 3
+                'shield': 1
             }
         ]
     }
@@ -245,7 +317,7 @@ ROOMS = [
         'id': 4,
         'resemblance': 'stairs',
         # TODO: Add items and monster
-        'connections': [0,6,14],
+        'connections': [0, 6, 14],
         'locked': None  # None or number of key
     },
     {
