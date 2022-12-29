@@ -12,7 +12,7 @@ def display_inventory(character):
         print(f"\t- {element['name']}")
     # Clothes
     print("Clothes:")
-    if character['inventory']['clothes']['pjama'] == None:
+    if character['inventory']['clothes']['pijama'] == None:
         print(f"\tShirt: {character['inventory']['clothes']['shirt']}")
         print(f"\tPants: {character['inventory']['clothes']['pants']}")
         print(f"\tShoes: {character['inventory']['clothes']['feet']}")
@@ -21,7 +21,7 @@ def display_inventory(character):
     # Faith Item
     # If there is no faith item in inventory, won't show
     # (No spoilers)
-    if character['inventory']['faith item'] != None:
+    if character['inventory']['faith_item'] != None:
         print(f"Faith item : {character['inventory']['faith item']}")
     # Weapon
     print(f"Weapon: {character['inventory']['weapon']}")
