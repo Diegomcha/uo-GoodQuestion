@@ -22,8 +22,16 @@ def display(room):
             print()
 
 
-def unlock(character, room):  # TODO: Change where the keys are stored and remove it when used
-    return True if (room['locked'] == None) else (room['locked'] in character['inventory']['keys'])
+def unlock(character, room):  
+    if room['locked'] == None:
+        return True
+    
+    for i in range(len(character['inventory']['keys'])):
+        if character['inventory']['keys'][i] == room['locked']:
+            character['inventory']['keys'].remove(i)
+            return True
+            
+    return False
 
 
 def move(character, room):
