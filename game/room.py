@@ -6,20 +6,21 @@ from utils.functions import decide, ask_int
 
 
 # Main methods
-def display(room):
+def display(room, character):
     print(f"You enter into a room that resembles a {room['resemblance']}.")
 
-    if room['monster'] == room['item'] == None:
-        print("You find nothing inside.")
-    else:
-        # TODO:
-        # if room['monster'] != None:
-        #     print(f"You find a monster!")
-        #     print()
-        if room['item'] != None:
-            print(f"You find an item!")
-            it.display(room['item'])
-            print()
+    if not room['id'] in character['visited_rooms']:
+        if room['monster'] == room['item'] == None:
+            print("You find nothing inside.")
+        else:
+            # TODO:
+            # if room['monster'] != None:
+            #     print(f"You find a monster!")
+            #     print()
+            if room['item'] != None:
+                print(f"You find an item!")
+                it.display(room['item'])
+                print()
 
 
 def unlock(character, room):  
@@ -33,6 +34,7 @@ def unlock(character, room):
             return True
             
     return False
+
 
 
 def move(character, room):
@@ -57,7 +59,7 @@ def move(character, room):
         character['last_room'] = character['room']['id']
         character['visited_rooms'].append(character['room']['id'])
         character['room'] = rm.generate(where_to, character['sneak'])
-        display(character['room'])
+        display(character['room'], character)
     else:
         print("Seems to be locked")
 
@@ -88,3 +90,4 @@ def generate(id, sneak):
         'item': item,
         'monster': monster
     }
+
