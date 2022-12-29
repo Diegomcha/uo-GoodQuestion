@@ -31,11 +31,18 @@ def move(character, room):
     print()
     print("Where to move?: ")
     print()
-
+    
     for i, id in enumerate(room['connections']):
         print(f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
-    where_to = room['connections'][ask_int(1, len(room['connections']))-1]
-
+    print(f"{len(room['connections']) +1 } - Exit")
+    
+    ask = ask_int(1, len(room['connections']) + 1)
+    
+    if( ask == len(room['connections']) + 1):
+        return 0
+    else:
+        where_to = room['connections'][ask]
+        
     if unlock(character, ROOMS[where_to]):
         character['room'] = rm.generate(where_to, character['sneak'])
     else:
