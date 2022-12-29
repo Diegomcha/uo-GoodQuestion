@@ -26,9 +26,10 @@ def unlock(character, room):
     if room['locked'] == None:
         return True
     
-    for i in range(len(character['inventory']['keys'])):
-        if character['inventory']['keys'][i] == room['locked']:
-            character['inventory']['keys'].remove(i)
+    for key in character['inventory']['keys']:    
+        if key == room['locked']:
+            character['inventory']['keys'].remove(key)
+            room['locked'] = None
             return True
             
     return False
