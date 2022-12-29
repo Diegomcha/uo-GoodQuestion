@@ -85,25 +85,25 @@ Base stats for each difficulty. New difficulties may be added, the structure is 
 
 QUALITIES = [
     {
-        # id: 0
+        'id': 0,
         'name': 'Legendary',
         'special': True,
         'rate': 5
     },
     {
-        # id: 1
+        'id': 1,
         'name': 'Rare',
         'special': False,
         'rate': 15
     },
     {
-        # id: 2
+        'id': 2,
         'name': 'Uncommon',
         'special': False,
         'rate': 30
     },
     {
-        # id: 3
+        'id': 3,
         'name': 'Common',
         'special': False,
         'rate': 50
@@ -121,19 +121,19 @@ ITEMS = {
         'pickable': True,
         'traits': [
             {
-                # quality id: 0
+                # qualit'id': 0,
                 'strength': 4
             },
             {
-                # quality id: 1
+                # qualit'id': 1,
                 'strength': 3
             },
             {
-                # quality id: 2
+                # qualit'id': 2,
                 'strength': 2
             },
             {
-                # quality id: 3
+                # qualit'id': 3,
                 'strength': 1
             }
         ]
@@ -145,19 +145,19 @@ ITEMS = {
         'pickable': True,
         'traits': [
             {
-                # quality id: 0
+                # qualit'id': 0,
                 'strength': 4
             },
             {
-                # quality id: 1
+                # qualit'id': 1,
                 'strength': 3
             },
             {
-                # quality id: 2
+                # qualit'id': 2,
                 'strength': 2
             },
             {
-                # quality id: 3
+                # qualit'id': 3,
                 'strength': 1
             }
         ]
@@ -201,8 +201,8 @@ List of monsters.
 ROOMS = [
     # Floor 0
     {
-        # id: 0
-        'special options': ['Pet cat'],
+        'id': 0,
+        'special options': [],
         'resemblance': 'entrance',
         'items': {
             'rate': 100,
@@ -221,35 +221,35 @@ ROOMS = [
         'locked': None  # None or number of key
     },
     {
-        # id: 1
+        'id': 1,
         'resemblance': 'living room',
         # TODO: Add items and monster
         'connections': [0, 5],
         'locked': None  # None or number of key
     },
     {
-        # id: 2
+        'id': 2,
         'resemblance': 'kitchen',
         # TODO: Add items and monster
         'connections': [0, 3],
         'locked': None  # None or number of key
     },
     {
-        # id: 3
+        'id': 3,
         'resemblance': 'bathroom',
         # TODO: Add items and monster
         'connections': [0, 2],
         'locked': None  # None or number of key
     },
     {
-        # id: 4
+        'id': 4,
         'resemblance': 'stairs',
         # TODO: Add items and monster
-        'connections': [0],
+        'connections': [0,6,14],
         'locked': None  # None or number of key
     },
     {
-        # id: 5
+        'id': 5,
         'resemblance': 'guests bedroom',
         # TODO: Add items and monster
         'connections': [0, 1],
@@ -257,44 +257,44 @@ ROOMS = [
     },
     # Floor 1
     {
-        # id: 6
+        'id': 6,
         'resemblance': 'hall2',
         # TODO: Add items and monster
         'connections': [4, 7, 8, 9, 10, 11, 12],
         'locked': None  # None or number of key
     },
     {
-        # id: 7
+        'id': 7,
         'resemblance': 'bathroom',
         # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
     }, {
-        # id: 8
+        'id': 8,
         'resemblance': 'diner',
         # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
     }, {
-        # id: 9
+        'id': 9,
         'resemblance': 'main bedroom',
         # TODO: Add items and monster
         'connections': [6, 12],
         'locked': None  # None or number of key
     }, {
-        # id: 10
+        'id': 10,
         'resemblance': 'bedroom',
         # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
     }, {
-        # id: 11
+        'id': 11,
         'resemblance': 'toys room',
         # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
     }, {
-        # id: 12
+        'id': 12,
         'resemblance': 'main bedroom bathroom',
         # TODO: Add items and monster
         'connections': [9],
@@ -302,7 +302,7 @@ ROOMS = [
     },
     # Floor 3
     {
-        # id: 13
+        'id': 13,
         'resemblance': 'atic',
         # TODO: Add items and monster
         'connections': [6],
@@ -310,8 +310,9 @@ ROOMS = [
     },
     # Basement
     {
-        # id: 14
+        'id': 14,
         'resemblance': 'basement',
+        'special option': 'Pet cat',
         # TODO: Add items and monster
         'connections': [4],
         'locked': 1  # None or number of key

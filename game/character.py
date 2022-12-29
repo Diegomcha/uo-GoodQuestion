@@ -60,7 +60,7 @@ def select():
         'last_room': 0,
         'visited_rooms': [],
         'remaining': difficulty['remaining'],
-        'inventory': {'keys': [], 'medicine': [], 'items': [], 'clothes': {'shirt': "", 'pants': "", 'feet': "", 'pjama': ""}, 'faith item':"", 'weapon': "" }
+        'inventory': {'keys': [], 'medicine': [], 'items': [], 'clothes': {'shirt': None, 'pants': None, 'feet': None, 'pjama': None}, 'faith item':None, 'weapon': None }
     }
 
     # Character
@@ -97,7 +97,7 @@ def select():
     character['name'] = BASE_CHARACTERS[id]['name']
     character['hp'] = character['maxhp']
     character['room'] = rm.generate(0, character['sneak'])
-    character['last_room'] = character['room']
+    character['last_room'] = character['room']['id']
 
     return character
 

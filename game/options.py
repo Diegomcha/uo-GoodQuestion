@@ -21,7 +21,7 @@ def display(special_options, character):
 
     if selection == 1:
         rm.move(character, character['room'])
-
+        display(special_options, character)
     elif selection == 2:
         inv.display_inventory(character)
         input()

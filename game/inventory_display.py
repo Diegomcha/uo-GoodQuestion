@@ -11,7 +11,7 @@ def display_inventory(character):
     #Items
     print("Items:")
     for element in character['inventory']['items']:
-        print(f"\t- {element}")
+        print(f"\t- {element['name']}")
     #Clothes
     print("Clothes:")
     if character['inventory']['clothes']['pjama'] == None:

@@ -31,7 +31,7 @@ def move(character, room):
     print()
     print("Where to move?: ")
     print()
-    
+
     for i, id in enumerate(room['connections']):
         print(f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
     print(f"{len(room['connections']) +1 } - Exit")
@@ -41,10 +41,14 @@ def move(character, room):
     if( ask == len(room['connections']) + 1):
         return 0
     else:
-        where_to = room['connections'][ask]
+        where_to = room['connections'][ask -1] 
         
+
     if unlock(character, ROOMS[where_to]):
+        character['last_room'] = character['room']['id']
+        character['visited_rooms'].append(character['room']['id'])
         character['room'] = rm.generate(where_to, character['sneak'])
+        display(character['room'])
     else:
         print("Seems to be locked")
 
@@ -52,7 +56,8 @@ def move(character, room):
 # Main
 def generate(id, sneak):
     room = ROOMS[id]
-    item_rate = room['items']['rate']
+    #item_rate = room['items']['rate']
+    item_rate = 0
     # monster_rate = room['monsters']['rate'] - sneak
 
     item = None
