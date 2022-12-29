@@ -1,5 +1,5 @@
 import game.item as it
-import game.room as rm
+import game.character as char
 
 from opts import ROOMS
 from utils.functions import decide, ask_int
@@ -21,7 +21,12 @@ def display(room, character):
             if room['item'] != None:
                 print(f"You find an item!")
                 it.display(room['item'])
-                print()
+    elif room['monster'] != None:
+        print(f"A monster has appeared!")
+        # TODO: Display monster
+        # mon.display(room['monster'])
+
+    print()
 
 
 def unlock(character, room):
@@ -32,6 +37,7 @@ def unlock(character, room):
         if key == room['locked']:
             character['inventory']['keys'].remove(key)
             room['locked'] = None
+            print('You unlock the door with the key you have in your inventory.')
             return True
 
     return False
@@ -40,12 +46,11 @@ def unlock(character, room):
 def move(character, room):
     print(f"----- {room['resemblance'].upper()} -----")
     print()
-    print("Where to move?: ")
-    print()
 
     for i, id in enumerate(room['connections']):
         print(f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
     print(f"{len(room['connections']) +1 } - Exit")
+    print()
 
     ask = ask_int(1, len(room['connections']) + 1)
 
@@ -57,7 +62,8 @@ def move(character, room):
     if unlock(character, ROOMS[where_to]):
         character['last_room'] = character['room']['id']
         character['visited_rooms'].append(character['room']['id'])
-        character['room'] = rm.generate(where_to, character['sneak'])
+        character['room'] = generate(where_to, character['sneak'])
+        char.display(character)
         display(character['room'], character)
     else:
         print("Seems to be locked")
@@ -66,8 +72,8 @@ def move(character, room):
 # Main
 def generate(id, sneak):
     room = ROOMS[id]
-    item_rate = room['items']['rate']
-    monster_rate = room['monsters']['rate'] - sneak
+    item_rate = 0  # room['items']['rate']
+    monster_rate = 0  # room['monsters']['rate'] - sneak
 
     item = None
     monster = None

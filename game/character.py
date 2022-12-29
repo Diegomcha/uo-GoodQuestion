@@ -118,9 +118,4 @@ def display(character):
     print(title)
     print(f" - Health: {character['hp']} / {character['maxhp']}")
     print(f" - Strength: {character['strength']}")
-    print(f" - Inventory:{' Empty' if len(character['inventory']) == 0 else ''}")
-
-    # TODO: CHANGE
-    for item in character['inventory']['items']:
-        it.display(item)
     print("-"*len(title))

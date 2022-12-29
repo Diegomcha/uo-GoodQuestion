@@ -273,8 +273,8 @@ List of monsters.
 ROOMS = [
     # Floor 0
     {
-        'id': 0,
-        'special options': [],
+        # 'id': 0,
+        'special_options': [],
         'resemblance': 'entrance',
         'items': {
             'rate': 100,
@@ -293,35 +293,40 @@ ROOMS = [
         'locked': None  # None or number of key
     },
     {
-        'id': 1,
+        # 'id': 1,
+        'special_options': [],
         'resemblance': 'living room',
         # TODO: Add items and monster
         'connections': [0, 5],
         'locked': None  # None or number of key
     },
     {
-        'id': 2,
+        # 'id': 2,
+        'special_options': [],
         'resemblance': 'kitchen',
         # TODO: Add items and monster
         'connections': [0, 3],
         'locked': None  # None or number of key
     },
     {
-        'id': 3,
+        # 'id': 3,
+        'special_options': [],
         'resemblance': 'bathroom',
         # TODO: Add items and monster
         'connections': [0, 2],
         'locked': None  # None or number of key
     },
     {
-        'id': 4,
+        # 'id': 4,
+        'special_options': [],
         'resemblance': 'stairs',
         # TODO: Add items and monster
         'connections': [0, 6, 14],
         'locked': None  # None or number of key
     },
     {
-        'id': 5,
+        # 'id': 5,
+        'special_options': [],
         'resemblance': 'guests bedroom',
         # TODO: Add items and monster
         'connections': [0, 1],
@@ -329,44 +334,56 @@ ROOMS = [
     },
     # Floor 1
     {
-        'id': 6,
-        'resemblance': 'hall2',
+        # 'id': 6,
+        'special_options': [],
+        'resemblance': 'hall',
         # TODO: Add items and monster
         'connections': [4, 7, 8, 9, 10, 11, 12],
         'locked': None  # None or number of key
     },
     {
-        'id': 7,
+        # 'id': 7,
+        'special_options': [],
         'resemblance': 'bathroom',
         # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
-    }, {
-        'id': 8,
+    },
+    {
+        # 'id': 8,
+        'special_options': [],
         'resemblance': 'diner',
         # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
-    }, {
-        'id': 9,
+    },
+    {
+        # 'id': 9,
+        'special_options': [],
         'resemblance': 'main bedroom',
         # TODO: Add items and monster
         'connections': [6, 12],
         'locked': None  # None or number of key
-    }, {
-        'id': 10,
+    },
+    {
+        # 'id': 10,
+        'special_options': [],
         'resemblance': 'bedroom',
         # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
-    }, {
-        'id': 11,
+    },
+    {
+        # 'id': 11,
+        'special_options': [],
         'resemblance': 'toys room',
         # TODO: Add items and monster
         'connections': [6],
         'locked': None  # None or number of key
-    }, {
-        'id': 12,
+    },
+    {
+        # 'id': 12,
+        'special_options': [],
         'resemblance': 'main bedroom bathroom',
         # TODO: Add items and monster
         'connections': [9],
@@ -374,7 +391,8 @@ ROOMS = [
     },
     # Floor 3
     {
-        'id': 13,
+        # 'id': 13,
+        'special_options': [],
         'resemblance': 'atic',
         # TODO: Add items and monster
         'connections': [6],
@@ -382,9 +400,9 @@ ROOMS = [
     },
     # Basement
     {
-        'id': 14,
+        # 'id': 14,
+        'special_options': ['cat'],
         'resemblance': 'basement',
-        'special option': 'Pet cat',
         # TODO: Add items and monster
         'connections': [4],
         'locked': 1  # None or number of key
