@@ -31,7 +31,7 @@ def main():
         menu.display_lore()
         
         #Displays inital Room
-        rm.display(character['room'])
+        rm.display(character['room'], character)
 
         while character['remaining'] > 0:
             char.display(character)
