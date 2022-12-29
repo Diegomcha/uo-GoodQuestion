@@ -8,15 +8,15 @@ from utils.functions import ask_int
 # special_options = [option1.....]
 def print_special_options(special_options):
     for i, element in enumerate(special_options):
-        print(f"{i+3} - {element}")
+        print(f"{i+3} - [{element}]")
     return len(special_options)
 
 
 def display(special_options, character):
     # print("----- OPTIONS -----")
     # print()
-    print("1 - Go to another room")
-    print("2 - Check inventory")
+    print("1 - [Go to another room]")
+    print("2 - [Check inventory]")
     new_options = print_special_options(special_options)
     print()
     selection = ask_int(1, 2 + new_options)

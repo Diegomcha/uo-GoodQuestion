@@ -1,3 +1,4 @@
+from opts import ACHIEVEMENTS
 
 def is_in_file(path, name):
     """Scans through the the file if possible, and returns wether the achievment is in the file or not
@@ -23,7 +24,7 @@ def is_in_file(path, name):
         return -1
 
 
-def write_achievement(path, name, description):
+def write_achievement(path, id):
     """ Checks if the given achivement is in the file, and in case it is not, it writes
 
         Args:
@@ -35,11 +36,11 @@ def write_achievement(path, name, description):
         0 : if written propperly
         -1 : ERROR_WRONG_PATH
         """
-    if is_in_file(path, name) == True:
+    if is_in_file(path, id[0]) == True:
         return 1
-    elif is_in_file(path, name) == False:
+    elif is_in_file(path, id[0]) == False:
         write_file = open(path, "a")
-        write_file.write(name + ": "+description +"\n")
+        write_file.write(id[0] + ": "+id[1] +"\n")
         write_file.close()
         return 0
     else:

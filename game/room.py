@@ -1,5 +1,6 @@
 import game.item as it
 import game.character as char
+from game.game_manager import manager
 
 from opts import ROOMS
 from utils.functions import decide, ask_int
@@ -10,6 +11,7 @@ def display(room, character):
     print(f"You enter into a room that resembles a {room['resemblance']}.")
 
     if not room['id'] in character['visited_rooms']:
+        manager['rooms_visited'].append(room)
         if room['monster'] == room['item'] == None:
             print("You find nothing inside.")
         else:
@@ -26,7 +28,7 @@ def display(room, character):
         # TODO: Display monster
         # mon.display(room['monster'])
 
-    print()
+    input()
 
 
 def unlock(character, room):
@@ -49,7 +51,7 @@ def move(character, room):
 
     for i, id in enumerate(room['connections']):
         print(f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
-    print(f"{len(room['connections']) +1 } - Exit")
+    print(f"{len(room['connections']) +1 } - Back")
     print()
 
     ask = ask_int(1, len(room['connections']) + 1)

@@ -3,6 +3,7 @@ import game.character as char
 import game.achievement_display as achiev
 import game.room as rm
 import game.options as opt
+import game.end as end
 
 from opts import ROOMS
 
@@ -37,6 +38,9 @@ def main():
 
         while character['remaining'] > 0:
             opt.display(ROOMS[character['room']['id']]['special_options'], character)
+        
+        end.write_achivement()
+            
 
         # TODO: Continue...
 

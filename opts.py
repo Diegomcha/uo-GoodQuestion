@@ -10,7 +10,7 @@ KEYS = {
 Keys used.
 """
 
-ACHIEVEMENTS_SAVE_PATH = "data.txt"
+ACHIEVEMENTS_SAVE_PATH = "utils/assets/data.txt"
 """
 Where to save the achievements progress.
 """
@@ -246,24 +246,33 @@ MONSTERS = [  # stats are provisional
         'traits': {
             'strength': 5,
             'swiftness': -5
-        }
+        },
+        'drop': [],
+        'drop_rate': 0
+        
     },
     {
         'name': 'Giant rat',
         'traits': {
             'maxhp': 5,
             'strength': -5
-        }
+        },
+        'drop': [],
+        'drop_rate': 0
     },
     {
         'name': 'Viper',
         'traits': {
             'swiftness': 5
-        }
+        },
+        'drop': [],
+        'drop_rate': 0
     },
     {
         'name': 'Ghost',
-        'traits': {}
+        'traits': {},
+        'drop': [],
+        'drop_rate': 0
     },
 ]
 """
@@ -338,7 +347,7 @@ ROOMS = [
         'special_options': [],
         'resemblance': 'hall',
         # TODO: Add items and monster
-        'connections': [4, 7, 8, 9, 10, 11, 12],
+        'connections': [4, 7, 8, 9, 10, 11, 13],
         'locked': None  # None or number of key
     },
     {
@@ -415,15 +424,21 @@ List of rooms (Map of the house).
 ACHIEVEMENTS = {
     "PACIFIST": ["PACIFIST", "Complete the game but no enemy was harmed during the proccess"],
     "UNARMED": ["UNARMED", "Complete the game without collecting any weapon"],
-    "SNEAKY PEAKY": ["SNEAKY PEAKY", "Complete the game without finding an enemy (lucky you)"],
-    "ROOKIE TREASURE HUNTER": ["ROOKIE TREASURE HUNTER", "Collect your first item"],
-    "ADVANCED TREASURE HUNTER": ["ADVANCED TREASURE HUNTER", "Collect the halve of the items in one run"],
-    "GOD-LIKE TREASURE HUNTER": ["GOD-LIKE-TREASURE HUNTER", "Collect all the items in one run"],
+    "SNEAKY_PEAKY": ["SNEAKY PEAKY", "Complete the game without finding an enemy (lucky you)"],
+    "ROOKIE_TREASURE_HUNTER": ["ROOKIE TREASURE HUNTER", "Collect your first item"],
+    "ADVANCED_TREASURE_HUNTER": ["ADVANCED TREASURE HUNTER", "Collect the halve of the items in one run"],
+    "GOD_LIKE_TREASURE_HUNTER": ["GOD-LIKE-TREASURE HUNTER", "Collect all the items in one run"],
     "SAVIOUR": ["SAVIOUR", "Complete the game once"],
-    "MULTIPLE": ["MULTIPLE", "Complete the game using all characters"],
+    "GEORGE_OF_THE_JUNGLE": ["GEORGE OF THE JUNGLE", "Pet the cat 10 times and get his love"],
     "VOLATIN": ["VOLATIN", "Save your mate and jump through the window to scape"],
     "HERO": ["HERO", "Defeat a total of 30 enemies in one run"]
 }
 """
 List of achievements.
+"""
+TOTAL_TREASURES = 0
+
+
+"""
+    Other data
 """
