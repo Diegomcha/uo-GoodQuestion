@@ -39,7 +39,7 @@ def write_achievement(path, name, description):
         return 1
     elif is_in_file(path, name) == False:
         write_file = open(path, "a")
-        write_file.write(name + ": "+description +"\n")
+        write_file.write(name + ": "+description + "\n")
         write_file.close()
         return 0
     else:

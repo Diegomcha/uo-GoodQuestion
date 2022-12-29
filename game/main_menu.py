@@ -1,4 +1,5 @@
 import os
+
 from utils.functions import ask_int, print_file
 
 TITLE_FILEPATH = os.path.join(os.path.curdir, "utils", "assets", "title.txt")

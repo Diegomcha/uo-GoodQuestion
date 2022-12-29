@@ -1,7 +1,8 @@
-from utils.functions import ask_options, ask_int
 import game.room as rm
-from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES
 import game.item as it
+
+from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES
+from utils.functions import ask_options, ask_int
 
 
 def display_difficulties():
