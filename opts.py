@@ -115,11 +115,11 @@ List of all the available qualities.
 
 ITEMS = {
     'weapon': {
-        'names': ['knife', 'fork', 'machete', 'spike'],
-        'legendary_names': ["cat's sword"],  # TODO: new names
+        'names': ['uwu'],
+        'legendary_names': ['special'],
         'consumable': False,
-        'duration': -1,
-        'traits': [  # TODO: change rates
+        'pickable': True,
+        'traits': [
             {
                 # quality id: 0
                 'strength': 4
@@ -139,98 +139,26 @@ ITEMS = {
         ]
     },
     'medicine': {
-        'names': ['half-filled syringe', 'unknown pills', 'inhaler'],
-        'special_names': ['glass of glowing liquid'],
+        'names': ['uwu'],
+        'special_names': ['special'],
         'consumable': True,
-        'duration': -1,
-        'traits': [  # TODO: Change rates
+        'pickable': True,
+        'traits': [
             {
                 # quality id: 0
-                'hp': 4,
+                'strength': 4
             },
             {
                 # quality id: 1
-                'hp': 3
+                'strength': 3
             },
             {
                 # quality id: 2
-                'hp': 2
+                'strength': 2
             },
             {
                 # quality id: 3
-                'hp': 1
-            }
-        ],
-    },
-    'clothes': {
-        'names': ['broken t-shirt', 'shorts', 'sleepers'],
-        'special_names': ['dino pijama'],
-        'consumable': False,
-        'duration': -1,
-        'traits': [  # TODO: Change rates
-            {
-                # quality id: 0
-                'sneak': 4
-            },
-            {
-                # quality id: 1
-                'sneak': 3
-            },
-            {
-                # quality id: 2
-                'sneak': 2
-            },
-            {
-                # quality id: 3
-                'sneak': 1
-            }
-        ]
-    },
-    'energetic_drinks': {
-        'names': ['PinkBull', 'NotMonster', 'Popstar', 'Freeze'],
-        'special_names': ['Frosty Freezy Freeze'],
-        'consumable': True,
-        'duration': 1,
-        'traits': [  # TODO: Change rates
-            {
-                # quality id: 0
-                'swiftness': 4
-            },
-            {
-                # quality id: 1
-                'swiftness': 3
-            },
-            {
-                # quality id: 2
-                'swiftness': 2
-            },
-            {
-                # quality id: 3
-                'swiftness': 1
-            }
-        ]
-    },
-    'faith_shields': {
-        'names': ['wristband', 'cross', 'necklace', 'old watch'],
-        'special_names': ["cat's necklace"],
-        'consumable': False,
-        'duration': -1,
-        'traits': [  # TODO: Change rates
-            {
-                # quality id: 0
-                'shield': 4
-            },
-            {
-                # quality id: 1
-                'shield': 3
-            },
-            {
-                # quality id: 2
-                'shield': 2
-            },
-            {
-                # quality id: 3
-                'shield': 1
+                'strength': 1
             }
         ]
     }
@@ -274,6 +202,7 @@ ROOMS = [
     # Floor 0
     {
         # id: 0
+        'special options': ['Pet cat'],
         'resemblance': 'entrance',
         'items': {
             'rate': 100,

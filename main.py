@@ -2,6 +2,8 @@ import game.main_menu as menu
 import game.character as char
 import game.achievement_display as achiev
 import game.room as rm
+import game.options as opt
+from opts import ROOMS
 
 
 def main():
@@ -28,10 +30,11 @@ def main():
         # Displays starting text (lore)
         menu.display_lore()
 
-        # while character['remaining'] > 0:
-        char.display(character)
-        room = rm.generate(character['room'], character['sneak'])
-        rm.display(room)
+        while character['remaining'] > 0:
+            char.display(character)
+            if character['last_room'] != character['room']:
+                rm.display(character['room'])
+            opt.display(ROOMS[character['room']['id']]['special options'], character)
 
         # TODO: Continue...
 

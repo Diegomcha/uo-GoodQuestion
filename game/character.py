@@ -1,4 +1,5 @@
 from utils.functions import ask_options, ask_int
+import game.room as rm
 from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES
 import game.item as it
 
@@ -56,12 +57,10 @@ def select():
         'strength': difficulty['strength'],
         'sneak': difficulty['sneak'],
         'swiftness': difficulty['swiftness'],
-        'shield': 0,
-        'room': 0,
         'last_room': 0,
         'visited_rooms': [],
         'remaining': difficulty['remaining'],
-        'inventory': []
+        'inventory': {'keys': [], 'medicine': [], 'items': [], 'clothes': {'shirt': "", 'pants': "", 'feet': "", 'pjama': ""}, 'faith item':"", 'weapon': "" }
     }
 
     # Character
@@ -97,6 +96,8 @@ def select():
         character[trait] += (val / 100) * character[trait]
     character['name'] = BASE_CHARACTERS[id]['name']
     character['hp'] = character['maxhp']
+    character['room'] = rm.generate(0, character['sneak'])
+    character['last_room'] = character['room']
 
     return character
 
@@ -118,6 +119,6 @@ def display(character):
     print(f" - Inventory:{' Empty' if len(character['inventory']) == 0 else ''}")
 
     # TODO: CHANGE
-    for item in character['inventory']:
+    for item in character['inventory']['items']:
         it.display(item)
     print("-"*len(title))
