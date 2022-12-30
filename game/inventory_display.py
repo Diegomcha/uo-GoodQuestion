@@ -2,8 +2,8 @@ def display_inventory(character):
     print('----- INVENTORY -----')
     print()
     # Keys
-    print(f" - Keys: {'None' if len(character['inventory']['keys']) == 0 else character['inventory']['keys'].join(', ') }")
-    print(f" - Medicines: {'None' if len(character['inventory']['medicine']) == 0 else character['inventory']['medicine'].join(', ') }")
+    print(f" - Keys: {'None' if len(character['inventory']['keys']) == 0 else len(character['inventory']['keys'])}")
+    print(f" - Medicines: {'None' if len(character['inventory']['medicine']) == 0 else ', '.join(character['inventory']['medicine']) }")
     # for element in character['inventory']['medicine']:
     #     print(f"\t- {element}")
     # Items
