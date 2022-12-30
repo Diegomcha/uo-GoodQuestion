@@ -35,12 +35,11 @@ def unlock(character, room):
     if room['locked'] == None:
         return True
 
-    for key in character['inventory']['keys']:
-        if key == room['locked']:
-            character['inventory']['keys'].remove(key)
-            room['locked'] = None
-            print('You unlock the door with the key you have in your inventory.')
-            return True
+    if room['locked'] in character['inventory']['keys']:
+        character['inventory']['keys'].remove(room['locked'])
+        room['locked'] = None
+        print('You unlock the door with the key you have in your inventory.')
+        return True
 
     return False
 
