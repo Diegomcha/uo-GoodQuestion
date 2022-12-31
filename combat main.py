@@ -35,9 +35,7 @@ def player_turn(monster_health, player_strength, fleeing_chance):
     print("What will you do?")
     print('\t\t1 - [Attack]')
     print()
-    print('\t\t2 - [Check Stats]')
-    print()
-    print('\t\t3 - [Flee]')
+    print('\t\t2 - [Flee]')
 
     selection = ask_int(1, 2)
 
