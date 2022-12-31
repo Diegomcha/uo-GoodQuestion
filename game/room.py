@@ -29,47 +29,6 @@ def visit(room, character):
         character['visited_rooms'].append(room['id'])
 
 
-# def unlock(character, room):
-#     if room['locked'] == None:
-#         return True
-
-#     for key in character['inventory']['keys']:
-#         if key == room['locked']:
-#             character['inventory']['keys'].remove(key)
-#             room['locked'] = None
-#             print('You unlock the door with the key you have in your inventory.')
-#             return True
-
-#     return False
-
-
-# def move(character, room):
-#     print(f"----- {room['resemblance'].upper()} -----")
-#     print()
-
-#     for i, id in enumerate(room['connections']):
-#         print(f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
-#     print(f"{len(room['connections']) +1 } - Exit")
-#     print()
-
-#     ask = ask_int(1, len(room['connections']) + 1)
-
-#     if (ask == len(room['connections']) + 1):
-#         return 0
-#     else:
-#         where_to = room['connections'][ask - 1]
-
-#     if unlock(character, ROOMS[where_to]):
-#         character['last_room'] = character['room']['id']
-#         character['visited_rooms'].append(character['room']['id'])
-#         character['room'] = generate(where_to, character['sneak'])
-#         char.display(character)
-#         display(character['room'], character)
-#     else:
-#         print("Seems to be locked")
-
-
-# Main
 def generate(id, sneak):
     room = ROOMS[id]
 
@@ -80,10 +39,13 @@ def generate(id, sneak):
     monster_rate = (room['monsters']['rate'] - sneak) if not monster else 0
 
     # generate item
-    if not item and item_rate > 0:
-        room['items']['rate'] = 0  # removes the possibility of an item appearing when the room has already been visited
-        if decide(item_rate):  # if item is gonna be generated
-            item = it.generate(room['items']['available'])
+    if not item:
+        if item_rate > 0:
+            room['items']['rate'] = 0  # removes the possibility of an item appearing when the room has already been visited
+            if decide(item_rate):  # if item is gonna be generated
+                item = it.generate(room['items']['available'])
+    else:
+        room['items']['custom'] = None
 
     # TODO: generate monster
     if not monster and monster_rate > 0:

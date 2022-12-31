@@ -1,7 +1,7 @@
 import game.room as rm
 import game.inventory as inv
 
-from utils.functions import ask_options, ask_int
+from utils.functions import ask_options, ask_int, pause
 from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES, INVENTORY_SIZE, ROOMS
 
 
@@ -138,7 +138,6 @@ def options(character):
             start += 1
             opts.insert(0, 'item')
             print(f"1 - Pick {character['room']['item']['name']}")
-            print()
 
         print(f'{start} - Move to another room')
         print(f"{start + 1} - View inventory ({str(len(character['inventory'])) + ' / ' + str(INVENTORY_SIZE)})")
@@ -170,7 +169,7 @@ def move(character):
             print("The room is locked, you use your key to open it")
         else:
             print("The room is locked, you need a key")
-            print()
+            pause()
             return False
 
     character['room'] = rm.generate(connections[inp], character['sneak'])
@@ -180,11 +179,12 @@ def move(character):
 
 def pick_item(character):
     if len(character['inventory']) >= INVENTORY_SIZE:
-        print(f"You must drop something before picking {character['room']['item']['name']}")
+        print(f"You must drop something before picking {character['room']['item']['name']}:")
+        print()
         for id, item in enumerate(character['inventory']):
             print(f"{id + 1} - {item['name']}")
         print(f"{len(character['inventory']) + 1} - Do nothing")
-
+        print()
         inp = ask_int(1, len(character['inventory']) + 1) - 1
         if inp == len(character['inventory']):
             return
@@ -197,7 +197,7 @@ def pick_item(character):
     inv.add_item(character, character['room']['item'])
     character['room']['item'] = None
 
-    print()
+    pause()
 
 
 def inventory(character):

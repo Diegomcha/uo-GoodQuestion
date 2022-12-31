@@ -1,6 +1,14 @@
 import random
 
 
+def pause():
+    """
+    Pauses the game until the user hits ENTER.
+    """
+    input("[PRESS ENTER]")
+    print()
+
+
 def ask_options(opts):
     """
     Asks the user to choose from the provided options.

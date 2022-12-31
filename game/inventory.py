@@ -1,6 +1,6 @@
 import game.item as it
 
-from utils.functions import ask_int
+from utils.functions import ask_int, pause
 
 
 def display(inventory):
@@ -21,7 +21,7 @@ def options(inventory):
             mapp.append(i)
 
     if len(mapp) == 0:
-        input()
+        pause()
         return
     else:
         print(f"{len(mapp) + 1} - Do nothing")
