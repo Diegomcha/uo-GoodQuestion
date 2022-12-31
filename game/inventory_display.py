@@ -10,21 +10,21 @@ def display_inventory(character):
         print("None")
         
     else:
-        printed = []
+       printed = []
         for element in character['inventory']['medicine']:
             if element not in printed:
                 printed.append(element)
                 count = character['inventory']['medicine'].count(element)
                 if  count == 1:
                     if element == character['inventory']['medicine'][0]:
-                        print(f"{element['name']}[{element['quality']}/4]", end = " ")
+                        print(f"{element['name']}[{QUALITIES[element['quality']]['name']}]", end = " ")
                     else:
-                        print(f", {element['name']}[{element['quality']}/4]", end = " ")
+                        print(f", {element['name']}[{QUALITIES[element['quality']]['name']}]", end = " ")
                 else:
                     if element == character['inventory']['medicine'][0]:
-                        print(f"{element['name']}[{element['quality']}/4] X{count}", end = " ")
+                        print(f"{element['name']}[{QUALITIES[element['quality']]['name']}] X{count}", end = " ")
                     else:
-                        print(f", {element['name']}[{element['quality']}/4] X{count}", end = " ")
+                        print(f", {element['name']}[{QUALITIES[element['quality']]['name']}] X{count}", end = " ")
         print()
         
     # for element in character['inventory']['medicine']:
