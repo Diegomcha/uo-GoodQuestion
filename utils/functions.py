@@ -141,3 +141,22 @@ def decide_index_rated_list(list):
             return i
         else:
             last += item['rate']
+
+def ask_if_continue(lose, win, room):
+    if lose != None:
+        print()
+        print(f"Are you willing to change the {lose['type']} [Name: {lose['name']} - Quality: {lose['quality']}/4 - Traits: {lose['traits']}]")
+        print(f"For the {win['type']} [Name: {win['name']} - Quality: {win['quality']}/4 - Traits: {win['traits']}]")
+        print("""
+            1 - [Yes]
+            2 - [No]
+            """)
+        
+        if ask_int(1,2) == 1:
+            room['chest'].append(lose)
+            return True
+        else:
+            room['chest'].append(win)
+            return False
+    else:
+        return True

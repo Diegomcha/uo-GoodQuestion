@@ -1,0 +1,22 @@
+//Item related
+Add the names to the new opts constants SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES
+Fix the generators or the items (too many rare to few common/uncommon)
+Add the damage to the item generator -> None if the item is not a weapon else, the value
+Fix problem with the display of special items
+(DONE)Create a chest where to store the items you dont want when selecting ( The chest will be kept in the room where the selection took place)
+Finish all the items
+Set the items in different rooms, program the forced items etc...
+
+//Lore related
+Set the room where the friend will be and so the mate (need a key to unlock him)
+Add the window to that romm (change the corresponding value to the manager whe certain action performed)
+Add the end of the story 
+Add dialogues during the story in some rooms (special options coul be to read smth idk)
+
+//Combat related:
+Adapt the combat and so the game manager to get the stadisitics
+
+//After game:
+Write the achivements (DONE)
+Go back to main menu?
+exit?

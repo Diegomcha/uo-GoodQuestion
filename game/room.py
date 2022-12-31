@@ -35,6 +35,7 @@ def unlock(character, room):
     if room['locked'] == None:
         return True
 
+
     if room['locked'] in character['inventory']['keys']:
         character['inventory']['keys'].remove(room['locked'])
         room['locked'] = None

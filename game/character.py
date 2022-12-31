@@ -1,7 +1,7 @@
 import game.room as rm
 import game.item as it
 
-from utils.functions import ask_options, ask_int
+from utils.functions import ask_options, ask_int, ask_if_continue
 from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES
 
 
@@ -35,7 +35,7 @@ def display_base_character(baseCharacter):
     for trait_name, trait_value in baseCharacter['traits'].items():
         print(f"\t{'+' if trait_value >= 0 else '-'} {str(trait_value).lstrip('-')}% {trait_name}")
     print()
-
+    
 
 # Main methods
 def select():
@@ -62,7 +62,8 @@ def select():
         'last_room': 0,
         'visited_rooms': [],
         'remaining': difficulty['remaining'],
-        'inventory': {'keys': [], 'medicine': [], 'items': [], 'clothes': {'shirt': None, 'pants': None, 'feet': None, 'pijama': None}, 'faith_item': None, 'weapon': None}
+        'inventory': {'keys': [], 'medicine': [], 'clothes': {'shirt': None, 'pants': None, 'shoes': None, 'pijama': None}, 'faith_item': None, 'weapon': None},
+        'traits': []    
     }
 
     # Character

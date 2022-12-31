@@ -112,13 +112,18 @@ QUALITIES = [
 """
 List of all the available qualities.
 """
+SHIRTS_NAMES = []
+PANTS_NAMES = []
+SHOES_NAMES = []
 
 ITEMS = {
     'weapon': {
         'names': ['knife', 'fork', 'machete', 'spike'],
         'legendary_names': ["cat's sword"],  # TODO: new names
         'consumable': False,
+        'part_of_body': None,
         'duration': -1,
+        'damage': None,
         'traits': [  # TODO: change rates
             {
                 # quality id: 0
@@ -142,7 +147,9 @@ ITEMS = {
         'names': ['half-filled syringe', 'unknown pills', 'inhaler'],
         'special_names': ['glass of glowing liquid'],
         'consumable': True,
+        'part_of_body': None,
         'duration': -1,
+        'damage': None,
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
@@ -166,7 +173,9 @@ ITEMS = {
         'names': ['broken t-shirt', 'shorts', 'sleepers'],
         'special_names': ['dino pijama'],
         'consumable': False,
+        'part_of_body': ['shirt', 'pants', 'shoes', 'pijama'],
         'duration': -1,
+        'damage': None,
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
@@ -191,6 +200,7 @@ ITEMS = {
         'special_names': ['Frosty Freezy Freeze'],
         'consumable': True,
         'duration': 1,
+        'damage': None,
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
@@ -210,11 +220,12 @@ ITEMS = {
             }
         ]
     },
-    'faith_shields': {
+    'faith_item': {
         'names': ['wristband', 'cross', 'necklace', 'old watch'],
         'special_names': ["cat's necklace"],
         'consumable': False,
         'duration': -1,
+        'damage': None,
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
@@ -299,15 +310,17 @@ ROOMS = [
             }
         },
         'connections': [1, 2, 3, 4, 5],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     {
         # 'id': 1,
-        'special_options': [],
+        'special_options': ['item'],
         'resemblance': 'living room',
         # TODO: Add items and monster
         'connections': [0, 5],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     {
         # 'id': 2,
@@ -315,15 +328,17 @@ ROOMS = [
         'resemblance': 'kitchen',
         # TODO: Add items and monster
         'connections': [0, 3],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     {
         # 'id': 3,
-        'special_options': [],
+        'special_options': ['item'],
         'resemblance': 'bathroom',
         # TODO: Add items and monster
         'connections': [0, 2],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     {
         # 'id': 4,
@@ -331,7 +346,8 @@ ROOMS = [
         'resemblance': 'stairs',
         # TODO: Add items and monster
         'connections': [0, 6, 14],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': [1]
     },
     {
         # 'id': 5,
@@ -339,7 +355,8 @@ ROOMS = [
         'resemblance': 'guests bedroom',
         # TODO: Add items and monster
         'connections': [0, 1],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     # Floor 1
     {
@@ -348,7 +365,8 @@ ROOMS = [
         'resemblance': 'hall',
         # TODO: Add items and monster
         'connections': [4, 7, 8, 9, 10, 11, 13],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     {
         # 'id': 7,
@@ -356,7 +374,8 @@ ROOMS = [
         'resemblance': 'bathroom',
         # TODO: Add items and monster
         'connections': [6],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     {
         # 'id': 8,
@@ -364,7 +383,8 @@ ROOMS = [
         'resemblance': 'diner',
         # TODO: Add items and monster
         'connections': [6],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     {
         # 'id': 9,
@@ -372,7 +392,8 @@ ROOMS = [
         'resemblance': 'main bedroom',
         # TODO: Add items and monster
         'connections': [6, 12],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     {
         # 'id': 10,
@@ -380,7 +401,8 @@ ROOMS = [
         'resemblance': 'bedroom',
         # TODO: Add items and monster
         'connections': [6],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     {
         # 'id': 11,
@@ -388,7 +410,8 @@ ROOMS = [
         'resemblance': 'toys room',
         # TODO: Add items and monster
         'connections': [6],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     {
         # 'id': 12,
@@ -396,7 +419,8 @@ ROOMS = [
         'resemblance': 'main bedroom bathroom',
         # TODO: Add items and monster
         'connections': [9],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     # Floor 3
     {
@@ -405,7 +429,8 @@ ROOMS = [
         'resemblance': 'atic',
         # TODO: Add items and monster
         'connections': [6],
-        'locked': None  # None or number of key
+        'locked': None,  # None or number of key
+        'chest': []
     },
     # Basement
     {
@@ -414,7 +439,8 @@ ROOMS = [
         'resemblance': 'basement',
         # TODO: Add items and monster
         'connections': [4],
-        'locked': 1  # None or number of key
+        'locked': 1,  # None or number of key
+        'chest': []
     }
 ]
 """
