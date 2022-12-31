@@ -1,9 +1,9 @@
 import game.achievement_manager as am
 
-from opts import KEYS, ACHIEVEMENTS_SAVE_PATH
+from opts import KEYS, ACHIEVEMENTS_SAVE_PATH, ACHIEVEMENTS
 from utils.functions import ask_options
 
-TOTAL = 10
+TOTAL = len(ACHIEVEMENTS)
 
 
 def paint(count, total, index, name_from_index, description):

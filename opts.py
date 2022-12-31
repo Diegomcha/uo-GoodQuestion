@@ -20,32 +20,32 @@ BASE_CHARACTERS = [
         'name': 'SAM',
         'blood': 'AB+',
         'traits': {
-            'swiftness': 1,
-            'sneak': -1
+            'swiftness': 50,
+            'sneak': -25
         }
     },
     {
         'name': 'SARAH',
         'blood': '0-',
         'traits': {
-            'strength': 1,
-            'maxhp': -1
+            'strength': 60,
+            'maxhp': -40
         }
     },
     {
         'name': 'CHRISTA',
         'blood': '0+',
         'traits': {
-            'sneak': 1,
-            'swiftness': -1
+            'sneak': 50,
+            'swiftness': -25
         }
     },
     {
         'name': 'MIKE',
         'blood': 'A+',
         'traits': {
-            'maxhp': 1,
-            'strength': -1
+            'maxhp': 75,
+            'strength': -50
         }
     }
 ]
@@ -56,27 +56,27 @@ Characters used in the game, new characters can be added and the structure is fi
 DIFFICULTIES = [
     {
         'name': 'Easy',
-        'maxhp': 0,
-        'strength': 0,
-        'sneak': 0,
-        'swiftness': 0,
-        'remaining': 1
+        'moves': 40,
+        'maxhp': 30,
+        'strength': 10,
+        'sneak': 10,
+        'swiftness': 10
     },
     {
         'name': 'Medium',
-        'maxhp': 0,
-        'strength': 0,
-        'sneak': 0,
-        'swiftness': 0,
-        'remaining': 1
+        'moves': 24,
+        'maxhp': 30,
+        'strength': 8,
+        'sneak': 8,
+        'swiftness': 8
     },
     {
         'name': 'Hard',
-        'maxhp': 0,
-        'strength': 0,
-        'sneak': 0,
-        'swiftness': 0,
-        'remaining': 1
+        'moves': 12,
+        'maxhp': 20,
+        'strength': 5,
+        'sneak': 1,
+        'swiftness': 1
     }
 ]
 """
@@ -85,25 +85,21 @@ Base stats for each difficulty. New difficulties may be added, the structure is 
 
 QUALITIES = [
     {
-        'id': 0,
         'name': 'Legendary',
-        'special': True,
+        'special': True,  # Special qualities use special_names and its effects / traits are unbounded
         'rate': 5
     },
     {
-        'id': 1,
         'name': 'Rare',
         'special': False,
         'rate': 15
     },
     {
-        'id': 2,
         'name': 'Uncommon',
         'special': False,
         'rate': 30
     },
     {
-        'id': 3,
         'name': 'Common',
         'special': False,
         'rate': 50
@@ -113,24 +109,26 @@ QUALITIES = [
 List of all the available qualities.
 """
 
+INVENTORY_SIZE = 3
+
 ITEMS = {
     'weapon': {
         'names': ['knife', 'fork', 'machete', 'spike'],
-        'legendary_names': ["cat's sword"],  # TODO: new names
+        'special_names': ["Maxwell's sword"],
         'consumable': False,
         'duration': -1,
-        'traits': [  # TODO: change rates
+        'traits': [
             {
                 # quality id: 0
-                'strength': 4
+                'strength': 10
             },
             {
                 # quality id: 1
-                'strength': 3
+                'strength': 5
             },
             {
                 # quality id: 2
-                'strength': 2
+                'strength': 3
             },
             {
                 # quality id: 3
@@ -140,41 +138,41 @@ ITEMS = {
     },
     'medicine': {
         'names': ['half-filled syringe', 'unknown pills', 'inhaler'],
-        'special_names': ['glass of glowing liquid'],
+        'special_names': ['Glowing Liquid filled bottle'],
         'consumable': True,
         'duration': -1,
-        'traits': [  # TODO: Change rates
+        'traits': [
             {
                 # quality id: 0
-                'hp': 4,
+                'hp': 10
             },
             {
                 # quality id: 1
-                'hp': 3
+                'hp': 5
             },
             {
                 # quality id: 2
-                'hp': 2
+                'hp': 4
             },
             {
                 # quality id: 3
-                'hp': 1
+                'hp': 3
             }
         ],
     },
-    'clothes': {
+    'clothing': {
         'names': ['broken t-shirt', 'shorts', 'sleepers'],
-        'special_names': ['dino pijama'],
+        'special_names': ['Dino Pijama'],
         'consumable': False,
         'duration': -1,
-        'traits': [  # TODO: Change rates
+        'traits': [
             {
                 # quality id: 0
-                'sneak': 4
+                'sneak': 10
             },
             {
                 # quality id: 1
-                'sneak': 3
+                'sneak': 5
             },
             {
                 # quality id: 2
@@ -186,31 +184,31 @@ ITEMS = {
             }
         ]
     },
-    'energetic_drinks': {
+    'energetic_drink': {
         'names': ['PinkBull', 'NotMonster', 'Popstar', 'Freeze'],
         'special_names': ['Frosty Freezy Freeze'],
         'consumable': True,
         'duration': 1,
-        'traits': [  # TODO: Change rates
+        'traits': [
             {
                 # quality id: 0
-                'swiftness': 4
+                'swiftness': 50
             },
             {
                 # quality id: 1
-                'swiftness': 3
+                'swiftness': 30
             },
             {
                 # quality id: 2
-                'swiftness': 2
+                'swiftness': 15
             },
             {
                 # quality id: 3
-                'swiftness': 1
+                'swiftness': 5
             }
         ]
     },
-    'faith_shields': {
+    'faith_shield': {
         'names': ['wristband', 'cross', 'necklace', 'old watch'],
         'special_names': ["cat's necklace"],
         'consumable': False,
@@ -218,15 +216,15 @@ ITEMS = {
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
-                'shield': 4
+                'shield': 10
             },
             {
                 # quality id: 1
-                'shield': 3
+                'shield': 5
             },
             {
                 # quality id: 2
-                'shield': 2
+                'shield': 3
             },
             {
                 # quality id: 3
@@ -240,32 +238,28 @@ List of the types of items.
 """
 
 # Puse los traits en un dictionario asi no hay que poner todas las stats even if no hay changes
-MONSTERS = [  # stats are provisional
-    {
-        'name': 'Ghoul',
+MONSTERS = {  # stats are provisional
+    'ghoul': {
+        'display_name': 'Ghoul',
         'traits': {
-            'strength': 5,
-            'swiftness': -5
+            'strength': 6,
+            'swiftness': -3
         }
     },
-    {
-        'name': 'Giant rat',
+    'giant_rat': {
+        'display_name': 'Giant rat',
         'traits': {
-            'maxhp': 5,
+            'maxhp': 10,
             'strength': -5
         }
     },
-    {
-        'name': 'Viper',
+    'viper': {
+        'display_name': 'Viper',
         'traits': {
             'swiftness': 5
         }
-    },
-    {
-        'name': 'Ghost',
-        'traits': {}
-    },
-]
+    }
+}
 """
 List of monsters.
 """
@@ -273,137 +267,459 @@ List of monsters.
 ROOMS = [
     # Floor 0
     {
-        # 'id': 0,
-        'special_options': [],
+        # id: 0
         'resemblance': 'entrance',
         'items': {
             'rate': 100,
-            'available': ['weapon', 'medicine'],
-            'forced': []
+            'available': ['clothing'],
+            'custom': None
         },
         'monsters': {
-            'rate': 0,
-            'available': [],
-            'forced': [],
-            'base_stats': {
-
-            }
+            'rate': 10,
+            'available': ['ghoul', 'giant_rat'],
+            'custom': None
         },
         'connections': [1, 2, 3, 4, 5],
-        'locked': None  # None or number of key
+        'locked': None
     },
     {
-        # 'id': 1,
-        'special_options': [],
+        # id: 1
         'resemblance': 'living room',
-        # TODO: Add items and monster
+        'items': {
+            'rate': 75,
+            'available': [
+                {
+                    'type': 'clothing',
+                    'rate': 70
+                },
+                {
+                    'type': 'energetic_drink',
+                    'rate': 20
+                },
+                {
+                    'type': 'weapon',
+                    'rate': 10
+                }
+            ],
+            'custom': None
+        },
+        'monsters': {
+            'rate': 60,
+            'available': [
+                {
+                    'type': 'ghoul',
+                    'rate': 40
+                },
+                {
+                    'type': 'giant_rat',
+                    'rate': 50
+                },
+                {
+                    'type': 'viper',
+                    'rate': 10
+                }
+            ],
+            'custom': None
+        },
         'connections': [0, 5],
-        'locked': None  # None or number of key
+        'locked': None
     },
     {
-        # 'id': 2,
-        'special_options': [],
+        # id: 2
         'resemblance': 'kitchen',
-        # TODO: Add items and monster
+        'items': {
+            'rate': 100,
+            'available': ['weapon'],
+            'custom': None
+        },
+        'monsters': {
+            'rate': 75,
+            'available': [
+                {
+                    'type': 'ghoul',
+                    'rate': 10
+                },
+                {
+                    'type': 'giant_rat',
+                    'rate': 70
+                },
+                {
+                    'type': 'viper',
+                    'rate': 20
+                }
+            ],
+            'custom': None
+        },
         'connections': [0, 3],
         'locked': None  # None or number of key
     },
     {
         # 'id': 3,
-        'special_options': [],
         'resemblance': 'bathroom',
-        # TODO: Add items and monster
+        'items': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'medicine',
+                    'rate': 90
+                },
+                {
+                    'type': 'weapon',
+                    'rate': 10
+                }
+            ],
+            'custom': None
+        },
+        'monsters': {
+            'rate': 90,
+            'available': [
+                {
+                    'type': 'giant_rat',
+                    'rate': 60
+                },
+                {
+                    'type': 'viper',
+                    'rate': 40
+                }
+            ],
+            'custom': None
+        },
         'connections': [0, 2],
         'locked': None  # None or number of key
     },
     {
         # 'id': 4,
-        'special_options': [],
         'resemblance': 'stairs',
-        # TODO: Add items and monster
+        'items': {
+            'rate': 25,
+            'available': ['medicine'],
+            'custom': None
+        },
+        'monsters': {
+            'rate': 80,
+            'available': [
+                {
+                    'type': 'giant_rat',
+                    'rate': 55
+                },
+                {
+                    'type': 'viper',
+                    'rate': 45
+                }
+            ],
+            'custom': None
+        },
         'connections': [0, 6, 14],
         'locked': None  # None or number of key
     },
     {
         # 'id': 5,
-        'special_options': [],
         'resemblance': 'guests bedroom',
-        # TODO: Add items and monster
+        'items': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'faith_shield',
+                    'rate': 30
+                },
+                {
+                    'type': 'medicine',
+                    'rate': 20
+                },
+                {
+                    'type': 'clothing',
+                    'rate': 50
+                }
+            ],
+            'custom': None
+        },
+        'monsters': {
+            'rate': 95,
+            'available': [
+                {
+                    'type': 'ghoul',
+                    'rate': 80
+                },
+                {
+                    'type': 'viper',
+                    'rate': 20
+                }
+            ],
+            'custom': None
+        },
         'connections': [0, 1],
         'locked': None  # None or number of key
     },
     # Floor 1
     {
         # 'id': 6,
-        'special_options': [],
         'resemblance': 'hall',
-        # TODO: Add items and monster
-        'connections': [4, 7, 8, 9, 10, 11, 12],
+        'items': {
+            'rate': 0,
+            'custom': None
+        },
+        'monsters': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'ghoul',
+                    'rate': 80
+                },
+                {
+                    'type': 'giant_rat',
+                    'rate': 20
+                },
+                {
+                    'type': 'viper',
+                    'rate': 10
+                }
+            ],
+            'custom': None
+        },
+        'connections': [4, 7, 8, 9, 10, 11, 12, 13],
         'locked': None  # None or number of key
     },
     {
         # 'id': 7,
-        'special_options': [],
         'resemblance': 'bathroom',
-        # TODO: Add items and monster
+        'items': {
+            'rate': 90,
+            'available': [
+                {
+                    'type': 'medicine',
+                    'rate': 90
+                },
+                {
+                    'type': 'weapon',
+                    'rate': 10
+                }
+            ],
+            'custom': None
+        },
+        'monsters': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'ghoul',
+                    'rate': 10
+                },
+                {
+                    'type': 'giant_rat',
+                    'rate': 60
+                },
+                {
+                    'type': 'viper',
+                    'rate': 30
+                }
+            ],
+            'custom': None
+        },
         'connections': [6],
         'locked': None  # None or number of key
     },
     {
         # 'id': 8,
-        'special_options': [],
         'resemblance': 'diner',
-        # TODO: Add items and monster
+        'items': {
+            'custom': {
+                'name': 'key',
+                'type': 'key',
+                'id': 1
+            }
+        },
+        'monsters': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'ghoul',
+                    'rate': 10
+                },
+                {
+                    'type': 'giant_rat',
+                    'rate': 60
+                },
+                {
+                    'type': 'viper',
+                    'rate': 30
+                }
+            ],
+            'custom': None
+        },
         'connections': [6],
         'locked': None  # None or number of key
     },
     {
         # 'id': 9,
-        'special_options': [],
         'resemblance': 'main bedroom',
-        # TODO: Add items and monster
+        'items': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'clothing',
+                    'rate': 70
+                },
+                {
+                    'type': 'medicine',
+                    'rate': 25
+                },
+                {
+                    'type': 'faith_shield',
+                    'rate': 5
+                }
+            ],
+            'custom': None
+        },
+        'monsters': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'ghoul',
+                    'rate': 70
+                },
+                {
+                    'type': 'viper',
+                    'rate': 30
+                }
+            ],
+            'custom': None
+        },
         'connections': [6, 12],
         'locked': None  # None or number of key
     },
     {
         # 'id': 10,
-        'special_options': [],
         'resemblance': 'bedroom',
-        # TODO: Add items and monster
+        'items': {
+            'rate': 80,
+            'available': [
+                {
+                    'type': 'clothing',
+                    'rate': 70
+                },
+                {
+                    'type': 'medicine',
+                    'rate': 30
+                }
+            ],
+            'custom': None
+        },
+        'monsters': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'ghoul',
+                    'rate': 25
+                },
+                {
+                    'type': 'giant_rat',
+                    'rate': 25
+                },
+                {
+                    'type': 'viper',
+                    'rate': 50
+                }
+            ],
+            'custom': None
+        },
         'connections': [6],
         'locked': None  # None or number of key
     },
     {
         # 'id': 11,
-        'special_options': [],
         'resemblance': 'toys room',
-        # TODO: Add items and monster
+        'items': {
+            'custom': {
+                'name': 'stick',
+                'type': 'key',
+                'id': 0
+            }
+        },
+        'monsters': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'ghoul',
+                    'rate': 30
+                },
+                {
+                    'type': 'viper',
+                    'rate': 70
+                }
+            ],
+            'custom': None
+        },
         'connections': [6],
         'locked': None  # None or number of key
     },
     {
         # 'id': 12,
-        'special_options': [],
-        'resemblance': 'main bedroom bathroom',
-        # TODO: Add items and monster
+        'resemblance': 'bathroom',
+        'items': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'medicine',
+                    'rate': 90
+                },
+                {
+                    'type': 'weapon',
+                    'rate': 5
+                },
+                {
+                    'type': 'faith_shield',
+                    'rate': 5
+                }
+            ],
+            'custom': None
+
+        },
+        'monsters': {
+            'rate': 100,
+            'available': [
+                {
+                    'type': 'ghoul',
+                    'rate': 40
+                },
+                {
+                    'type': 'viper',
+                    'rate': 60
+                }
+            ],
+            'custom': None
+        },
         'connections': [9],
         'locked': None  # None or number of key
     },
     # Floor 3
     {
         # 'id': 13,
-        'special_options': [],
         'resemblance': 'atic',
         # TODO: Add items and monster
         'connections': [6],
-        'locked': None  # None or number of key
+        'locked': 0  # None or number of key
     },
     # Basement
     {
         # 'id': 14,
-        'special_options': ['cat'],
         'resemblance': 'basement',
-        # TODO: Add items and monster
+        'items': {
+            'custom': {
+                'name': 'Maxwell the cat',
+                'special': True,
+                'quality': 0,
+                'type': 'cat',
+                'consumable': False,
+                'traits': {
+                    'shield': 100,
+                    'strength': 100,
+                    'swiftness': 100
+                }
+            }
+        },
+        'monsters': {
+            'rate': 0,
+            'custom': None  # TODO: maybe add a monster or something
+        },
         'connections': [4],
         'locked': 1  # None or number of key
     }
