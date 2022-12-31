@@ -2,7 +2,7 @@
 Add the names to the new opts constants SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES
 Fix the generators or the items (too many rare to few common/uncommon)
 Add the damage to the item generator -> None if the item is not a weapon else, the value
-Fix problem with the display of special items
+(DONE)Fix problem with the display of special items
 (DONE)Create a chest where to store the items you dont want when selecting ( The chest will be kept in the room where the selection took place)
 Finish all the items
 Set the items in different rooms, program the forced items etc...
