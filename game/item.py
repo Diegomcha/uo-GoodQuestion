@@ -7,7 +7,7 @@ def generate(available):
         'type': decide_list(available),
         'quality': decide_index_rated_list(QUALITIES)
     }
-    item['name'] = decide_list(ITEMS[item['type']]['names']) if QUALITIES[item['quality']]['special'] != True else decide_list(ITEMS[item['type']['special_names']])
+    item['name'] = decide_list(ITEMS[item['type']]['names']) if QUALITIES[item['quality']]['special'] != True else decide_list(ITEMS[item['type']]['special_names'])
     item['traits'] = ITEMS[item['type']]['traits'][item['quality']]
     item['consumable'] = ITEMS[item['type']]['consumable']
     
