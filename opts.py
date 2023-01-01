@@ -60,7 +60,8 @@ DIFFICULTIES = [
         'maxhp': 30,
         'strength': 10,
         'sneak': 10,
-        'swiftness': 10
+        'swiftness': 10,
+        'flee': 90
     },
     {
         'name': 'Medium',
@@ -68,7 +69,8 @@ DIFFICULTIES = [
         'maxhp': 30,
         'strength': 8,
         'sneak': 8,
-        'swiftness': 8
+        'swiftness': 8,
+        'flee': 70
     },
     {
         'name': 'Hard',
@@ -76,7 +78,8 @@ DIFFICULTIES = [
         'maxhp': 20,
         'strength': 5,
         'sneak': 1,
-        'swiftness': 1
+        'swiftness': 1,
+        'flee': 30
     }
 ]
 """
@@ -237,26 +240,30 @@ ITEMS = {
 List of the types of items.
 """
 
-# Puse los traits en un dictionario asi no hay que poner todas las stats even if no hay changes
-MONSTERS = {  # stats are provisional
+MONSTER_SCALING = 2.25
+"""
+Percentage that monster use to scale.
+"""
+
+MONSTERS = {
     'ghoul': {
-        'display_name': 'Ghoul',
+        'displayname': 'Ghoul',
         'traits': {
-            'strength': 6,
-            'swiftness': -3
+            'strength': 25,
+            'swiftness': 40
         }
     },
     'giant_rat': {
-        'display_name': 'Giant rat',
+        'displayname': 'Giant rat',
         'traits': {
-            'maxhp': 10,
-            'strength': -5
+            'hp': 50,
+            'strength': -30
         }
     },
     'viper': {
-        'display_name': 'Viper',
+        'displayname': 'Viper',
         'traits': {
-            'swiftness': 5
+            'swiftness': 25
         }
     }
 }

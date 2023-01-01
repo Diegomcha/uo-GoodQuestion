@@ -1,8 +1,8 @@
 import game.item as it
-import game.character as char
+import game.monster as mon
 
 from opts import ROOMS
-from utils.functions import decide, ask_int
+from utils.functions import decide
 
 
 # Main methods
@@ -11,17 +11,20 @@ def display(room, character):
 
     if room['monster'] != None:
         print(f"You find a monster!")
-        # TODO: Display monster
-        # mon.display(room['monster'])
-
-    if room['id'] not in character['visited_rooms']:
+        mon.display(room['monster'])
+    elif room['id'] not in character['visited_rooms']:
         visit(room, character)
 
         if room['monster'] == room['item'] == None:
             print("You find nothing inside.")
-        elif room['item'] != None:
-            print(f"You find an item!")
-            it.display(room['item'])
+        else:
+            display_item(room)
+
+
+def display_item(room):
+    if room['item'] != None:
+        print(f"You find an item!")
+        it.display(room['item'])
 
 
 def visit(room, character):
@@ -29,14 +32,14 @@ def visit(room, character):
         character['visited_rooms'].append(room['id'])
 
 
-def generate(id, sneak):
+def generate(id, character):
     room = ROOMS[id]
 
     item = room['items']['custom']
     monster = room['monsters']['custom']
 
     item_rate = room['items']['rate'] if not item else 0
-    monster_rate = (room['monsters']['rate'] - sneak) if not monster else 0
+    monster_rate = (room['monsters']['rate'] - character['sneak']) if not monster else 0
 
     # generate item
     if not item:
@@ -47,12 +50,9 @@ def generate(id, sneak):
     else:
         room['items']['custom'] = None
 
-    # TODO: generate monster
     if not monster and monster_rate > 0:
         if decide(monster_rate):
-            # TODO: generate monster & remove pass
-            pass
-            # monster = mon.generate(room['monsters']['available'], room['monsters']['base_stats'])
+            monster = mon.generate(room['monsters']['available'], character['monster_base'], character['remaining'])
 
     return {
         'id': id,

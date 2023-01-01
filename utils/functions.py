@@ -5,8 +5,31 @@ def pause():
     """
     Pauses the game until the user hits ENTER.
     """
-    input("[PRESS ENTER]")
+    input("[press enter]")
     print()
+
+
+def round_traits(entity, traits, precision=None):
+    """
+    Rounds all the specified traits of an entity.
+
+    Parameters
+    ----------
+    entity : dict[str, Any]
+        Entity whose selected traits will be rounded.
+    traits : list[str]
+        List of the traits to round.
+    precision : int?
+        Precision to use when rounding.
+
+    Returns
+    -------
+    dict[str, Any]
+        The entity with the selected traits rounded.
+    """
+    for trait in traits:
+        entity[trait] = round(entity[trait], precision)
+    return entity
 
 
 def ask_options(opts):

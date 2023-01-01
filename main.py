@@ -39,6 +39,7 @@ def main():
 
             while character['remaining'] > 0:  # TODO:
                 changed_room = False
+                fight_won = False
                 selected = char.options(character)
 
                 if selected == 'move':
@@ -47,6 +48,12 @@ def main():
                     char.inventory(character)
                 elif selected == 'item':
                     char.pick_item(character)
+                elif selected == 'monster':
+                    fight_won = char.fight(character)
+                    if fight_won == 'flee':
+                        changed_room = True
+                    elif not fight_won:
+                        break
 
                 char.display(character)
                 char.display_separator(character)
@@ -54,14 +61,9 @@ def main():
                 if changed_room:
                     rm.display(character['room'], character)
                     char.display_separator(character)
-
-            # char.display(character)
-            # rm.display(character['room'], character)
-
-            # while character['remaining'] > 0:
-            #     opt.display(ROOMS[character['room']['id']]['special_options'], character)
-
-            # TODO: Continue...
+                elif fight_won == True:
+                    rm.display_item(character['room'])
+                    char.display_separator(character)
 
 
 main()

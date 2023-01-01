@@ -1,7 +1,8 @@
 import game.room as rm
 import game.inventory as inv
+import game.combat as comb
 
-from utils.functions import ask_options, ask_int, pause
+from utils.functions import ask_options, ask_int, round_traits, pause
 from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES, INVENTORY_SIZE, ROOMS
 
 
@@ -63,6 +64,7 @@ def select():
         'visited_rooms': [],
         'remaining': difficulty['moves'],
         'inventory': [],
+        'monster_base': difficulty,
         'stats': {
 
         }
@@ -101,7 +103,9 @@ def select():
         character[trait] += (val / 100) * character[trait]
     character['name'] = BASE_CHARACTERS[id]['name']
     character['hp'] = character['maxhp']
-    character['room'] = rm.generate(0, character['sneak'])
+    character['room'] = rm.generate(0, character)
+
+    character = round_traits(character, ['hp', 'maxhp', 'strength'])
 
     return character
 
@@ -116,35 +120,84 @@ def display(character):
         Character to display.
     """
     print(f"----- {character['name']} ({character['remaining']} moves left) -----")
-    print(f" - Health: {round(character['hp'], 1)} / {round(character['maxhp'], 1)}", end='')
+    print(f" - Health: {character['hp']} / {character['maxhp']}", end='')
     if character['shield'] != 0:
-        print(f" ({round(character['shield'], 1)} shield)")
+        print(f" ({character['shield']} shield)")
     else:
         print()
-    print(f" - Strength: {round(character['strength'], 1)}")
+    print(f" - Strength: {character['strength']}")
     print(f" - Swiftness: {round(character['swiftness'], 1)}%")
     print(f" - Sneak: {round(character['sneak'], 1)}%")
 
 
 def options(character):
-    # TODO:
     if character['room']['monster'] != None:
-        pass
-    else:
-        start = 1
-        opts = ['move', 'inv']
+        pause()
+        return 'monster'
 
-        if character['room']['item'] != None:
-            start += 1
-            opts.insert(0, 'item')
-            print(f"1 - Pick {character['room']['item']['name']}")
+    start = 1
+    opts = ['move', 'inv']
 
-        print(f'{start} - Move to another room')
-        print(f"{start + 1} - View inventory ({str(len(character['inventory'])) + ' / ' + str(INVENTORY_SIZE)})")
+    if character['room']['item'] != None:
+        start += 1
+        opts.insert(0, 'item')
+        print(f"1 - Pick {character['room']['item']['name']}")
+
+    print(f'{start} - Move to another room')
+    print(f"{start + 1} - View inventory ({str(len(character['inventory'])) + ' / ' + str(INVENTORY_SIZE)})")
+    print()
+
+    return opts[ask_int(1, len(opts))-1]
+
+
+def fight(character):
+    monster = character['room']['monster']
+    while comb.check_end(character, monster) == False:
+        comb.display_stats(character, monster)
+        print(f"1 - Fight {character['room']['monster']['displayname']}")
+        print(f"2 - Try fleeing the room ({round(monster['flee'], 1)}% success)")
+        print(f"3 - View inventory ({str(len(character['inventory'])) + ' / ' + str(INVENTORY_SIZE)})")
+
         print()
-        # TODO: continue here
+        sel = ask_int(1, 3)
+        if sel == 3:
+            inventory(character)
+        else:
+            if sel == 1:
+                comb.display_attack(comb.attack(character, monster), 'character', monster)
+                if comb.check_end(character, monster) != False:
+                    break
 
-        return opts[ask_int(1, len(opts))-1]
+                comb.display_attack(comb.attack(monster, character), 'monster', character)
+            elif sel == 2:
+                if not comb.flee(character, monster):
+                    print("The monster doesn't let you flee and attacks you")
+                    comb.display_attack(comb.attack(monster, character), 'monster', character)
+                else:
+                    print("You manage to go back to the previous room without fighting the monster!")
+                    pause()
+                    return 'flee'
+            pause()
+
+    if comb.check_end(character, monster) == 'character':
+        character['room']['monster'] = None
+        print(f"You defeated the {monster['displayname']}!")
+        pause()
+        return True
+    else:
+        return False
+
+
+def display_combat(character):
+    print(f"{character['name']}:")
+    print(f" - Health: {character['hp']} / {character['maxhp']}", end='')
+    if character['shield'] != 0:
+        print(f" ({character['shield']} shield)")
+    else:
+        print()
+    print(f" - Strength: {character['strength']}")
+    print(f" - Swiftness: {round(character['swiftness'], 1)}%")
+    print(f" - Sneak: {round(character['sneak'], 1)}%")
 
 
 def move(character):
@@ -172,8 +225,9 @@ def move(character):
             pause()
             return False
 
-    character['room'] = rm.generate(connections[inp], character['sneak'])
     character['remaining'] -= 1
+    character['last_room'] = character['room']['id']
+    character['room'] = rm.generate(connections[inp], character)
     return True
 
 
