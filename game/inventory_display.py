@@ -1,3 +1,5 @@
+from opts import QUALITIES
+
 def display_inventory(character):
     print('----- INVENTORY -----')
     print()
@@ -10,7 +12,7 @@ def display_inventory(character):
         print("None")
         
     else:
-       printed = []
+        printed = []
         for element in character['inventory']['medicine']:
             if element not in printed:
                 printed.append(element)

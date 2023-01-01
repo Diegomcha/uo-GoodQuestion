@@ -1,7 +1,7 @@
 import game.room as rm
 import game.item as it
 
-from utils.functions import ask_options, ask_int, ask_if_continue
+from utils.functions import ask_options, ask_int
 from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES
 
 

@@ -20,3 +20,12 @@ Adapt the combat and so the game manager to get the stadisitics
 Write the achivements (DONE)
 Go back to main menu?
 exit?
+
+//Others
+Ask friend name?
+Add item No damage boots (friend will give them to you if decided to scape)
+Remove Exclusive items from the generator (remove their names from the list and create them manually if neccessary)
+Improve name
+Improve weapon damage generator
+Give use to traits
+Give use to difficulties

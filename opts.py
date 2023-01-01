@@ -116,10 +116,12 @@ SHIRTS_NAMES = []
 PANTS_NAMES = []
 SHOES_NAMES = []
 
+BASE_DAMAGE_WEAPON = {'knife': 3, 'fork' : 2, 'machete': 6, 'spike': 7}
+
 ITEMS = {
     'weapon': {
         'names': ['knife', 'fork', 'machete', 'spike'],
-        'legendary_names': ["cat's sword"],  # TODO: new names
+        'special_names': ["cat's sword"],  # TODO: new names
         'consumable': False,
         'part_of_body': None,
         'duration': -1,
@@ -347,7 +349,7 @@ ROOMS = [
         # TODO: Add items and monster
         'connections': [0, 6, 14],
         'locked': None,  # None or number of key
-        'chest': [1]
+        'chest': []
     },
     {
         # 'id': 5,
@@ -425,7 +427,7 @@ ROOMS = [
     # Floor 3
     {
         # 'id': 13,
-        'special_options': [],
+        'special_options': ['friend', 'window'],
         'resemblance': 'atic',
         # TODO: Add items and monster
         'connections': [6],
@@ -462,6 +464,14 @@ ACHIEVEMENTS = {
 """
 List of achievements.
 """
+
+FRIEND = {
+    'name': 'Ian',
+    'locked': 13,
+    'items': 'No falldamage boots'#Making it possible to escape through the window without dying if chosen
+    
+    
+}
 TOTAL_TREASURES = 0
 
 

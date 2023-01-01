@@ -1,7 +1,7 @@
 
 manager = {
     'rooms_visited' : [],
-    'times_cat_pet' : [],
+    'times_cat_pet' : 0,
     'enemies_defeated' : 0,
     'damage_taken' : 0,
     'damage_dealt' : 0,

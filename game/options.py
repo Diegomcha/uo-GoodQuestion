@@ -1,11 +1,13 @@
 import game.room as rm
 import game.character as char
 import game.inventory_display as inv
-from utils.functions import ask_if_continue
 import game.item as it
+from game.options_logic import pick_items
 from opts import ROOMS
-
 from utils.functions import ask_int
+from game.game_manager import manager
+from game.options_logic import ask_if_continue
+
 
 
 # special_options = [option1.....]
@@ -41,63 +43,60 @@ def display(special_options, character):
     else:
         selection -= 3
         if special_options[selection] == "cat":
-            pet_cat()
+            pet_cat(character)
 
         elif special_options[selection] == "Play piano":
             play_piano()
             
         elif special_options[selection] == "item":
-            get_item(it.generate(['medicine']),1,character)
+            pick_items(it.generate("weapon"),1,character)
             
         elif special_options[selection] == "Open chest":
             open_chest(character)
 
 # TO-DO:
-def get_item(item, quantity, character):
-    room = ROOMS[character['room']['id']]
+
+
+def pet_cat(character):
+    manager['times_cat_pet'] += 1
     
-    if item['type'] == 'key':
-        character['inventory']['keys'].append(item)
-        
-    elif item['type'] == 'clothes':
-        if item['part_of_body'] == 'shirt' and ask_if_continue(character['inventory']['clothes']['shirt'], item, room):
-            character['inventory']['clothes']['shirt'] == item
-            print(f"You've received an {item['name']}")
+    print("Cat meows")
+    
+    if manager['times_cat_pet'] == 4:
+        print("Cat comes a little bit closer")
             
-        elif item['part_of_body'] == 'pants' and ask_if_continue(character['inventory']['clothes']['pants'], item, room):
-            character['inventory']['clothes']['pants'] == item
-            print(f"You've received an {item['name']}")
+    elif manager['times_cat_pet'] == 7:
+        print("Cat starts to purr")
         
-        elif item['part_of_body'] == 'shoes' and ask_if_continue(character['inventory']['clothes']['pants'], item, room):
-            character['inventory']['clothes']['shoes'] == item
-            print(f"You've received an {item['name']}")
-        
-        elif item['part_of_body'] == 'pijama' and ask_if_continue(character['inventory']['clothes']['shirt'], item, room) and ask_if_continue(character['inventory']['clothes']['pants'], item, room):
-            character['inventory']['clothes']['shoes'] == item
-            print(f"You've received an {item['name']}")
-        
-    elif item['type'] == 'medicine':
-        for _ in range(quantity):
-            character['inventory']['medicine'].append(item)
-        print(f"You've received {quantity} {item['name']}{'s' if quantity > 1 else ''}")
-        
-    elif item['type'] == 'faith_item' and ask_if_continue(character['inventory']['faith_item'], item, room):
-        character['inventory']['faith_item'] = item
-        print(f"You've received an {item['name']}")
-
-    elif item['type'] == 'weapon' and ask_if_continue(character['inventory']['weapon'], item, room):
-        character['inventory']['weapon'] = item
-        print(f"You've received an {item['name']}")
-
-def pet_cat():
-    print("Miau")
-
+    elif manager['times_cat_pet'] == 10:
+        Cat_item = {'name': 'Miracolous cat gift', 'quality': 'Legendary', 'consumable': False, 'traits': [], 'type': 'faith_item', 'part_of_body': None}
+        pick_items(Cat_item, 1, character)
+    
+    print()
 
 def play_piano():
     print("A piece fell down revealing a key")
     
 def open_chest(character):
-    print(ROOMS[character['room']['id']]['chest'])
+    print("The chest contains:")
+    
+    for i, item in enumerate(ROOMS[character['room']['id']]['chest']):
+        if item['type'] == 'weapon':
+            print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Damage: {item['damage']}")
+        else:
+            print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Traits: {item['traits']}")
+    print(f"\t{i+2}- [Back]")
+    print()
+    
+    result = ask_int(1, i+2)
+    
+    if result != i+2:
+        lose =character['inventory'][(ROOMS[character['room']['id']]['chest'])[result-1]['type']]
+        win = ROOMS[character['room']['id']]['chest'][result-1]
+        
+        if ask_if_continue(lose, win, ROOMS[character['room']['id']]):
+            ROOMS[character['room']['id']]['chest'].remove(win)
+    pass
     # Item add key (index whatever)
 
 # display([["Pet cat"], ["pick your nose"]])
