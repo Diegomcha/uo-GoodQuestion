@@ -111,3 +111,21 @@ def pick_items(item, quantity, character):
         print("You stay as before", end= "")
     
     input()
+    
+    def consume_item(item, character):
+    
+    if item['name'] == 'medicine':
+        
+        afterwards_hp = character['hp'] + item['traits']['heal']
+        print()
+        print(f"Do you want to use the item {item['name']}? [{character['hp']} -> {afterwards_hp if afterwards_hp <= character['maxhp'] else character['maxhp']}]")
+        print("\n\t1- [YES]\n\t2- [NO]\n")
+        
+        if ask_int(1,2) == 1:
+            print('Item used', end = "")
+            character['hp'] = afterwards_hp if afterwards_hp <= character['maxhp'] else character['maxhp']
+            character['inventory']['medicine'].remove(item)
+        else:
+            print("Item not used", end = "")
+        
+        input()
