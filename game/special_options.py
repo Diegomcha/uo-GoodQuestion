@@ -32,6 +32,7 @@ def open_chest(character):
             print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Damage: {item['damage']}")
         else:
             print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Traits: {item['traits']}")
+    print()
     print(f"\t{i+2}- [Back]")
     print()
     
@@ -54,7 +55,6 @@ def knife_poster(character):
     
     if ask_int(1,2) == 1:
         it.pick_items(PREFABS['kitchen_knife'], 1, character)
-        ROOMS[character['room']['id']]['special_options'].remove("Poster with a knife")
         
     
 def get_toy(type, character):

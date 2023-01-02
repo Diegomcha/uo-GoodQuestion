@@ -74,6 +74,7 @@ def select():
     while selection != KEYS['select']:
         # Character stats
         display_base_character(BASE_CHARACTERS[id])
+        print()
 
         # Asks for selection
         selection = ask_options({

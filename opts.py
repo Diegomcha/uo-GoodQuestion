@@ -116,12 +116,12 @@ SHIRTS_NAMES = []
 PANTS_NAMES = []
 SHOES_NAMES = []
 
-BASE_DAMAGE_WEAPON = {'knife': 3, 'fork' : 2, 'machete': 6, 'spike': 7}
+BASE_DAMAGE_WEAPON = {'knife': 3, 'fork' : 2, 'machete': 6, 'spike': 7, "cat's paw":10}
 
 ITEMS = {
     'weapon': {
         'names': ['knife', 'fork', 'machete', 'spike'],
-        'special_names': ["cat's sword"],  # TODO: new names
+        'special_names': ["cat's paw"],  # TODO: new names
         'consumable': False,
         'part_of_body': None,
         'duration': -1,
@@ -482,7 +482,7 @@ PREFABS = {
             'name': 'Kitchen knife',
             'quality': 2,
             'consumable': False,
-            'damage': 6,
+            'damage': 5.5,
             'part_of_body': None,
             'traits': []
         },
@@ -501,9 +501,7 @@ PREFABS = {
 FRIEND = {
     'name': 'Ian',
     'locked': 13,
-    'item': {
-        
-    }
+    'item': [PREFABS['Boots_of_the_swiftness_of_a_cat']]
     
     
 }

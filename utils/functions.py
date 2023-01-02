@@ -26,6 +26,7 @@ def ask_options(opts):
         print(f"{opt_val} - {opt_name}")
 
     selection = ''
+    print()
     while not selection in opts.keys():
         selection = input('Selection: ').upper().strip()
     print()

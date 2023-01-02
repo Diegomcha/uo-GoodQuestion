@@ -23,7 +23,7 @@ def display(special_options, character):
     if not manager['character_displayed']:
         print()
         char.display(character)
-        manager['character_displayed'] = False
+        manager['character_displayed'] = True
        
     if len(ROOMS[character['room']['id']]['chest']) != 0:
         if 'Open chest' not in ROOMS[character['room']['id']]['special_options']:
@@ -44,7 +44,6 @@ def display(special_options, character):
     elif selection == 2:
         inv.display_inventory(character)
         input()
-        char.display(character)
     else:
         selection -= 3
         if special_options[selection] == "Play with cat":
@@ -61,6 +60,7 @@ def display(special_options, character):
         
         elif special_options[selection] == "Poster with a knife":
             so.knife_poster(character)
+            ROOMS[character['room']['id']]['special_options'].remove(special_options[selection])
         
         elif special_options[selection] == "Get a train toy":
             so.get_toy('train', character)
@@ -74,7 +74,8 @@ def display(special_options, character):
             so.open('drawner', character)
             ROOMS[character['room']['id']]['special_options'].remove(special_options[selection])
         
-        display(ROOMS[character['room']['id']]['special_options'], character)
+    manager['character_displayed'] = False
+    display(ROOMS[character['room']['id']]['special_options'], character)
 
 # TO-DO:
 
