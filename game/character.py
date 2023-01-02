@@ -271,6 +271,7 @@ def spend_move(character):
                 print(f"The {item['name']} effects decay")
                 character['ephemeral_items'].pop(i)
                 inv.disable_item(character, item)
+                pause()
             else:
                 item['duration'] -= 1
 
