@@ -1,6 +1,6 @@
 //Item related
 Add the names to the new opts constants SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES
-Add the damage to the item generator -> None if the item is not a weapon else, the value
+(DONE)Add the damage to the item generator -> None if the item is not a weapon else, the value
 (DONE)Fix problem with the display of special items
 (DONE)Create a chest where to store the items you dont want when selecting ( The chest will be kept in the room where the selection took place)
 Finish all the items
@@ -16,13 +16,13 @@ Add dialogues during the story in some rooms (special options coul be to read sm
 Adapt the combat and so the game manager to get the stadisitics
 
 //After game:
-Write the achivements (DONE)
+(DONE)Write the achivements
 Go back to main menu?
 exit?
 
 //Others
 (DONE) Add item No damage boots (friend will give them to you if decided to scape)
 (DONE) Remove Exclusive items from the generator (remove their names from the list and create them manually if neccessary)
-Improve weapon damage generator
+(DONE)Improve weapon damage generator
 Give use to traits
 (KIND OF DONE)Give use to difficulties
