@@ -27,6 +27,8 @@ def generate(available, max_quality):
             item['part_of_body'] = 'shoes'
         else: #pijama
             item['part_of_body'] = 'pijama'
+    
+    item['traits']['heal'] = None if item['type'] != 'medicine' else 1
         
     
     return item
@@ -111,10 +113,10 @@ def pick_items(item, quantity, character):
         print("You stay as before", end= "")
     
     input()
+
+def consume_item(item, character):
     
-    def consume_item(item, character):
-    
-    if item['name'] == 'medicine':
+    if item['type'] == 'medicine':
         
         afterwards_hp = character['hp'] + item['traits']['heal']
         print()
@@ -129,3 +131,8 @@ def pick_items(item, quantity, character):
             print("Item not used", end = "")
         
         input()
+        
+            
+            
+        
+        

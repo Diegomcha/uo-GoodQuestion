@@ -1,5 +1,5 @@
-
 import random
+import game.inventory_display as id
 from utils.functions import ask_int
 
 #All subtituted
@@ -9,75 +9,79 @@ player_strength = 10
 monster_name = "rUPERTO"
 monster_health = 10
 monster_strength = 10
-fleeing_chance = 1
+fleeing_chance = 0
 
-def monster_turn(player_health,monster_strength):
+
+def monster_turn(character,monster):
     # No attack
     if random.randint(0,2) == 0:
-        print(f"The {monster_name} growled!")
-        return(player_health)
+        print(f"The {monster['name']} growled!")
+        return(character['hp'])
 
-    elif random.randint(0,4+1) == 0:
-        print(f"You dodged the {monster_name}'s attack!")
-        return(player_health)
-    
-    #else:
-    player_health -= 5
-    damage_dealt = monster_strength/2
-    print(f"The {monster_name} attacked, it dealt: {str(damage_dealt)}")
-    return(player_health)
+    else:
+        print(f"{monster['name'].title()} decided to attack")
+        ran_result = random.randint(0,101)
+        if  ran_result > character['swiftness']:
+            damage_dealt = monster['strength'] * (1-(ran_result-character['swiftness'])/100) if ((ran_result-character['swiftness'])/100) < 0.3 else monster['strength']
+            character['hp'] -= damage_dealt
+            
+            print('You failed to dodge the attack')
+            print(f"You have received {damage_dealt}hp of damage")
+            
+        else:
+            print(f"You dodged the {monster['name']}'s attack!")
+            
+        return(character['hp'])
 
-def player_turn(monster_health, player_strength, fleeing_chance):
+
+def player_turn(monster, character):
+    print("Your turn to act!")
     print("What will you do?")
     print('\t\t1 - [Attack]')
     print()
-    print('\t\t2 - [Flee]')
+    print('\t\t2 - [Use Object]')
+    print()
+    print('\t\t3 - [Flee]')
 
+    result = ask_int(1,3)
 
-    if ask_int(1, 2) == 1:
+    if result == 1:
         #Monster try to evade
-        if random.randint(0,3) == 0:
-            print(f"The {monster_name} dodged the attack!")
-            return(monster_health, fleeing_chance)
-        #Evasion failed
-        monster_health-=5
-        damage_dealt = player_strength/2
-        print(f"You attacked! Dealt: {str(damage_dealt)} damage.")
-        return(monster_health, fleeing_chance)
+        if random.randint(0, 101) > monster['swiftness']:
+            print(f"The {monster['name']} dodged the attack!")
 
-    else:
+        else:
+            damage_dealt = character['strenght']
+            print(f"You attacked! Dealt: {damage_dealt} damage.")
+    
+    elif result == 2:
+        id.ask_use_items(character)
+
+    elif result == 3:
         #Fleeing chance
-        if random.randint(0,4) == 0:
+        if random.randint(0,101) > character['swiftness']:
             print("You succesfully escaped!")
-            return(monster_health, fleeing_chance)
+            return 'scaped'
         #If fails
         print(f"The {str(monster_name)} blocked your exit!")
-        return(monster_health, fleeing_chance)
+    
+    return 0
 
 
-def fight():
+def fight(character, monster):
     print("||||||||||||||||||||||||||||||")
     print("||||||||COMBAT! START!||||||||")
     print("||||||||||||||||||||||||||||||")
     print("")
 
     turn = random.randint(0,2)
-    while ((monster_health > 0) and (player_health > 0) and (fleeing_chance != 0)):
+    while monster['health'] >0  and character['hp'] > 0:
         if turn == 0:
-            print(f"{monster_name} rushed!")
-            player_health = monster_turn(player_health,monster_strength)
-            print("Player HP: " + str(player_health))
+            monster_turn(character, monster)
             turn = 1
         elif turn == 1:
-            print("Your turn to act!")
-            monster_health, fleeing_chance = player_turn(monster_health,player_strength, fleeing_chance)
-            print(f"{monster_name}'s HP: " + str(monster_health))
+            if player_turn(monster, character) == 'scaped':
+                print ("You were lucky back there huh?")
+                return 0
             turn = 0
 
-    #These could be return messages since now is a method
-    if fleeing_chance == 0:
-        print ("You were lucky back there huh?")
-    elif monster_health <= 0:
-        print ("You succesfully defeated the monster!")
-    else: 
-        print("You died:(")

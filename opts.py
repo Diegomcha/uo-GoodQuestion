@@ -364,7 +364,7 @@ ROOMS = [
     # Floor 1
     {
         # 'id': 6,
-        'special_options': [],
+        'special_options': ['Consume Item'],
         'resemblance': 'hall',
         # TODO: Add items and monster
         'connections': [4, 7, 8, 9, 10, 11, 13],

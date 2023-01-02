@@ -43,7 +43,8 @@ def display(special_options, character):
         display(ROOMS[character['room']['id']]['special_options'], character)
     elif selection == 2:
         inv.display_inventory(character)
-        input()
+        manager['character_displayed'] = False
+        display(ROOMS[character['room']['id']]['special_options'], character)
     else:
         selection -= 3
         if special_options[selection] == "Play with cat":
@@ -53,7 +54,11 @@ def display(special_options, character):
             so.play_piano()
             
         elif special_options[selection] == "Receive item":
-            it.pick_items(it.generate('weapon', ROOMS[character['room']['id']]['max_quality']),1,character)
+            try:
+                item = it.generate('weapon', ROOMS[character['room']['id']]['max_quality'])
+            except:
+                item = it.generate('weapon', 0)
+            it.pick_items(item,1,character)
             
         elif special_options[selection] == "Open chest":
             so.open_chest(character)
@@ -73,6 +78,21 @@ def display(special_options, character):
         elif special_options[selection] == "Open drawner":
             so.open('drawner', character)
             ROOMS[character['room']['id']]['special_options'].remove(special_options[selection])
+            
+        elif special_options[selection] == 'Consume Item':
+            medicine = {
+                'type': 'medicine',
+                'name': 'medicine', 
+                'quality': 4, 
+                'consumable': True,
+                'damage': None,  
+                'part_of_body': None,
+                'traits': {'heal':20}
+            }
+            character['hp'] -= 1
+            char.display(character)
+            it.pick_items(medicine,1,character)
+            it.consume_item(medicine, character)
         
     manager['character_displayed'] = False
     display(ROOMS[character['room']['id']]['special_options'], character)
