@@ -1,8 +1,7 @@
 import game.room as rm
 import game.character as char
 import game.inventory_display as inv
-import game.item as it
-import game.options_logic as ol 
+import game.item as it 
 import game.special_options as so
 import game.character as char
 
@@ -55,7 +54,7 @@ def display(special_options, character):
             so.play_piano()
             
         elif special_options[selection] == "Receive item":
-            ol.pick_items(it.generate('weapon'),1,character)
+            it.pick_items(it.generate('weapon'),1,character)
             
         elif special_options[selection] == "Open chest":
             so.open_chest(character)

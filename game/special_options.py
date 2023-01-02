@@ -1,4 +1,3 @@
-import game.options_logic as ol
 import game.item as it
 import random
 
@@ -18,7 +17,7 @@ def pet_cat(character):
         print("Cat starts to purr")
         
     elif manager['times_cat_pet'] == 10:
-        ol.pick_items(PREFABS['cat_item'], 1, character)
+        it.pick_items(PREFABS['cat_item'], 1, character)
     
     print()
 
@@ -42,7 +41,7 @@ def open_chest(character):
         win = ROOMS[character['room']['id']]['chest'][result-1]
         ROOMS[character['room']['id']]['chest'].remove(win)
         
-        ol.pick_items(win,1, character)
+        it.pick_items(win,1, character)
     pass
 
 def knife_poster(character):
@@ -54,7 +53,7 @@ def knife_poster(character):
     print('\t1- [Grab knife]\n\t2- [Leave]')
     
     if ask_int(1,2) == 1:
-        ol.pick_items(PREFABS['kitchen_knife'], 1, character)
+        it.pick_items(PREFABS['kitchen_knife'], 1, character)
         ROOMS[character['room']['id']]['special_options'].remove("Poster with a knife")
         
     
@@ -85,7 +84,7 @@ def open(type, character):
         print("You found nothing inside", end = "")
     else:
         print(f"You have found an {loot['name']}", end= "")
-        ol.pick_items(loot, 1, character)
+        it.pick_items(loot, 1, character)
     input()
     
     
