@@ -35,7 +35,7 @@ def display_base_character(baseCharacter):
     for trait_name, trait_value in baseCharacter['traits'].items():
         print(f"\t{'+' if trait_value >= 0 else '-'} {str(trait_value).lstrip('-')}% {trait_name}")
     print()
-
+    
 
 # Main methods
 def select():
@@ -54,7 +54,8 @@ def select():
     character = {
         'name': '',
         'maxhp': difficulty['maxhp'],
-        'hp': 0,
+        'difficulty': difficulty,
+        'hp': 'maxhp',
         'shield': 0,
         'strength': difficulty['strength'],
         'sneak': difficulty['sneak'],
@@ -62,7 +63,8 @@ def select():
         'last_room': 0,
         'visited_rooms': [],
         'remaining': difficulty['remaining'],
-        'inventory': {'keys': [], 'medicine': [], 'items': [], 'clothes': {'shirt': None, 'pants': None, 'feet': None, 'pijama': None}, 'faith_item': None, 'weapon': None}
+        'inventory': {'keys': [], 'medicine': [], 'clothes': {'shirt': None, 'pants': None, 'shoes': None, 'pijama': None}, 'faith_item': None, 'weapon': None},
+        'traits': []    
     }
 
     # Character
@@ -115,7 +117,8 @@ def display(character):
     """
     title = f"----- {character['name']} ({character['remaining']} turn left) -----"
 
-    print(title)
-    print(f" - Health: {character['hp']} / {character['maxhp']}")
-    print(f" - Strength: {character['strength']}")
-    print("-"*len(title))
+    print(f"\t{title}")
+    print(f"\t - Health: {character['hp']} / {character['maxhp']}")
+    print(f"\t - Strength: {character['strength']}")
+    print(f"\t{'-' * len(title)}")
+    print()

@@ -6,6 +6,7 @@ import game.options as opt
 import game.end as end
 
 from opts import ROOMS
+from game.game_manager import manager
 
 
 def main():
@@ -31,9 +32,16 @@ def main():
 
         # Displays starting text (lore)
         menu.display_lore()
+        print()
+        print()
+        print("------------- ADVENTURE STARTS! -------------") 
+        print()
+        print()    
+        
 
         # Displays inital Room & character
         char.display(character)
+        manager['displayed_character'] = True
         rm.display(character['room'], character)
 
         while character['remaining'] > 0:

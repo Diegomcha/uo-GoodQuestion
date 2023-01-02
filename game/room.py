@@ -8,25 +8,28 @@ from utils.functions import decide, ask_int
 
 # Main methods
 def display(room, character):
-    print(f"You enter into a room that resembles a {room['resemblance']}.")
 
     if not room['id'] in character['visited_rooms']:
+        print(f"You enter into a room that resembles a {room['resemblance']}")
+        
         manager['rooms_visited'].append(room)
-        if room['monster'] == room['item'] == None:
-            print("You find nothing inside.")
-        else:
-            if room['monster'] != None:
-                print(f"You find a monster!")
-                # TODO: Display monster
-                # mon.display(room['monster'])
-                print()
-            if room['item'] != None:
-                print(f"You find an item!")
-                it.display(room['item'])
-    elif room['monster'] != None:
-        print(f"A monster has appeared!")
-        # TODO: Display monster
-        # mon.display(room['monster'])
+        
+        if room['resemblance'] != 'stairs':
+            if room['monster'] == room['item'] == None:
+                print("You find nothing inside.", end="")
+            else:
+                if room['monster'] != None:
+                    print(f"You find a monster!", end="")
+                    # TODO: Display monster
+                    # mon.display(room['monster'])
+                    print()
+                if room['item'] != None:
+                    print(f"You find an item!", end="")
+                    it.display(room['item'])
+                
+    else:
+        print(f"You return to the {room['resemblance']}.", end = "")
+
 
     input()
 
@@ -34,6 +37,7 @@ def display(room, character):
 def unlock(character, room):
     if room['locked'] == None:
         return True
+
 
     if room['locked'] in character['inventory']['keys']:
         character['inventory']['keys'].remove(room['locked'])
@@ -65,6 +69,7 @@ def move(character, room):
         character['visited_rooms'].append(character['room']['id'])
         character['room'] = generate(where_to, character['sneak'])
         char.display(character)
+        manager['character_displayed'] = True
         display(character['room'], character)
     else:
         print("Seems to be locked")

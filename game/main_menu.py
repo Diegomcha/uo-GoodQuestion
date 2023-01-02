@@ -1,6 +1,7 @@
 import os
 
 from utils.functions import ask_int, print_file
+from opts import FRIEND
 
 TITLE_FILEPATH = os.path.join(os.path.curdir, "utils", "assets", "title.txt")
 CREDITS_FILEPATH = os.path.join(os.path.curdir, "utils", "assets", "credits.txt")
@@ -47,6 +48,7 @@ def display_lore():
     """
     Displays the lore.
     """
+    print("\t\t\t\t----- LORE -----")
     f = open(LORE_FILEPATH, 'r')
     for line in f:
         if line == '\n':
@@ -54,3 +56,21 @@ def display_lore():
         else:
             print(line, end='')
     f.close()
+    print("\t\t\t\t----------------")
+    
+#def ask_name_friend():
+#    while 1:
+#        print()
+#        name = input("How is your friend called?: ")
+#        
+#        if len(name) > 0:
+#            break
+#        print('Invalid name!')
+#            
+#    if name.title() == 'Ian':
+#        FRIEND['name'] = 'Mike'
+#        
+#        
+#    print(f"Oh {FRIEND['name']}? Goodluck in your journey TRYING to rescue {FRIEND['name'].upper()}!")
+#    input()
+        

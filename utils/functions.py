@@ -111,7 +111,7 @@ def decide_list(list):
     Any
         The chosen item
     """
-    return random.choice(list)
+    return random.choice(list) if not type(list) == type('str') else list
 
 
 def decide_index_rated_list(list):
@@ -141,3 +141,6 @@ def decide_index_rated_list(list):
             return i
         else:
             last += item['rate']
+
+
+
