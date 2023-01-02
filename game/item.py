@@ -2,10 +2,14 @@ from opts import ITEMS, QUALITIES, SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES, BASE_
 from utils.functions import decide_list, decide_index_rated_list, ask_int
 
 
-def generate(available):
+def generate(available, max_quality):
+    qualities = QUALITIES.copy()
+    for i in range(max_quality, 0, -1):
+        if i-max_quality > 0:
+            qualities = qualities.remove(QUALITIES[i-max_quality])
     item = {
         'type': decide_list(available),
-        'quality': decide_index_rated_list(QUALITIES)
+        'quality': decide_index_rated_list(qualities)
     }
     item['name'] = decide_list(ITEMS[item['type']]['names']) if not QUALITIES[item['quality']]['special'] else decide_list(ITEMS[item['type']]['special_names'])
     item['traits'] = ITEMS[item['type']]['traits'][item['quality']]

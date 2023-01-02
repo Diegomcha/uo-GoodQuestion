@@ -17,6 +17,7 @@ def display(room, character):
         if room['resemblance'] != 'stairs':
             if room['monster'] == room['item'] == None:
                 print("You find nothing inside.", end="")
+                input()
             else:
                 if room['monster'] != None:
                     print(f"You find a monster!", end="")
@@ -24,14 +25,11 @@ def display(room, character):
                     # mon.display(room['monster'])
                     print()
                 if room['item'] != None:
-                    print(f"You find an item!", end="")
-                    it.display(room['item'])
+                    it.pick_items(room['item'], 1, character)
                 
     else:
         print(f"You return to the {room['resemblance']}.", end = "")
-
-
-    input()
+        input()
 
 
 def unlock(character, room):
@@ -67,7 +65,7 @@ def move(character, room):
     if unlock(character, ROOMS[where_to]):
         character['last_room'] = character['room']['id']
         character['visited_rooms'].append(character['room']['id'])
-        character['room'] = generate(where_to, character['sneak'])
+        character['room'] = generate(where_to, character['sneak'], character['difficulty'])
         char.display(character)
         manager['character_displayed'] = True
         display(character['room'], character)
@@ -76,26 +74,35 @@ def move(character, room):
 
 
 # Main
-def generate(id, sneak):
+def generate(id, sneak, difficulty):
     room = ROOMS[id]
-    item_rate = 0  # room['items']['rate']
-    monster_rate = 0  # room['monsters']['rate'] - sneak
+    try:
+        item_rate = room['items']['rate'] * 0.5 if difficulty == 2 else room['items']['rate'] * 0.8 if difficulty == 1 else room['items']['rate']
+        monster_rate = room['monsters']['rate'] - sneak
+    except:
+        pass
 
     item = None
     monster = None
 
     # generate item
-    if item_rate > 0:
-        room['items']['rate'] = 0  # removes the possibility of an item appearing when the room has already been visited
-        if decide(item_rate):  # if item is gonna be generated
-            item = it.generate(room['items']['available'])
+    try:
+        if item_rate > 0:
+            room['items']['rate'] = 0  # removes the possibility of an item appearing when the room has already been visited
+            if decide(item_rate):  # if item is gonna be generated
+                item = it.generate(room['items']['available'], room['items']['max_quality'])
+    except:
+        pass
 
     # TODO: generate monster
-    if monster_rate > 0:
-        if decide(monster_rate):
-            # TODO: generate monster & remove pass
-            pass
-            # monster = mon.generate(room['monsters']['available'], room['monsters']['base_stats'])
+    try:
+        if monster_rate > 0:
+            if decide(monster_rate):
+                # TODO: generate monster & remove pass
+                pass
+                # monster = mon.generate(room['monsters']['available'], room['monsters']['base_stats'])
+    except:
+        pass
 
     return {
         'id': id,

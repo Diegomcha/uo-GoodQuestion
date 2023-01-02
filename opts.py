@@ -299,8 +299,9 @@ ROOMS = [
         'special_options': [],
         'resemblance': 'entrance',
         'items': {
-            'rate': 100,
-            'available': ['weapon', 'medicine'],
+            'rate': 90,
+            'available': ['medicine'],
+            'max_quality': 2,
             'forced': []
         },
         'monsters': {

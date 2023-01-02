@@ -101,7 +101,7 @@ def select():
         character[trait] += (val / 100) * character[trait]
     character['name'] = BASE_CHARACTERS[id]['name']
     character['hp'] = character['maxhp']
-    character['room'] = rm.generate(0, character['sneak'])
+    character['room'] = rm.generate(0, character['sneak'], character['difficulty'])
     character['last_room'] = character['room']['id']
 
     return character
