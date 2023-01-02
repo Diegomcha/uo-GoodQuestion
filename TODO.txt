@@ -25,4 +25,5 @@ exit?
 (DONE) Remove Exclusive items from the generator (remove their names from the list and create them manually if neccessary)
 (DONE)Improve weapon damage generator
 Give use to traits
+Implement the Turns
 (KIND OF DONE)Give use to difficulties
