@@ -61,7 +61,7 @@ def main():
                 if changed_room:
                     rm.display(character['room'], character)
                     char.display_separator(character)
-                elif fight_won == True:
+                elif fight_won == True and character['room']['item'] != None:
                     rm.display_item(character['room'])
                     char.display_separator(character)
 

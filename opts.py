@@ -714,6 +714,7 @@ ROOMS = [
                 'name': 'Maxwell the cat',
                 'special': True,
                 'quality': 0,
+                'duration': -1,
                 'type': 'cat',
                 'consumable': False,
                 'traits': {

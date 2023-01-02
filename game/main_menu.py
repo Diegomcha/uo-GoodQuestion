@@ -46,7 +46,7 @@ def display_lore():
     """
     Displays the lore.
     """
-    f = open(LORE_FILEPATH, 'r')
+    f = open(LORE_FILEPATH, 'r', encoding='utf-8')
     for line in f:
         if line == '\n':
             pause()

@@ -17,7 +17,8 @@ def options(inventory):
     mapp = []
     for i, item in enumerate(inventory):
         if not item['type'] == 'key' and item['consumable']:
-            print(f"{len(mapp) + 1} - Use {item['name']}")
+            duration = item['duration']
+            print(f"{len(mapp) + 1} - Use {item['name']} {f'[Duration: {duration}]' if duration > 0 else ''}")
             mapp.append(i)
 
     if len(mapp) == 0:
@@ -37,8 +38,20 @@ def use_item(character, item):
         character[trait] += val
         print(f"{'+' if val > 0 else ''}{val} {trait}")
 
+    if item['duration'] > 0:
+        character['ephemeral_items'].append(item)
+
     if character['hp'] > character['maxhp'] and not item['special']:
         character['hp'] = character['maxhp']
+
+    if item['consumable']:
+        delete_item(character, item)
+
+
+def disable_item(character, item):
+    for trait, val in item['traits'].items():
+        character[trait] -= val
+        print(f"{'+' if (-val) > 0 else ''}{-val} {trait}")
 
 
 def get_key(inventory, id):
@@ -57,7 +70,4 @@ def add_item(character, item):
 def delete_item(character, item):
     character['inventory'].remove(item)
     if not item['type'] == 'key' and not item['consumable']:
-        remove_traits = {}
-        for trait in item['traits']:
-            remove_traits[trait] = -item['traits'][trait]
-        use_item(character, {'traits': remove_traits})
+        disable_item(character, item)

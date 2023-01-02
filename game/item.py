@@ -19,7 +19,7 @@ def display(item):
     if item['type'] == 'key':
         print(f" · {item['name']} [KEY]")
     else:
-        print(f" · {item['name']} [{QUALITIES[item['quality']]['name']}]")
+        print(f" · {item['name']} [{QUALITIES[item['quality']]['name']}{' | CONSUMABLE' if item['consumable'] else ''}]")
         for key in item['traits'].keys():
             value = item['traits'][key]
             print(f"   {'+' if value > 0 else ''}{value} {key}")

@@ -60,13 +60,21 @@ def select():
         'strength': difficulty['strength'],
         'sneak': difficulty['sneak'],
         'swiftness': difficulty['swiftness'],
-        'last_room': 0,
+        'last_room': None,
         'visited_rooms': [],
         'remaining': difficulty['moves'],
         'inventory': [],
         'monster_base': difficulty,
+        'ephemeral_items': [],
         'stats': {
-
+            'kill': 0,
+            'item': 0,
+            'flee': 0,
+            'dmg_dealt': 0,
+            'dmg_received': 0,
+            'dodge': 0,
+            'hit': 0,
+            'monster': 0
         }
     }
 
@@ -151,41 +159,65 @@ def options(character):
 
 
 def fight(character):
+    register(character, 'monster')
     monster = character['room']['monster']
     while comb.check_end(character, monster) == False:
         comb.display_stats(character, monster)
         print(f"1 - Fight {character['room']['monster']['displayname']}")
-        print(f"2 - Try fleeing the room ({round(monster['flee'], 1)}% success)")
-        print(f"3 - View inventory ({str(len(character['inventory'])) + ' / ' + str(INVENTORY_SIZE)})")
+        print(f"2 - View inventory ({str(len(character['inventory'])) + ' / ' + str(INVENTORY_SIZE)})")
+        if character['last_room'] != None:
+            print(f"3 - Try fleeing the room ({round(monster['flee'], 1)}% success)")
 
         print()
-        sel = ask_int(1, 3)
-        if sel == 3:
+        sel = ask_int(1, 3 if character['last_room'] != None else 2)
+        if sel == 2:
             inventory(character)
-        else:
-            if sel == 1:
-                comb.display_attack(comb.attack(character, monster), 'character', monster)
-                if comb.check_end(character, monster) != False:
-                    break
+        elif sel == 1:
+            c_attack = comb.attack(character, monster)
+            comb.display_attack(c_attack, 'character', monster)
+            if c_attack != None:
+                register(character, 'hit')
+                register(character, 'dmg_dealt', c_attack)
 
-                comb.display_attack(comb.attack(monster, character), 'monster', character)
-            elif sel == 2:
-                if not comb.flee(character, monster):
-                    print("The monster doesn't let you flee and attacks you")
-                    comb.display_attack(comb.attack(monster, character), 'monster', character)
+            if comb.check_end(character, monster) != False:
+                break
+
+            m_attack = comb.attack(monster, character)
+            comb.display_attack(m_attack, 'monster', character)
+            if m_attack == None:
+                register(character, 'dodge')
+            else:
+                register(character, 'dmg_received', m_attack)
+        else:
+            if not comb.flee(character, monster):
+                print("The monster doesn't let you flee and attacks you")
+
+                m_attack = comb.attack(monster, character)
+                comb.display_attack(m_attack, 'monster', character)
+                if m_attack == None:
+                    register(character, 'dodge')
                 else:
-                    print("You manage to go back to the previous room without fighting the monster!")
-                    pause()
-                    return 'flee'
-            pause()
+                    register(character, 'dmg_received', m_attack)
+            else:
+                register(character, 'flee')
+                print("You manage to go back to the previous room without fighting the monster!")
+                pause()
+                return 'flee'
+        pause()
 
     if comb.check_end(character, monster) == 'character':
         character['room']['monster'] = None
+        register(character, 'kill')
+
         print(f"You defeated the {monster['displayname']}!")
         pause()
         return True
     else:
         return False
+
+
+def register(character, stat, value=1):
+    character['stats'][stat] += value
 
 
 def display_combat(character):
@@ -225,10 +257,22 @@ def move(character):
             pause()
             return False
 
-    character['remaining'] -= 1
+    spend_move(character)
     character['last_room'] = character['room']['id']
     character['room'] = rm.generate(connections[inp], character)
     return True
+
+
+def spend_move(character):
+    character['remaining'] -= 1
+    if len(character['ephemeral_items']) != 0:
+        for i, item in enumerate(character['ephemeral_items']):
+            if item['duration'] == 0:
+                print(f"The {item['name']} effects decay")
+                character['ephemeral_items'].pop(i)
+                inv.disable_item(character, item)
+            else:
+                item['duration'] -= 1
 
 
 def pick_item(character):
@@ -246,6 +290,7 @@ def pick_item(character):
         print(f"{character['inventory'][inp]['name']} was dropped")
         inv.delete_item(character, character['inventory'][inp])
 
+    register(character, 'item')
     print(f"{character['room']['item']['name']} is now in your inventory")
 
     inv.add_item(character, character['room']['item'])
@@ -260,8 +305,7 @@ def inventory(character):
     if sel_item != None:
         print(f"Used {sel_item['name']}")
         inv.use_item(character, sel_item)
-        inv.delete_item(character, sel_item)
-        print()
+        pause()
 
 
 def display_separator(character):

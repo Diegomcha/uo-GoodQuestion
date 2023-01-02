@@ -13,12 +13,12 @@ def display(room, character):
         print(f"You find a monster!")
         mon.display(room['monster'])
     elif room['id'] not in character['visited_rooms']:
-        visit(room, character)
-
-        if room['monster'] == room['item'] == None:
+        if room['item'] == None:
             print("You find nothing inside.")
         else:
             display_item(room)
+
+    visit(room, character)
 
 
 def display_item(room):
