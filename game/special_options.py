@@ -45,12 +45,12 @@ def open_chest(character):
     pass
 
 def knife_poster(character):
-    print()
-    print('...')
+    print('...', end = "")
     input()
-    print('You find a poster with the friend of your friends and a knife stabbed to it')
+    print('You find a poster with the image of your friends and a knife stabbed to it')
     input()
     print('\t1- [Grab knife]\n\t2- [Leave]')
+    print()
     
     if ask_int(1,2) == 1:
         it.pick_items(PREFABS['kitchen_knife'], 1, character)
