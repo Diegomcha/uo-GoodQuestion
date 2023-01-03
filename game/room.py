@@ -88,17 +88,17 @@ def generate(id, sneak, difficulty):
     #monster = None
 
     # generate item
+    item = None
     try:
         if item_rate > 0:
             room['items']['rate'] = 0  # removes the possibility of an item appearing when the room has already been visited
             if decide(item_rate):  # if item is gonna be generated
                 item = it.generate(room['items']['available'])
-            else:
-                item = None
     except:
-        item = None
+        pass
 
     # TODO: generate monster
+    monster = None
     try:
         #if monster_rate > 0:
             #if decide(monster_rate):

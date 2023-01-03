@@ -65,14 +65,16 @@ def display_inventory(character):
     if character['inventory']['clothes']['pijama'] == None:
         print(f"\t\t    · Shirt: {character['inventory']['clothes']['shirt']['name'] if character['inventory']['clothes']['shirt'] != None else None}")
         print(f"\t\t    · Pants: {character['inventory']['clothes']['pants']['name'] if character['inventory']['clothes']['pants'] != None else None}")
-        print(f"\t\t    · Shoes: {character['inventory']['clothes']['shoes']['name'] if character['inventory']['clothes']['shoes'] != None else None}")
     else:
         print(f"\t    · Pijama: {character['inventory']['clothes']['pijama']['name']}")
+        
+    print(f"\t\t    · Shoes: {character['inventory']['clothes']['shoes']['name'] if character['inventory']['clothes']['shoes'] != None else None}")
+    
     # Faith Item
     # If there is no faith item in inventory, won't show
     # (No spoilers)
     if character['inventory']['faith_item'] != None:
-        print(f"\t\t - Faith item: {character['inventory']['faith_item']}")
+        print(f"\t\t - Faith item: {character['inventory']['faith_item']['name']} [{character['inventory']['faith_item']['traits']}]")
     # Weapon
     print(f"\t\t - Weapon: {character['inventory']['weapon']['name'] if not character['inventory']['weapon'] == None else None} {'['+str(character['inventory']['weapon']['damage']) + ']' if not character['inventory']['weapon'] ==  None else '' }")
 
@@ -92,9 +94,8 @@ def ask_use_items(character):
 
         print(f"·{len(character['inventory']['medicine']) + len(character['inventory']['energetic_drinks']) + 1}- [Leave]")
 
-        result = ask_int(1, i+j+2)
-        print(i+2)
-        if result == i+j+2:
+        result = ask_int(1, len(character['inventory']['medicine']) + len(character['inventory']['energetic_drinks']) + 1)
+        if result == len(character['inventory']['medicine']) + len(character['inventory']['energetic_drinks']) + 1:
             return 0
         else:
             it.consume_item(character['inventory']['medicine'][result - 1], character)

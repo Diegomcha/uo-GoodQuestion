@@ -86,7 +86,7 @@ def pick_items(item, quantity, character):
             character['inventory']['clothes']['pants'] = item
             print(f"You have received an {item['name']}", end="")
 
-        elif item['part_of_body'] == 'shoes' and ask_if_continue(character['inventory']['clothes']['pants'], item, room):
+        elif item['part_of_body'] == 'shoes' and ask_if_continue(character['inventory']['clothes']['shoes'], item, room):
             character['inventory']['clothes']['shoes'] = item
             print(f"You have received an {item['name']}", end="")
 
