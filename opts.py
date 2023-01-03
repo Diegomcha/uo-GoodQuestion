@@ -447,7 +447,7 @@ ROOMS = [
             ],
             'forced': None
         },
-        'connections': [0, 6, 14],
+        'connections': [6, 0, 14],
         'locked': None,  # None or number of key
         'chest': []
     },

@@ -50,8 +50,14 @@ def move(character, room):
     print(f"----- {room['resemblance'].upper()} -----")
     print()
 
-    for i, id in enumerate(room['connections']):
-        print(f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
+    if room['resemblance'] != 'stairs':
+        for i, id in enumerate(room['connections']):
+            print(f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
+    else:
+        print(f"1 - Top    [{'????' if (room['connections'][0] not in character['visited_rooms']) else ROOMS[room['connections'][0]]['resemblance']}]")
+        print(f"2 - Mid    [{'????' if (room['connections'][1] not in character['visited_rooms']) else ROOMS[room['connections'][1]]['resemblance']}]")
+        print(f"3 - Bottom [{'????' if (room['connections'][2] not in character['visited_rooms']) else ROOMS[room['connections'][2]]['resemblance']}]")
+        
     print(f"{len(room['connections']) +1 } - Back")
     print()
 
