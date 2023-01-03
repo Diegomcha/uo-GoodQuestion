@@ -95,7 +95,7 @@ def decide(rate):
     bool
         True if it should happen, false otherwise.
     """
-    return random.randint(1, 101) <= rate
+    return random.randint(1, 100) <= rate
 
 
 def decide_list(list):

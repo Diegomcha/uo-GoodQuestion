@@ -49,7 +49,7 @@ def display_lore():
     Displays the lore.
     """
     print("\t\t\t\t----- LORE -----")
-    f = open(LORE_FILEPATH, 'r')
+    f = open(LORE_FILEPATH, 'r', encoding='utf-8')
     for line in f:
         if line == '\n':
             input()
@@ -57,20 +57,19 @@ def display_lore():
             print(line, end='')
     f.close()
     print("\t\t\t\t----------------")
-    
-#def ask_name_friend():
+
+# def ask_name_friend():
 #    while 1:
 #        print()
 #        name = input("How is your friend called?: ")
-#        
+#
 #        if len(name) > 0:
 #            break
 #        print('Invalid name!')
-#            
+#
 #    if name.title() == 'Ian':
 #        FRIEND['name'] = 'Mike'
-#        
-#        
+#
+#
 #    print(f"Oh {FRIEND['name']}? Goodluck in your journey TRYING to rescue {FRIEND['name'].upper()}!")
 #    input()
-        

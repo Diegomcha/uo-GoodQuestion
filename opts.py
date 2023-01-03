@@ -20,32 +20,32 @@ BASE_CHARACTERS = [
         'name': 'SAM',
         'blood': 'AB+',
         'traits': {
-            'swiftness': 1,
-            'sneak': -1
+            'swiftness': 50,
+            'sneak': -25
         }
     },
     {
         'name': 'SARAH',
         'blood': '0-',
         'traits': {
-            'strength': 1,
-            'maxhp': -1
+            'strength': 60,
+            'maxhp': -40
         }
     },
     {
         'name': 'CHRISTA',
         'blood': '0+',
         'traits': {
-            'sneak': 1,
-            'swiftness': -1
+            'sneak': 50,
+            'swiftness': -25
         }
     },
     {
         'name': 'MIKE',
         'blood': 'A+',
         'traits': {
-            'maxhp': 1,
-            'strength': -1
+            'maxhp': 75,
+            'strength': -50
         }
     }
 ]
@@ -98,13 +98,13 @@ QUALITIES = [
     },
     {
         'name': 'Uncommon',
-        'id':2,
+        'id': 2,
         'special': False,
         'rate': 30
     },
     {
         'name': 'Common',
-        'id':3,
+        'id': 3,
         'special': False,
         'rate': 50
     },
@@ -788,37 +788,33 @@ ACHIEVEMENTS = {
 List of achievements.
 """
 PREFABS = {
-
-    'Boots_of_the_swiftness_of_a_cat':
-        {
-            'type': 'clothes',
-            'name': 'Boots of the swiftness of a cat',
-            'quality': 4,
-            'consumable': False,
-            'damage': None,
-            'part_of_body': 'shoes',
-            'traits': []
-        },
-    'kitchen_knife':
-        {
-            'type': 'weapon',
-            'name': 'Kitchen knife',
-            'quality': 2,
-            'consumable': False,
-            'damage': 5.5,
-            'part_of_body': None,
-            'traits': []
-        },
-    'cat_item':
-        {
-            'type': 'faith_item',
-            'name': 'Miracolous cat gift',
-            'quality': 4,
-            'consumable': False,
-            'damage': None,
-            'part_of_body': None,
-            'traits': []
-        }
+    'Boots_of_the_swiftness_of_a_cat': {
+        'type': 'clothes',
+        'name': 'Boots of the swiftness of a cat',
+        'quality': 4,
+        'consumable': False,
+        'damage': None,
+        'part_of_body': 'shoes',
+        'traits': []
+    },
+    'kitchen_knife': {
+        'type': 'weapon',
+        'name': 'Kitchen knife',
+        'quality': 2,
+        'consumable': False,
+        'damage': 5.5,
+        'part_of_body': None,
+        'traits': []
+    },
+    'cat_item': {
+        'type': 'faith_item',
+        'name': 'Miracolous cat gift',
+        'quality': 4,
+        'consumable': False,
+        'damage': None,
+        'part_of_body': None,
+        'traits': []
+    }
 }
 
 FRIEND = {
