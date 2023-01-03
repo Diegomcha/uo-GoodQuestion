@@ -95,7 +95,7 @@ def decide(rate):
     bool
         True if it should happen, false otherwise.
     """
-    return random.randint(1, 100) <= rate
+    return random.randint(1, 101) <= rate
 
 
 def decide_list(list):
@@ -142,6 +142,3 @@ def decide_index_rated_list(list):
             return i
         else:
             last += item['rate']
-
-
-

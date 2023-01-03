@@ -76,34 +76,39 @@ def move(character, room):
 # Main
 def generate(id, sneak, difficulty):
     room = ROOMS[id]
+    difficulty = difficulty['name']
+    
     try:
-        item_rate = room['items']['rate'] * 0.5 if difficulty == 2 else room['items']['rate'] * 0.8 if difficulty == 1 else room['items']['rate']
-        monster_rate = room['monsters']['rate'] - sneak
+        item_rate = room['items']['rate'] * 0.5 if difficulty == 'Hard' else room['items']['rate'] * 0.8 if difficulty == 'Medium' else room['items']['rate']
+        #monster_rate = room['monsters']['rate'] - sneak
     except:
         pass
 
-    item = None
-    monster = None
+    #item = None
+    #monster = None
 
     # generate item
     try:
         if item_rate > 0:
             room['items']['rate'] = 0  # removes the possibility of an item appearing when the room has already been visited
             if decide(item_rate):  # if item is gonna be generated
-                item = it.generate(room['items']['available'], room['items']['max_quality'])
+                item = it.generate(room['items']['available'])
+            else:
+                item = None
     except:
-        pass
+        item = None
 
     # TODO: generate monster
     try:
-        if monster_rate > 0:
-            if decide(monster_rate):
+        #if monster_rate > 0:
+            #if decide(monster_rate):
                 # TODO: generate monster & remove pass
-                pass
-                # monster = mon.generate(room['monsters']['available'], room['monsters']['base_stats'])
+                #pass
+                #monster = mon.generate(room['monsters']['available'], room['monsters']['base_stats'])
+        monster = None
     except:
+        monster = None
         pass
-
     return {
         'id': id,
         'resemblance': room['resemblance'],

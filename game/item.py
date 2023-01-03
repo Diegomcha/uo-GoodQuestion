@@ -2,14 +2,10 @@ from opts import ITEMS, QUALITIES, SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES, BASE_
 from utils.functions import decide_list, decide_index_rated_list, ask_int
 
 
-def generate(available, max_quality):
-    qualities = QUALITIES.copy()
-    for i in range(max_quality, 0, -1):
-        if i-max_quality > 0:
-            qualities = qualities.remove(QUALITIES[i-max_quality])
+def generate(available):
     item = {
         'type': decide_list(available),
-        'quality': decide_index_rated_list(qualities)
+        'quality': decide_index_rated_list(QUALITIES)
     }
     item['name'] = decide_list(ITEMS[item['type']]['names']) if not QUALITIES[item['quality']]['special'] else decide_list(ITEMS[item['type']]['special_names'])
     item['traits'] = ITEMS[item['type']]['traits'][item['quality']]
@@ -23,7 +19,7 @@ def generate(available, max_quality):
             item['part_of_body'] = 'shirt'
         elif item['name'] in PANTS_NAMES:
             item['part_of_body'] = 'pants'
-        elif item['name' in SHOES_NAMES]: 
+        elif item['name'] in SHOES_NAMES: 
             item['part_of_body'] = 'shoes'
         else: #pijama
             item['part_of_body'] = 'pijama'
@@ -95,9 +91,9 @@ def pick_items(item, quantity, character):
             character['inventory']['clothes']['shoes'] = item
             print(f"You have received an {item['name']}", end = "")
         
-    elif item['type'] == 'medicine':
+    elif item['type'] == 'medicine' or item['type'] == 'energetic_drink':
         for _ in range(quantity):
-            character['inventory']['medicine'].append(item)
+            character['inventory'][item['type']].append(item)
         print(f"You've received {quantity} {item['name']}{'s' if quantity > 1 else ''}", end = "")
         
     elif item['type'] == 'faith_item' and ask_if_continue(character['inventory']['faith_item'], item, room):
@@ -118,9 +114,9 @@ def consume_item(item, character):
     
     if item['type'] == 'medicine':
         
-        afterwards_hp = character['hp'] + item['traits']['heal']
+        afterwards_hp = character['hp'] + item['traits']['hp']
         print()
-        print(f"Do you want to use the item {item['name']}? [{character['hp']} -> {afterwards_hp if afterwards_hp <= character['maxhp'] else character['maxhp']}]")
+        print(f"Do you want to use the item {item['name']}? [{character['hp']}hp -> {afterwards_hp if afterwards_hp <= character['maxhp'] else character['maxhp']}hp]")
         print("\n\t1- [YES]\n\t2- [NO]\n")
         
         if ask_int(1,2) == 1:
@@ -131,6 +127,20 @@ def consume_item(item, character):
             print("Item not used", end = "")
         
         input()
+        
+    elif item['type'] == 'energetic_drink':
+        
+        swiftness = character['swiftness'] + item['traits']['swiftness']
+        print()
+        print(f"Do you want to use the item {item['name']}? [{character['swiftness']}sp -> {swiftness if swiftness <= 100 else 100}sp]")
+        print("\n\t1- [YES]\n\t2- [NO]\n")
+        
+        if ask_int(1,2) == 1:
+            print('Item used', end = "")
+            character['swiftness'] = swiftness if swiftness <= 100 else 100
+            character['inventory']['enegergetic_drinks'].remove(item)
+        else:
+            print("Item not used", end = "")
         
             
             

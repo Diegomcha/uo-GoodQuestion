@@ -37,11 +37,8 @@ def monster_turn(character,monster):
 def player_turn(monster, character):
     print("Your turn to act!")
     print("What will you do?")
-    print('\t\t1 - [Attack]')
-    print()
-    print('\t\t2 - [Use Object]')
-    print()
-    print('\t\t3 - [Flee]')
+    print('\t1 - [Attack]\t\t2 - [Use Object]')
+    print('\t\t\t3 - [Flee]')
 
     result = ask_int(1,3)
 

@@ -54,11 +54,7 @@ def display(special_options, character):
             so.play_piano()
             
         elif special_options[selection] == "Receive item":
-            try:
-                item = it.generate('weapon', ROOMS[character['room']['id']]['max_quality'])
-            except:
-                item = it.generate('weapon', 0)
-            it.pick_items(item,1,character)
+            it.pick_items(it.generate('weapon'),1,character)
             
         elif special_options[selection] == "Open chest":
             so.open_chest(character)

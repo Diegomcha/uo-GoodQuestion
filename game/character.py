@@ -63,7 +63,7 @@ def select():
         'last_room': 0,
         'visited_rooms': [],
         'remaining': difficulty['remaining'],
-        'inventory': {'keys': [], 'medicine': [], 'clothes': {'shirt': None, 'pants': None, 'shoes': None, 'pijama': None}, 'faith_item': None, 'weapon': None},
+        'inventory': {'keys': [], 'medicine': [], 'energetic_drinks': [], 'clothes': {'shirt': None, 'pants': None, 'shoes': None, 'pijama': None}, 'faith_item': None, 'weapon': None},
         'traits': []    
     }
 

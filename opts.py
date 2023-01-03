@@ -86,21 +86,25 @@ Base stats for each difficulty. New difficulties may be added, the structure is 
 QUALITIES = [
     {
         'name': 'Legendary',
+        'id': 0,
         'special': True,
         'rate': 5
     },
     {
         'name': 'Rare',
+        'id': 1,
         'special': False,
         'rate': 15
     },
     {
         'name': 'Uncommon',
+        'id':2,
         'special': False,
         'rate': 30
     },
     {
         'name': 'Common',
+        'id':3,
         'special': False,
         'rate': 50
     },
@@ -108,9 +112,9 @@ QUALITIES = [
 """
 List of all the available qualities.
 """
-SHIRTS_NAMES = []
-PANTS_NAMES = []
-SHOES_NAMES = []
+SHIRTS_NAMES = ['broken t-shirt']
+PANTS_NAMES = ['shorts']
+SHOES_NAMES = ['sleepers']
 
 BASE_DAMAGE_WEAPON = {'knife': 3, 'fork': 2, 'machete': 6, 'spike': 7, "cat's paw": 10}
 
