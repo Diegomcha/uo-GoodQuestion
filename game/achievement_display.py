@@ -1,11 +1,11 @@
 import game.achievement_manager as am
 
-from opts import KEYS, ACHIEVEMENTS_SAVE_PATH,  ACHIEVEMENTS
+from opts import KEYS, ACHIEVEMENTS_SAVE_PATH, ACHIEVEMENTS
 from utils.functions import ask_options
 
 TOTAL = len(ACHIEVEMENTS)
 
-
+# TODO: change docstring
 def paint(count, total, index, name_from_index, description):
     """ Makes the display of the achievement
     Args:
@@ -17,7 +17,7 @@ def paint(count, total, index, name_from_index, description):
     """
     print(f"----- ACHIEVEMENTS ({count} of {total} unlocked) -----")
     print()
-    
+
     if index != -1:
         print(f"     {index+1} - {name_from_index}")
         print(f"\t{description}")
@@ -32,24 +32,25 @@ def paint(count, total, index, name_from_index, description):
             KEYS['exit']: 'Exit'
         })
 
-    if result.upper == KEYS['next'].upper:
+    if result == KEYS['next']:
+        print(1)
         if index < count - 1:
             paint_logic(index+1)
         else:
             paint_logic(index)
-    elif result.upper == KEYS['previous'].upper:
+    elif result == KEYS['previous']:
+        print(1)
         if (index > 0):
             paint_logic(index - 1)
         else:
             paint_logic(index)
-    elif result.upper == KEYS['exit'].upper:
+    elif result == KEYS['exit']:
         return None
 
     else:
         pass
 
         
-
 
 def paint_logic(index_to_paint):
     """Gets the data for the paint method
@@ -62,7 +63,7 @@ def paint_logic(index_to_paint):
         paint(count,TOTAL,-1, "", "")
         return None
     name_from_index = am.separate_achievement(data[index_to_paint])[0]
-    description = am.separate_achievement(data[index_to_paint])[1]
+    description = am.separate_achievement(data[index_to_paint])[1].rstrip()
 
     paint(count, TOTAL, index_to_paint, name_from_index, description)
 

@@ -63,8 +63,12 @@ def display(special_options, character):
             so.get_toy('plushie', character)
             ROOMS[character['room']['id']]['special_options'].remove(special_options[selection])
         
-        elif special_options[selection] == "Open drawner":
-            so.open('drawner', character)
+        elif special_options[selection] == "Open drawer":
+            if character['room']['resemblance'] == 'kitchen':
+                available = ['weapon']
+            else:
+                available = ['faith_items', 'clothes']
+            so.open('drawer', available, character)
             ROOMS[character['room']['id']]['special_options'].remove(special_options[selection])  
             
         elif special_options[selection] == 'window':

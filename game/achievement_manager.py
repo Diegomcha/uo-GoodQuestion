@@ -1,4 +1,4 @@
-from opts import ACHIEVEMENTS
+# TODO: Change docstring
 
 def is_in_file(path, name):
     """Scans through the the file if possible, and returns wether the achievment is in the file or not
@@ -58,6 +58,7 @@ def read_achievements(path):
     try:
         file = open(path, "r")
         data = file.readlines()
+        file.close()
         return data
     except:
         return -1

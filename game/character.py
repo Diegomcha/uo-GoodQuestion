@@ -75,7 +75,6 @@ def select():
     while selection != KEYS['select']:
         # Character stats
         display_base_character(BASE_CHARACTERS[id])
-        print()
 
         # Asks for selection
         selection = ask_options({
@@ -109,6 +108,7 @@ def select():
 
 def set_elo(character):
     character['elo'] = character['strength']*2 + character['shield']*3 + character['hp']
+
 def display(character):
     """
     Prints the provided character.
@@ -130,7 +130,7 @@ def combat_display(character, monster):
     monster_name = monster['name'].title() + " ("+ monster['category']+")"
     print('***************************************************************')
     print(f"\t{character['name'].title()}\t\t|\t{monster_name}")
-    print(f"\tHP: {character['hp']}\t\t|\tHP: {monster['hp']}")
+    print(f"\tHP: {character['hp']:.0f}\t\t|\tHP: {monster['hp']}")
     print(f"\tSHIELD: {character['shield']}\t|")
     print(f"\tSTRENGTH: {character['strength']}\t|\tSTRENGTH: {monster['strength']}")
     print('***************************************************************')

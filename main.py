@@ -48,10 +48,10 @@ def main():
 
         while character['remaining'] > 0 and character['hp'] > 0:
             char.set_elo(character)
-            print(character['elo'])
             return_value = opt.display(ROOMS[character['room']['id']]['special_options'], character) 
-            if  return_value == 'Another room':
+            if return_value == 'Another room':
                 monster = rm.move(character, character['room'])
+
                 if monster != None:
                     input()
                     if comb.fight(character, monster) == 'scaped':

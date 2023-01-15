@@ -43,6 +43,7 @@ def open_chest(character):
         ROOMS[character['room']['id']]['chest'].remove(win)
         
         it.pick_items(win,1, character)
+    manager['character_displayed'] = False
     pass
 
 def knife_poster(character):
@@ -76,14 +77,14 @@ def get_toy(type, character):
         print('You put it down', end = "")
         input()
             
-def open(type, character):
-    loot = None if random.random() > 0.2 else it.generate(["medicine", "faith_item"])
+def open(type, available, character):
+    loot = None if random.random() < 0.55 else it.generate(available)
     print(f'You opened a {type}', end = "")
     input()
     if loot == None:
         print("You found nothing inside", end = "")
     else:
-        print(f"You have found an {loot['name']}", end= "")
+        print(f"You have found an {loot['name']}")
         it.pick_items(loot, 1, character)
     input()
     

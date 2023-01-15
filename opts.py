@@ -10,7 +10,7 @@ KEYS = {
 Keys used.
 """
 
-ACHIEVEMENTS_SAVE_PATH = "utils/assets/data.txt"
+ACHIEVEMENTS_SAVE_PATH = "data.txt"
 """
 Where to save the achievements progress.
 """
@@ -21,7 +21,7 @@ BASE_CHARACTERS = [
         'blood': 'AB+',
         'traits': {
             'swiftness': 50,
-            'sneak': -25
+            'sneak': -20
         }
     },
     {
@@ -37,7 +37,7 @@ BASE_CHARACTERS = [
         'blood': '0+',
         'traits': {
             'sneak': 50,
-            'swiftness': -25
+            'swiftness': -10
         }
     },
     {
@@ -58,7 +58,7 @@ DIFFICULTIES = [
         'name': 'Easy',
         'maxhp': 120,
         'strength': 10,
-        'sneak': 15,
+        'sneak': 50,
         'swiftness': 25,
         'remaining': 50
     },
@@ -66,7 +66,7 @@ DIFFICULTIES = [
         'name': 'Medium',
         'maxhp': 100,
         'strength': 8, 
-        'sneak': 10,
+        'sneak': 40,
         'swiftness': 20,
         'remaining': 30
     },
@@ -74,8 +74,8 @@ DIFFICULTIES = [
         'name': 'Hard',
         'maxhp': 80,
         'strength': 6,
-        'sneak': 5,
-        'swiftness': 10,
+        'sneak': 30,
+        'swiftness': 30,
         'remaining': 15
     }
 ]
@@ -115,6 +115,7 @@ List of all the available qualities.
 SHIRTS_NAMES = ['broken t-shirt']
 PANTS_NAMES = ['shorts']
 SHOES_NAMES = ['sleepers']
+PIJAMAS_NAMES = ['dino pijama']
 
 BASE_DAMAGE_WEAPON = {'knife': 3, 'fork': 2, 'machete': 6, 'spike': 7, "cat's paw": 10}
 
@@ -155,19 +156,19 @@ ITEMS = {
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
-                'hp': 30,
+                'hp': 50
             },
             {
                 # quality id: 1
-                'hp': 20
+                'hp': 30
             },
             {
                 # quality id: 2
-                'hp': 10
+                'hp': 20
             },
             {
                 # quality id: 3
-                'hp': 5
+                'hp': 15
             }
         ],
     },
@@ -206,7 +207,7 @@ ITEMS = {
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
-                'swiftness': 30
+                'swiftness': 20
             },
             {
                 # quality id: 1
@@ -321,8 +322,7 @@ ROOMS = [
         'monsters': {
             'rate': 0,
             'available': [],
-            'forced': None,
-            'base_stats': {}  # TODO: decide wether to use this aproach or not
+            'forced': None
         },
         'connections': [1, 2, 3, 4, 5],
         'locked': None,  # None or number of key
@@ -330,7 +330,7 @@ ROOMS = [
     },
     {
         # 'id': 1,
-        'special_options': ['item'],
+        'special_options': [],
         'resemblance': 'living room',
         'items': {
             'rate': 75,
@@ -366,8 +366,7 @@ ROOMS = [
                     'rate': 10
                 }
             ],
-            'forced': None,
-            'base_stats': {}  # TODO: decide whether to use this aproach or not
+            'forced': None
         },
         'connections': [0, 5],
         'locked': None,  # None or number of key
@@ -375,11 +374,11 @@ ROOMS = [
     },
     {
         # 'id': 2,
-        'special_options': ['Poster with a knife'],
+        'special_options': ['Poster with a knife', 'Open drawer'],
         'resemblance': 'kitchen',
         'items': {
             'rate': 100,
-            'available': ['weapon'],
+            'available': ['energetic_drink'],
             'forced': None
         },
         'monsters': {
@@ -406,7 +405,7 @@ ROOMS = [
     },
     {
         # 'id': 3,
-        'special_options': ['Receive item'],
+        'special_options': [],
         'resemblance': 'bathroom',
         'items': {
             'rate': 100,
@@ -510,7 +509,7 @@ ROOMS = [
     # Floor 1
     {
         # 'id': 6,
-        'special_options': ['Consume Item'],
+        'special_options': [],
         'resemblance': 'hall',
         'items': {
             'rate': 0,
@@ -694,7 +693,7 @@ ROOMS = [
     },
     {
         # 'id': 11,
-        'special_options': ['Get a train toy', 'Get a plushie', 'Open drawner'],
+        'special_options': ['Get a train toy', 'Get a plushie', 'Open drawer'],
         'resemblance': 'toys room',
         'items': {
             'forced': None  # TODO: Here the key to the attic

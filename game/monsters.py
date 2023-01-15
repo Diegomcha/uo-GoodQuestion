@@ -1,5 +1,5 @@
 from utils.functions import decide_index_rated_list
-from opts import MONSTERS, DIFFICULTIES
+from opts import MONSTERS
 import random
 
 monster_type_to_id = {'ghoul': 0, 'giant_rat': 1, 'viper': 2, 'ghost': 3}

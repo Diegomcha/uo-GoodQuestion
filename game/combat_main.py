@@ -1,29 +1,38 @@
 import random
 import game.inventory_display as id
 import game.character as char
+from game.game_manager import manager
 from utils.functions import ask_int
-
-#All subtituted
-player_health = 10
-player_strength = 10
-
-monster_name = "rUPERTO"
-monster_health = 10
-monster_strength = 10
-fleeing_chance = 0
 
 
 def monster_turn(character,monster):
+    """Method including all the monster options depending on the difficulty
+            - Deal damage
+            - Growl
+            - Escape
+
+    Parameters
+    ----------
+    character : dict[str, Any]
+        dictionary storing the character attributes
+    monster : dict[str, Any]
+        dictionary storing the monster attributes
+
+    Returns
+    -------
+    string
+        'ran' if the monster ran else None
+    """
     # No attack
     if monster['hp'] < monster['maxhp']/2:
         if random.randint(1,100) < monster['scape_rate']:
-            print(f"The {monster['name']} runed away")
+            print(f"The {monster['name']} ran away")
             input()
-            return 'runed'
+            return 'ran'
     if random.randint(0,2) == 0:
         print(f"The {monster['name']} growled!")
         input()
-        return(character['hp'])
+        return None
 
     else:
         print(f"{monster['name'].title()} decided to attack")
@@ -48,10 +57,24 @@ def monster_turn(character,monster):
         else:
             print(f"You dodged the {monster['name']}'s attack!")
             input()
-        return(character['hp'])
+        return None
 
 
 def player_turn(monster, character):
+    """Method including the decisions of the player
+
+    Parameters
+    ----------
+    character : dict[str, Any]
+        dictionary storing the character attributes
+    monster : dict[str, Any]
+        dictionary storing the monster attributes
+
+    Returns
+    -------
+    string
+        'escaped' if player escaped, else None
+    """
     print("Your turn to act!")
     while True:
         print("What will you do?")
@@ -77,25 +100,44 @@ def player_turn(monster, character):
         
         elif result == 2:
             invlen = len(character['inventory']['medicine']) + len(character['inventory']['energetic_drinks'])
-            id.ask_use_items(character)
-            if invlen != len(character['inventory']['medicine'])  + len(character['inventory']['energetic_drinks']):
-                break
+            if invlen == 0:
+                print("No consumable items")
+                input()
+            else:
+                id.ask_use_items(character)
+                
+                if invlen != len(character['inventory']['medicine']) + len(character['inventory']['energetic_drinks']):
+                    break
 
         elif result == 3:
             #Fleeing chance
             if random.randint(0,101) > character['swiftness']:
                 print("You succesfully escaped!")
-                return 'scaped'
+                return 'escaped'
             #If fails
-            print(f"The {str(monster_name)} blocked your exit!")
+            print(f"The {monster['name']} blocked your exit!")
             break
     
-    return 0
+    return None
 
 
 def fight(character, monster):
+    """Main loop for the combat
+
+    Parameters
+    ----------
+    character : dict[str, Any]
+        dictionary storing the character attributes
+    monster : dict[str, Any]
+        dictionary storing the monster attributes
+
+    Returns
+    -------
+    string
+        'escaped' if player escaped, else None
+    """
     print("||||||||||||||||||||||||||||||")
-    print("||||||||COMBAT! START!||||||||")
+    print("||||||||COMBAT START!|||||||||")
     print("||||||||||||||||||||||||||||||")
     print("")
 
@@ -103,16 +145,18 @@ def fight(character, monster):
     while monster['hp'] > 0  and character['hp'] > 0:
         char.combat_display(character,monster)
         if turn == 0:
-            if monster_turn(character, monster) == 'runed':
+            if monster_turn(character, monster) == 'ran':
                 return 0
             turn = 1
         elif turn == 1:
-            if player_turn(monster, character) == 'scaped':
+            if player_turn(monster, character) == 'escaped':
+                manager['character_displayed'] = False
                 print ("You were lucky back there huh?")
                 input()
-                return 'scaped'
+                return 'escaped'
             turn = 0
             
     if character['hp'] > 0:
+        manager['character_displayed'] = False
         print(f"You succesfully killed the {monster['name']}")
         input()

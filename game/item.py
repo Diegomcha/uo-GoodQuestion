@@ -1,5 +1,6 @@
-from opts import ITEMS, QUALITIES, SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES, BASE_DAMAGE_WEAPON, ROOMS
+from opts import ITEMS, QUALITIES, SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES, PIJAMAS_NAMES, BASE_DAMAGE_WEAPON, ROOMS
 from utils.functions import decide_list, decide_index_rated_list, ask_int
+from game.game_manager import manager
 
 
 def generate(available):
@@ -21,7 +22,7 @@ def generate(available):
             item['part_of_body'] = 'pants'
         elif item['name'] in SHOES_NAMES:
             item['part_of_body'] = 'shoes'
-        else:  # pijama
+        elif item['name'] in PIJAMAS_NAMES:  # pijama
             item['part_of_body'] = 'pijama'
 
     item['traits']['heal'] = None if item['type'] != 'medicine' else 1
@@ -80,19 +81,19 @@ def pick_items(item, quantity, character):
     elif item['type'] == 'clothes':
         if item['part_of_body'] == 'shirt' and ask_if_continue(character['inventory']['clothes']['shirt'], item, room):
             character['inventory']['clothes']['shirt'] = item
-            print(f"You have received an {item['name']}", end="")
+            print(f"You have received a {item['name']}", end="")
 
         elif item['part_of_body'] == 'pants' and ask_if_continue(character['inventory']['clothes']['pants'], item, room):
             character['inventory']['clothes']['pants'] = item
-            print(f"You have received an {item['name']}", end="")
+            print(f"You have received a {item['name']}", end="")
 
         elif item['part_of_body'] == 'shoes' and ask_if_continue(character['inventory']['clothes']['shoes'], item, room):
             character['inventory']['clothes']['shoes'] = item
-            print(f"You have received an {item['name']}", end="")
+            print(f"You have received a {item['name']}", end="")
 
         elif item['part_of_body'] == 'pijama' and ask_if_continue(character['inventory']['clothes']['shirt'], item, room) and ask_if_continue(character['inventory']['clothes']['pants'], item, room):
-            character['inventory']['clothes']['shoes'] = item
-            print(f"You have received an {item['name']}", end="")
+            character['inventory']['clothes']['pijama'] = item
+            print(f"You have received a {item['name']}", end="")
 
     elif item['type'] == 'medicine' or item['type'] == 'energetic_drink':
         for _ in range(quantity):
@@ -101,12 +102,25 @@ def pick_items(item, quantity, character):
 
     elif item['type'] == 'faith_item' and ask_if_continue(character['inventory']['faith_item'], item, room):
         character['inventory']['faith_item'] = item
-        print(f"You have received an {item['name']}", end="")
+        print(f"You have received a {item['name']}", end="")
 
     elif item['type'] == 'weapon' and ask_if_continue(character['inventory']['weapon'], item, room):
-        character['inventory']['weapon'] = item
-        character['strength'] = character['difficulty']['strength'] + item['damage']
-        print(f"You have received an {item['name']}", end="")
+        if character['inventory']['weapon'] == None:
+            print(f"Do you want to grab the {item['type']} [Name: {item['name']} - Quality: {QUALITIES[item['quality']]['name']} - Damage: {item['damage']}]?")
+            print("""
+                1 - [YES]
+                2 - [NO]
+                
+                """)
+            if ask_int(1, 2) == 1:
+                character['inventory']['weapon'] = item
+                character['strength'] = character['difficulty']['strength'] + item['damage']
+                print(f"You have received a {item['name']}", end="")
+            else:
+                ROOMS[character['room']['id']]['chest'].append(item)
+                print("You stay as before", end="")
+        else:
+            print(f"You have received a {item['name']}", end="")
 
     else:
         print("You stay as before", end="")
@@ -121,7 +135,7 @@ def consume_item(item, character):
         afterwards_hp = character['hp'] + item['traits']['hp']
         print()
         print(f"Do you want to use the item {item['name']}? [{character['hp']}hp -> {afterwards_hp if afterwards_hp <= character['maxhp'] else character['maxhp']}hp]")
-        print("\n\t1- [YES]\n\t2- [NO]\n")
+        print("\n\t1 - [YES]\n\t2 - [NO]\n")
 
         if ask_int(1, 2) == 1:
             print('Item used', end="")
@@ -137,7 +151,7 @@ def consume_item(item, character):
         swiftness = character['swiftness'] + item['traits']['swiftness']
         print()
         print(f"Do you want to use the item {item['name']}? [{character['swiftness']}sp -> {swiftness if swiftness <= 100 else 100}sp]")
-        print("\n\t1- [YES]\n\t2- [NO]\n")
+        print("\n\t1 - [YES]\n\t2 - [NO]\n")
 
         if ask_int(1, 2) == 1:
             print('Item used', end="")
