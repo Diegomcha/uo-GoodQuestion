@@ -1,9 +1,11 @@
 import game.main_menu as menu
 import game.character as char
 import game.achievement_display as achiev
+import game.inventory_display as inv
 import game.room as rm
 import game.options as opt
 import game.end as end
+import game.combat_main as comb
 
 from opts import ROOMS
 from game.game_manager import manager
@@ -44,9 +46,25 @@ def main():
         manager['displayed_character'] = True
         rm.display(character['room'], character)
 
-        while character['remaining'] > 0:
-            opt.display(ROOMS[character['room']['id']]['special_options'], character)
+        while character['remaining'] > 0 and character['hp'] > 0:
+            char.set_elo(character)
+            print(character['elo'])
+            return_value = opt.display(ROOMS[character['room']['id']]['special_options'], character) 
+            if  return_value == 'Another room':
+                monster = rm.move(character, character['room'])
+                if monster != None:
+                    input()
+                    if comb.fight(character, monster) == 'scaped':
+                        character['room'] = character['last_room']
+                
+            elif return_value == 'Inventory':
+                inv.display_inventory(character)
+                manager['character_displayed'] = False
+                
+            else:
+                continue
         
+        print("DEAD!")
         end.write_achivement()
             
 

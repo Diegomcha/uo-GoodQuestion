@@ -61,6 +61,7 @@ def select():
         'sneak': difficulty['sneak'],
         'swiftness': difficulty['swiftness'],
         'last_room': 0,
+        'elo': 100,
         'visited_rooms': [],
         'remaining': difficulty['remaining'],
         'inventory': {'keys': [], 'medicine': [], 'energetic_drinks': [], 'clothes': {'shirt': None, 'pants': None, 'shoes': None, 'pijama': None}, 'faith_item': None, 'weapon': None},
@@ -101,12 +102,13 @@ def select():
         character[trait] += (val / 100) * character[trait]
     character['name'] = BASE_CHARACTERS[id]['name']
     character['hp'] = character['maxhp']
-    character['room'] = rm.generate(0, character['sneak'], character['difficulty'])
+    character['room'] = rm.generate(0, character['sneak'], character['difficulty'], character['elo'])
     character['last_room'] = character['room']['id']
 
     return character
 
-
+def set_elo(character):
+    character['elo'] = character['strength']*2 + character['shield']*3 + character['hp']
 def display(character):
     """
     Prints the provided character.
@@ -122,4 +124,14 @@ def display(character):
     print(f"\t - Health: {character['hp']} / {character['maxhp']}")
     print(f"\t - Strength: {character['strength']}")
     print(f"\t{'-' * len(title)}")
+    print()
+    
+def combat_display(character, monster):
+    monster_name = monster['name'].title() + " ("+ monster['category']+")"
+    print('***************************************************************')
+    print(f"\t{character['name'].title()}\t\t|\t{monster_name}")
+    print(f"\tHP: {character['hp']}\t\t|\tHP: {monster['hp']}")
+    print(f"\tSHIELD: {character['shield']}\t|")
+    print(f"\tSTRENGTH: {character['strength']}\t|\tSTRENGTH: {monster['strength']}")
+    print('***************************************************************')
     print()

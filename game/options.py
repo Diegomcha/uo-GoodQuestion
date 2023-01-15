@@ -1,6 +1,4 @@
-import game.room as rm
 import game.character as char
-import game.inventory_display as inv
 import game.item as it 
 import game.special_options as so
 import game.character as char
@@ -39,12 +37,9 @@ def display(special_options, character):
     selection = ask_int(1, 2 + new_options)
 
     if selection == 1:
-        rm.move(character, character['room'])
-        display(ROOMS[character['room']['id']]['special_options'], character)
+        return 'Another room'
     elif selection == 2:
-        inv.display_inventory(character)
-        manager['character_displayed'] = False
-        display(ROOMS[character['room']['id']]['special_options'], character)
+        return 'Inventory'
     else:
         selection -= 3
         if special_options[selection] == "Play with cat":
@@ -52,9 +47,6 @@ def display(special_options, character):
 
         elif special_options[selection] == "Play piano":
             so.play_piano()
-            
-        elif special_options[selection] == "Receive item":
-            it.pick_items(it.generate('weapon'),1,character)
             
         elif special_options[selection] == "Open chest":
             so.open_chest(character)
@@ -73,25 +65,13 @@ def display(special_options, character):
         
         elif special_options[selection] == "Open drawner":
             so.open('drawner', character)
-            ROOMS[character['room']['id']]['special_options'].remove(special_options[selection])
+            ROOMS[character['room']['id']]['special_options'].remove(special_options[selection])  
             
-        elif special_options[selection] == 'Consume Item':
-            medicine = {
-                'type': 'medicine',
-                'name': 'medicine', 
-                'quality': 4, 
-                'consumable': True,
-                'damage': None,  
-                'part_of_body': None,
-                'traits': {'heal':20}
-            }
-            character['hp'] -= 1
-            char.display(character)
-            it.pick_items(medicine,1,character)
-            it.consume_item(medicine, character)
+        elif special_options[selection] == 'window':
+            character['hp'] = 0
         
-    manager['character_displayed'] = False
-    display(ROOMS[character['room']['id']]['special_options'], character)
+        manager['character_displayed'] = False
+        return 0
 
 # TO-DO:
 
