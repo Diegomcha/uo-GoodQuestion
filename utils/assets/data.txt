@@ -1,6 +1,0 @@
-SAVIOUR: Complete the game once
-ADVANCED TREASURE HUNTER: Collect the halve of the items in one run
-GOD-LIKE-TREASURE HUNTER: Collect all the items in one run
-PACIFIST: Complete the game but no enemy was harmed during the proccess
-SNEAKY PEAKY: Complete the game without finding an enemy (lucky you)
-UNARMED: Complete the game without collecting any weapon

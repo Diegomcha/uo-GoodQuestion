@@ -27,25 +27,23 @@ def display(room, character):
 
     if not room['id'] in character['visited_rooms']:
         print(f"You enter into a room that resembles a {room['resemblance']}")
-        
-        manager['rooms_visited'].append(room)
-        
+
         if room['resemblance'] != 'stairs':
             if room['monster'] == room['item'] == None:
                 print("You find nothing inside.", end="")
                 input()
             else:
                 if room['item'] != None:
-                    it.pick_items(room['item'], 1, character)  
-                                  
+                    it.pick_items(room['item'], 1, character)
+
                 if room['monster'] != None:
                     print(f"You find a monster!", end="")
                     return room['monster']
-                
+
     else:
-        print(f"You return to the {room['resemblance']}.", end = "")
+        print(f"You return to the {room['resemblance']}.", end="")
         input()
-        
+
     return None
 
 
@@ -68,7 +66,6 @@ def unlock(character, room):
     if room['locked'] == None:
         return True
 
-
     if room['locked'] in character['inventory']['keys']:
         character['inventory']['keys'].remove(room['locked'])
         room['locked'] = None
@@ -87,7 +84,7 @@ def move(character, room):
         dictionary storing the attributes of the character
     room : dict[str, Any]
         dictionary storing the values of the room to display
-        
+
     Returns
     -------
     dict[str, Any]
@@ -104,7 +101,7 @@ def move(character, room):
         print(f"1 - Top    [{'????' if (room['connections'][0] not in character['visited_rooms']) else ROOMS[room['connections'][0]]['resemblance']}]")
         print(f"2 - Mid    [{'????' if (room['connections'][1] not in character['visited_rooms']) else ROOMS[room['connections'][1]]['resemblance']}]")
         print(f"3 - Bottom [{'????' if (room['connections'][2] not in character['visited_rooms']) else ROOMS[room['connections'][2]]['resemblance']}]")
-        
+
     print(f"{len(room['connections']) +1 } - Back")
     print()
 
@@ -127,7 +124,7 @@ def move(character, room):
             return monster
     else:
         print("Seems to be locked")
-    
+
     return None
 
 
@@ -153,12 +150,12 @@ def generate(id, sneak, difficulty, elo):
     """
     room = ROOMS[id]
     difficulty = difficulty['name']
-    
+
     try:
         item_rate = room['items']['rate'] * 0.5 if difficulty == 'Hard' else room['items']['rate'] * 0.8 if difficulty == 'Medium' else room['items']['rate']
     except:
         pass
-    
+
     try:
         monster_rate = room['monsters']['rate'] - sneak
     except:

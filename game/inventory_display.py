@@ -70,8 +70,6 @@ def display_inventory(character):
         print(f"\t\t    · Pijama: {character['inventory']['clothes']['pijama']['name']}")
         print(f"\t\t    · Shoes: {character['inventory']['clothes']['shoes']['name'] if character['inventory']['clothes']['shoes'] != None else None}")
 
-        
-    
     # Faith Item
     # If there is no faith item in inventory, won't show
     # (No spoilers)

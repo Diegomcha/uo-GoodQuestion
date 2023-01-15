@@ -36,10 +36,9 @@ def main():
         menu.display_lore()
         print()
         print()
-        print("------------- ADVENTURE STARTS! -------------") 
+        print("------------- ADVENTURE STARTS! -------------")
         print()
-        print()    
-        
+        print()
 
         # Displays inital Room & character
         char.display(character)
@@ -48,25 +47,25 @@ def main():
 
         while character['remaining'] > 0 and character['hp'] > 0:
             char.set_elo(character)
-            return_value = opt.display(ROOMS[character['room']['id']]['special_options'], character) 
+            return_value = opt.display(ROOMS[character['room']['id']]['special_options'], character)
             if return_value == 'Another room':
                 monster = rm.move(character, character['room'])
 
                 if monster != None:
+                    manager['enemies_found'] += 1
                     input()
                     if comb.fight(character, monster) == 'scaped':
                         character['room'] = character['last_room']
-                
+
             elif return_value == 'Inventory':
                 inv.display_inventory(character)
                 manager['character_displayed'] = False
-                
+
             else:
                 continue
-        
+
         print("DEAD!")
         end.write_achivement()
-            
 
         # TODO: Continue...
 

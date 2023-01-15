@@ -5,6 +5,7 @@ from utils.functions import ask_options
 
 TOTAL = len(ACHIEVEMENTS)
 
+
 # TODO: change docstring
 def paint(count, total, index, name_from_index, description):
     """ Makes the display of the achievement
@@ -50,7 +51,6 @@ def paint(count, total, index, name_from_index, description):
     else:
         pass
 
-        
 
 def paint_logic(index_to_paint):
     """Gets the data for the paint method
@@ -60,7 +60,7 @@ def paint_logic(index_to_paint):
     data = am.read_achievements(ACHIEVEMENTS_SAVE_PATH)
     count = len(data)
     if count == 0:
-        paint(count,TOTAL,-1, "", "")
+        paint(count, TOTAL, -1, "", "")
         return None
     name_from_index = am.separate_achievement(data[index_to_paint])[0]
     description = am.separate_achievement(data[index_to_paint])[1].rstrip()

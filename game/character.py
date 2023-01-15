@@ -35,7 +35,7 @@ def display_base_character(baseCharacter):
     for trait_name, trait_value in baseCharacter['traits'].items():
         print(f"\t{'+' if trait_value >= 0 else '-'} {str(trait_value).lstrip('-')}% {trait_name}")
     print()
-    
+
 
 # Main methods
 def select():
@@ -65,7 +65,7 @@ def select():
         'visited_rooms': [],
         'remaining': difficulty['remaining'],
         'inventory': {'keys': [], 'medicine': [], 'energetic_drinks': [], 'clothes': {'shirt': None, 'pants': None, 'shoes': None, 'pijama': None}, 'faith_item': None, 'weapon': None},
-        'traits': []    
+        'traits': []
     }
 
     # Character
@@ -98,7 +98,9 @@ def select():
 
     # applies traits and name and initializes hp
     for trait, val in BASE_CHARACTERS[id]['traits'].items():
-        character[trait] += (val / 100) * character[trait]
+        character['difficulty'][trait] += (val / 100) * character['difficulty'][trait]
+        character[trait] = character['difficulty'][trait]
+
     character['name'] = BASE_CHARACTERS[id]['name']
     character['hp'] = character['maxhp']
     character['room'] = rm.generate(0, character['sneak'], character['difficulty'], character['elo'])
@@ -106,8 +108,10 @@ def select():
 
     return character
 
+
 def set_elo(character):
     character['elo'] = character['strength']*2 + character['shield']*3 + character['hp']
+
 
 def display(character):
     """
@@ -125,9 +129,10 @@ def display(character):
     print(f"\t - Strength: {character['strength']}")
     print(f"\t{'-' * len(title)}")
     print()
-    
+
+
 def combat_display(character, monster):
-    monster_name = monster['name'].title() + " ("+ monster['category']+")"
+    monster_name = monster['name'].title() + " (" + monster['category']+")"
     print('***************************************************************')
     print(f"\t{character['name'].title()}\t\t|\t{monster_name}")
     print(f"\tHP: {character['hp']:.0f}\t\t|\tHP: {monster['hp']}")

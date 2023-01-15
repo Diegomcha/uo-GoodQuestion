@@ -11,7 +11,6 @@ def generate(available):
     item['name'] = decide_list(ITEMS[item['type']]['names']) if not QUALITIES[item['quality']]['special'] else decide_list(ITEMS[item['type']]['special_names'])
     item['traits'] = ITEMS[item['type']]['traits'][item['quality']]
     item['consumable'] = ITEMS[item['type']]['consumable']
-    item['damage'] = None if item['type'] != 'weapon' else BASE_DAMAGE_WEAPON[item['name']] + (4-int(QUALITIES[item['quality']]['id']))
 
     if item['type'] != 'clothes':
         item['part_of_body'] = None
@@ -24,8 +23,6 @@ def generate(available):
             item['part_of_body'] = 'shoes'
         elif item['name'] in PIJAMAS_NAMES:  # pijama
             item['part_of_body'] = 'pijama'
-
-    item['traits']['heal'] = None if item['type'] != 'medicine' else 1
 
     return item
 
@@ -79,20 +76,24 @@ def pick_items(item, quantity, character):
         print(f"You have received a key")
 
     elif item['type'] == 'clothes':
-        if item['part_of_body'] == 'shirt' and ask_if_continue(character['inventory']['clothes']['shirt'], item, room):
+        if item['part_of_body'] == 'shirt' and ask_if_continue(character['inventory']['clothes']['shirt'], item, room) and ask_if_continue(character['inventory']['clothes']['pijama'], item, room):
             character['inventory']['clothes']['shirt'] = item
+            character['sneak'] = character['difficulty']['sneak'] + item['traits']['sneak']
             print(f"You have received a {item['name']}", end="")
 
-        elif item['part_of_body'] == 'pants' and ask_if_continue(character['inventory']['clothes']['pants'], item, room):
+        elif item['part_of_body'] == 'pants' and ask_if_continue(character['inventory']['clothes']['pants'], item, room) and ask_if_continue(character['inventory']['clothes']['pijama'], item, room):
             character['inventory']['clothes']['pants'] = item
+            character['sneak'] = character['difficulty']['sneak'] + item['traits']['sneak']
             print(f"You have received a {item['name']}", end="")
 
         elif item['part_of_body'] == 'shoes' and ask_if_continue(character['inventory']['clothes']['shoes'], item, room):
             character['inventory']['clothes']['shoes'] = item
+            character['sneak'] = character['difficulty']['sneak'] + item['traits']['sneak']
             print(f"You have received a {item['name']}", end="")
 
         elif item['part_of_body'] == 'pijama' and ask_if_continue(character['inventory']['clothes']['shirt'], item, room) and ask_if_continue(character['inventory']['clothes']['pants'], item, room):
             character['inventory']['clothes']['pijama'] = item
+            character['sneak'] = character['difficulty']['sneak'] + item['traits']['sneak']
             print(f"You have received a {item['name']}", end="")
 
     elif item['type'] == 'medicine' or item['type'] == 'energetic_drink':
@@ -102,6 +103,7 @@ def pick_items(item, quantity, character):
 
     elif item['type'] == 'faith_item' and ask_if_continue(character['inventory']['faith_item'], item, room):
         character['inventory']['faith_item'] = item
+        character['shield'] = item['traits']['shield']
         print(f"You have received a {item['name']}", end="")
 
     elif item['type'] == 'weapon' and ask_if_continue(character['inventory']['weapon'], item, room):
@@ -114,12 +116,16 @@ def pick_items(item, quantity, character):
                 """)
             if ask_int(1, 2) == 1:
                 character['inventory']['weapon'] = item
-                character['strength'] = character['difficulty']['strength'] + item['damage']
+                character['strength'] = character['difficulty']['strength'] + item['traits']['strength']
+                manager['weapons_taken'] += 1
                 print(f"You have received a {item['name']}", end="")
             else:
                 ROOMS[character['room']['id']]['chest'].append(item)
                 print("You stay as before", end="")
         else:
+            character['inventory']['weapon'] = item
+            character['strength'] = character['difficulty']['strength'] + item['traits']['strength']
+            manager['weapons_taken'] += 1
             print(f"You have received a {item['name']}", end="")
 
     else:
@@ -133,13 +139,16 @@ def consume_item(item, character):
     if item['type'] == 'medicine':
 
         afterwards_hp = character['hp'] + item['traits']['hp']
+        afterwards_hp = afterwards_hp if afterwards_hp <= character['maxhp'] else character['maxhp']
+
         print()
-        print(f"Do you want to use the item {item['name']}? [{character['hp']}hp -> {afterwards_hp if afterwards_hp <= character['maxhp'] else character['maxhp']}hp]")
+        print(f"Do you want to use the item {item['name']}? [{character['hp']}hp -> {afterwards_hp}hp]")
         print("\n\t1 - [YES]\n\t2 - [NO]\n")
 
         if ask_int(1, 2) == 1:
             print('Item used', end="")
-            character['hp'] = afterwards_hp if afterwards_hp <= character['maxhp'] else character['maxhp']
+            manager['recovered_hp'] = afterwards_hp - character['hp']
+            character['hp'] = afterwards_hp
             character['inventory']['medicine'].remove(item)
         else:
             print("Item not used", end="")
@@ -149,13 +158,15 @@ def consume_item(item, character):
     elif item['type'] == 'energetic_drink':
 
         swiftness = character['swiftness'] + item['traits']['swiftness']
+        swiftness = swiftness if swiftness <= 100 else 100
+
         print()
-        print(f"Do you want to use the item {item['name']}? [{character['swiftness']}sp -> {swiftness if swiftness <= 100 else 100}sp]")
+        print(f"Do you want to use the item {item['name']}? [{character['swiftness']}sp -> {swiftness}sp]")
         print("\n\t1 - [YES]\n\t2 - [NO]\n")
 
         if ask_int(1, 2) == 1:
             print('Item used', end="")
-            character['swiftness'] = swiftness if swiftness <= 100 else 100
-            character['inventory']['enegergetic_drinks'].remove(item)
+            character['swiftness'] = swiftness
+            character['inventory']['energetic_drinks'].remove(item)
         else:
             print("Item not used", end="")

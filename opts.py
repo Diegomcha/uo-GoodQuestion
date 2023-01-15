@@ -65,7 +65,7 @@ DIFFICULTIES = [
     {
         'name': 'Medium',
         'maxhp': 100,
-        'strength': 8, 
+        'strength': 8,
         'sneak': 40,
         'swiftness': 20,
         'remaining': 30
@@ -257,7 +257,7 @@ List of the types of items.
 MONSTERS = [  # stats are provisional and in percentages
     {
         'name': 'Ghoul',
-        'maxhp':20,
+        'maxhp': 20,
         'drop': [],
         'drop_rate': 0,
         'strength': 30,
@@ -284,7 +284,7 @@ MONSTERS = [  # stats are provisional and in percentages
         'traits': {
             'swiftness': 25
         },
-        'strength':23,
+        'strength': 23,
         'maxhp': 35,
         'swiftness': 25,
         'drop': [],
