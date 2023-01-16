@@ -37,13 +37,19 @@ def display(room, character):
 
                 if room['monster'] != None:
                     print(f"You find a monster!")
+                    return room['monster']
 
     else:
         print(f"You return to the {room['resemblance']}")
 
     pause()
-    return room['monster']
+    return None
 
+def search_keys(character, room):
+    for key in character['inventory']['keys']:
+        if room['locked'] == key['number']:
+            return key
+    return None
 
 def unlock(character, room):
     """Method used for knowing if a room is unlocked
@@ -63,9 +69,10 @@ def unlock(character, room):
     """
     if room['locked'] == None:
         return True
-
-    if room['locked'] in character['inventory']['keys']:
-        character['inventory']['keys'].remove(room['locked'])
+    
+    key = search_keys(character, room) 
+    if key != None:
+        character['inventory']['keys'].remove(key)
         room['locked'] = None
         print('You unlock the door with the key you have in your inventory.')
         return True
@@ -94,11 +101,15 @@ def move(character, room):
 
     if room['resemblance'] != 'stairs':
         for i, id in enumerate(room['connections']):
-            print(f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
+            print(
+                f"{i+1} - Door {i+1} [{'????' if (id not in character['visited_rooms']) else ROOMS[id]['resemblance']}]")
     else:
-        print(f"1 - Top    [{'????' if (room['connections'][0] not in character['visited_rooms']) else ROOMS[room['connections'][0]]['resemblance']}]")
-        print(f"2 - Mid    [{'????' if (room['connections'][1] not in character['visited_rooms']) else ROOMS[room['connections'][1]]['resemblance']}]")
-        print(f"3 - Bottom [{'????' if (room['connections'][2] not in character['visited_rooms']) else ROOMS[room['connections'][2]]['resemblance']}]")
+        print(
+            f"1 - Top    [{'????' if (room['connections'][0] not in character['visited_rooms']) else ROOMS[room['connections'][0]]['resemblance']}]")
+        print(
+            f"2 - Mid    [{'????' if (room['connections'][1] not in character['visited_rooms']) else ROOMS[room['connections'][1]]['resemblance']}]")
+        print(
+            f"3 - Bottom [{'????' if (room['connections'][2] not in character['visited_rooms']) else ROOMS[room['connections'][2]]['resemblance']}]")
 
     print(f"{len(room['connections']) +1 } - Back")
     print()
@@ -122,7 +133,7 @@ def move(character, room):
         if monster != None:
             return monster
     else:
-        character['door_']
+        character['locked_doors_visited'].append(where_to)
         print("Seems to be locked")
 
 
@@ -150,7 +161,8 @@ def generate(id, sneak, difficulty, elo):
 
     item_rate = 0
     try:
-        item_rate = room['items']['rate'] * 0.5 if difficulty == 'Hard' else room['items']['rate'] * 0.8 if difficulty == 'Medium' else room['items']['rate']
+        item_rate = room['items']['rate'] * 0.5 if difficulty == 'Hard' else room['items']['rate'] * \
+            0.8 if difficulty == 'Medium' else room['items']['rate']
     except:
         pass
 
@@ -165,7 +177,8 @@ def generate(id, sneak, difficulty, elo):
 
     # generate item
     item = None
-    room['items']['rate'] = 0  # removes the possibility of an item appearing when the room has already been visited
+    # removes the possibility of an item appearing when the room has already been visited
+    room['items']['rate'] = 0
     if decide(item_rate):  # if item is gonna be generated
         item = it.generate(room['items']['available'])
 

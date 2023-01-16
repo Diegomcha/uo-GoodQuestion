@@ -30,8 +30,11 @@ def pet_cat(character):
     print()
 
 
-def play_piano():
-    print("A piece fell down revealing a key")
+def play_piano(character):
+    print("A piece fell down revealing a key", end = "")
+    pause()
+    it.pick_items(PREFABS['basement_key'],1, character)
+    pause()
 
 
 def open_chest(character):
@@ -42,24 +45,30 @@ def open_chest(character):
     character : dict[str, Any]
         dictionary storing all the attributes of the character
     """
-    print("The chest contains:")
+    if len(ROOMS[character['room']['id']]['chest']) > 0:
+        print("The chest contains:")
 
-    for i, item in enumerate(ROOMS[character['room']['id']]['chest']):
-        if item['type'] == 'weapon':
-            print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Damage: {item['traits']['strength']}")
-        else:
-            print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Traits: {item['traits']}")
-    print()
-    print(f"\t{i+2}- [Back]")
-    print()
+        for i, item in enumerate(ROOMS[character['room']['id']]['chest']):
+            if item['type'] == 'weapon':
+                print(
+                    f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Damage: {item['traits']['strength']}")
+            else:
+                print(
+                    f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Traits: {item['traits']}")
+        print()
+        print(f"\t{i+2}- [Back]")
+        print()
 
-    result = ask_int(1, i+2)
+        result = ask_int(1, i+2)
 
-    if result != i+2:
-        win = ROOMS[character['room']['id']]['chest'][result-1]
-        ROOMS[character['room']['id']]['chest'].remove(win)
+        if result != i+2:
+            win = ROOMS[character['room']['id']]['chest'][result-1]
+            ROOMS[character['room']['id']]['chest'].remove(win)
 
-        it.pick_items(win, 1, character)
+            it.pick_items(win, 1, character)
+    else:
+        print('The chest is empty')
+        pause()
     manager['character_displayed'] = False
     pass
 
@@ -81,6 +90,8 @@ def knife_poster(character):
 
     if ask_int(1, 2) == 1:
         it.pick_items(PREFABS['kitchen_knife'], 1, character)
+    else:    
+        ROOMS[character['room']['id']]['chest'].append(PREFABS['kitchen_knife'])
 
 
 def get_toy(type, character):
@@ -133,3 +144,4 @@ def open(type, available, character):
         print(f"You have found an {loot['name']}")
         it.pick_items(loot, 1, character)
     pause()
+    return None

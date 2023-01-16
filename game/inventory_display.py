@@ -1,4 +1,4 @@
-from opts import QUALITIES
+from opts import QUALITIES, ROOMS
 from utils.functions import ask_int, pause
 import game.item as it
 
@@ -15,7 +15,15 @@ def display_inventory(character):
     print('\t\t----- INVENTORY -----')
     print()
     # Keys
-    print(f"\t\t - Keys: {'None' if len(character['inventory']['keys']) == 0 else len(character['inventory']['keys'])}")
+    if len(character['inventory']['keys']) != 0:
+        print(f"\t\t - Keys: ")
+        for key in character['inventory']['keys']:
+            if len(character['locked_doors_visited']) != 0 and key['number'] not in character['locked_doors_visited']:
+                print("\t\t\t[?????]")
+            else:
+                print(f"\t\t\t[{ROOMS[key['number']]['resemblance'].upper()}]")
+    else:
+        print(f"\t\t - Keys: None")
     # print(f" - Medicies: {'None' if len(character['inventory']['medicines']) == 0 else element['name'] for element in character['inventory']['medicine']}")
 
     print("\t\t - Medicines:", end=" ")

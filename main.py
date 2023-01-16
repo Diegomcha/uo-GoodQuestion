@@ -62,8 +62,8 @@ def main():
                     manager['character_displayed'] = False
             else:
                 break
-
-        end.write_achivement()
+        
+        end.ending()
 
         # TODO: Continue...
 

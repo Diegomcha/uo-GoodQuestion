@@ -20,13 +20,13 @@ def generate(available, difficulty, elo):
     dict[str, Any]
         dictionary containing the attributes of the monster
     """
-    monsterinfo = MONSTERS[available[decide_index_rated_list(available)]['type']]
 
+    monster_info = MONSTERS[available[decide_index_rated_list(available)]['type']]
     monster = {
-        'name': monsterinfo['display_name'],
-        'maxhp': monsterinfo['maxhp'],
-        'strength': monsterinfo['strength'],
-        'swiftness': monsterinfo['swiftness'],
+        'name': monster_info['display_name'],
+        'maxhp': monster_info['maxhp'],
+        'strength': monster_info['strength'],
+        'swiftness': monster_info['swiftness'],
         'category': 'Basic'
     }
 
@@ -63,22 +63,20 @@ def generate_ghost(monster, difficulty, elo):
     }
 
     if difficulty == 'Easy':
-        ghost['escape_rate'] = 50
         if elo > 150 and decide(25):
             ghost['category'] = 'Special'
 
     elif difficulty == 'Medium':
-        ghost['escape_rate'] = 33
         if elo > 130 and decide(33):
             ghost['category'] = 'Special'
 
     elif difficulty == 'Hard':
-        ghost['escape_rate'] = 25
         if elo > 90 and decide(50):
             ghost['category'] = 'Special'
 
     return {
         **ghost,  # spread operator used to unpack the dictionary into the new one
+        'escape_rate': monster['escape_rate'],
         'maxhp': monster['maxhp'] if ghost['category'] == 'Special' else round(0.75*monster['maxhp']),
         'hp': monster['maxhp'] if ghost['category'] == 'Special' else round(0.75*monster['maxhp']),
         'strength': monster['strength'] if ghost['category'] == 'Special' else round(0.75*monster['strength'])

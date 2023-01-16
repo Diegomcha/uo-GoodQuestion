@@ -59,18 +59,33 @@ def ending(character):
 
     if result == 1:
         manager['volatin'] = True
+        character['hp'] -= 30
+        print("You opened the window and without saying anything both you and Ian proceeded to jump.")
+        pause('...')
+        if character['hp'] > 0:
+            print("You succesfully landed without any harm.")
+            print("After recomposing yourself you looked at your mate and asked him: ")
+            print(f"{character['name']}: Now that I think about it, why didn´t you exit yourself earlier?.")
+            print("Ian replied: Thats a good question.")
+        if character['hp'] <= 0:
+            print("Logically ")
 
     if result == 2:
         character['remaining'] -= 5
         if character['remaining'] <= 0:
             print("\'As you reached the exit you felt as if something dragged you in again, at that moment you realized your friend was no longer with you.\'")
             pause('...')
-            print("\'While being held, you raised your head just to realize the grotesque apareance of the creature that was , your friend laid behind it. It seems he got him first.\'")
+            print("\'While being held, you raised your head just to realize the grotesque appereance of the creature that was , your friend laid behind it. It seems he got him first.\'")
             print("\'Then and there you came to the conclusion that the noises from earlier where made by that thing and before you could do anything else it brutally murdered you.\'")
             pause('...')
             print("\'You slowly began to loose your sight when suddenly you heard your friends voice one final time.\'")
             pause('...')
             print("Ian: You know, maybe it was a bad decision to come here after all...")
         else:
-            print("As you ran to the exit you felt something chasing you, without looking behind you managed to escape, your friend left ")
+            print("As you ran to the exit you felt something chasing you, without looking behind you managed to escape, your friend left just behind you and weirdly enought the door in the entrance closed behind you.")
+            print("\'You asked your friend what exactly was going on inside that place\'")
+            pause("")
+            print("Ian, still in shock, replied: \'Good Question\' ")
+
+
     write_achivements()

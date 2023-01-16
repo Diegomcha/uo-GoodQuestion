@@ -119,7 +119,7 @@ def pick_items(item, quantity, character):
     room = ROOMS[character['room']['id']]
 
     if item['type'] == 'key':
-        character['inventory']['keys'].append(item['number'])
+        character['inventory']['keys'].append(item)
         print(f"You have received a key")
 
     elif item['type'] == 'clothes':
@@ -179,6 +179,8 @@ def pick_items(item, quantity, character):
 
     else:
         print("You stay as before")
+        
+    return None
 
 
 def consume_item(item, character):

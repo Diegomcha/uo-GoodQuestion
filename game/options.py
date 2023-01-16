@@ -71,7 +71,7 @@ def display(special_options, character):
             so.pet_cat(character)
 
         elif special_options[selection] == "Play piano":
-            so.play_piano()
+            so.play_piano(character)
 
         elif special_options[selection] == "Open chest":
             so.open_chest(character)

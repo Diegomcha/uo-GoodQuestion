@@ -411,20 +411,20 @@ ROOMS = [
             'available': ['medicine'],
             'forced': None
         },
-        'monsters': {
-            'rate': 80,
-            'available': [
-                {
-                    'type': 'giant_rat',
-                    'rate': 55
-                },
-                {
-                    'type': 'viper',
-                    'rate': 45
-                }
-            ],
-            'forced': None
-        },
+        # 'monsters': {
+        #     'rate': 80,
+        #     'available': [
+        #         {
+        #             'type': 'giant_rat',
+        #             'rate': 55
+        #         },
+        #         {
+        #             'type': 'viper',
+        #             'rate': 45
+        #         }
+        #     ],
+        #     'forced': None
+        # },
         'connections': [6, 0, 14],
         'locked': None,  # None or number of key
         'chest': []
@@ -742,7 +742,7 @@ ROOMS = [
         'resemblance': 'basement',
         # TODO: Add items and monster
         'connections': [4],
-        'locked': 1,  # None or number of key
+        'locked': 14,  # None or number of key
         'chest': []
     }
 ]
@@ -792,6 +792,10 @@ PREFABS = {
         'consumable': False,
         'part_of_body': None,
         'traits': []
+    },
+    'basement_key': {
+        'type': 'key',
+        'number': 14
     }
 }
 
