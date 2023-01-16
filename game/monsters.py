@@ -6,6 +6,22 @@ monster_type_to_id = {'ghoul': 0, 'giant_rat': 1, 'viper': 2, 'ghost': 3}
 
 
 def generate(available, difficulty, elo):
+    """Method for generating a monster having in mind the difficulty chosen and the player power
+
+    Parameters
+    ----------
+    available : list
+        list containing the type of monsters to generate
+    difficulty : string
+        name of the local difficulty
+    elo : int
+        power of the character
+
+    Returns
+    -------
+    dict[str, Any]
+        dictionary containing the attributes of the monster
+    """
     monsterinfo = MONSTERS[monster_type_to_id[available[decide_index_rated_list(available)]['type']]]
 
     monster = {

@@ -7,6 +7,13 @@ from utils.functions import ask_int
 
 
 def pet_cat(character):
+    """Method for petting the cat
+
+    Parameters
+    ----------
+    character : dict[str, Any]
+        dictionary storing all the attributes of the character
+    """
     manager['times_cat_pet'] += 1
 
     print("Cat meows")
@@ -28,6 +35,13 @@ def play_piano():
 
 
 def open_chest(character):
+    """Method for opening the chest, show what is inside and options to get the items inside
+
+    Parameters
+    ----------
+    character : dict[str, Any]
+        dictionary storing all the attributes of the character
+    """
     print("The chest contains:")
 
     for i, item in enumerate(ROOMS[character['room']['id']]['chest']):
@@ -51,6 +65,13 @@ def open_chest(character):
 
 
 def knife_poster(character):
+    """Spooky message with spooky knife
+
+    Parameters
+    ----------
+    character : dict[str, Any]
+        dictionary storing all the attributes of the character
+    """
     print('...', end="")
     input()
     print('You find a poster with the image of your friends and a knife stabbed to it')
@@ -63,6 +84,15 @@ def knife_poster(character):
 
 
 def get_toy(type, character):
+    """Method for kids or adults who like to play with toys
+
+    Parameters
+    ----------
+    type : string
+        type of toy!
+    character : dict[str, Any]
+        dictionary storing all the attributes of the character
+    """
     if type == 'train':
         print('You grab the train', end="")
         input()
@@ -83,6 +113,17 @@ def get_toy(type, character):
 
 
 def open(type, available, character):
+    """Method for opening any drawer or cupboard
+
+    Parameters
+    ----------
+    type : string
+        type of furniture
+    available : list
+        list of possible items to generate
+    character : dict[str, Any]
+        dictionary storing all the attributes of the character
+    """
     loot = None if random.random() < 0.55 else it.generate(available)
     print(f'You opened a {type}', end="")
     input()

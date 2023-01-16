@@ -4,6 +4,14 @@ import game.item as it
 
 
 def display_inventory(character):
+    """Method that displays the inventory of the character and gives the option of using items 
+    if they are in the inventory
+
+    Parameters
+    ----------
+    character : dict[str, Any]
+        dictionary storing all the attributes of the character
+    """
     print('\t\t----- INVENTORY -----')
     print()
     # Keys
@@ -54,12 +62,6 @@ def display_inventory(character):
                         print(f", {element['name']}[{QUALITIES[element['quality']]['name']}] X{count}", end=" ")
         print()
 
-    # for element in character['inventory']['medicine']:
-    #     print(f"\t- {element}")
-    # Items
-    #print(f" - Items: {'None' if len(character['inventory']['items']) == 0 else ''}")
-    # for element in character['inventory']['items']:
-    #    print(f"     · {element['name']}")
     # Clothes
     print("\t\t - Clothes:")
     if character['inventory']['clothes']['pijama'] == None:
@@ -83,6 +85,17 @@ def display_inventory(character):
 
 
 def ask_use_items(character):
+    """Method that asks if the player really want to use the item
+
+    Parameters
+    ----------
+    character : dict[str, Any]
+        dictionary storing all the attributes of the character
+
+    Returns
+    -------
+    None
+    """
     if len(character['inventory']['medicine']) > 0 or len(character['inventory']['energetic_drinks']) > 0:
         if len(character['inventory']['medicine']) > 0:
             for i, medicine in enumerate(character['inventory']['medicine']):
@@ -96,7 +109,7 @@ def ask_use_items(character):
         print()
         result = ask_int(1, len(character['inventory']['medicine']) + len(character['inventory']['energetic_drinks']) + 1)
         if result == len(character['inventory']['medicine']) + len(character['inventory']['energetic_drinks']) + 1:
-            return 0
+            return None
         else:
             it.consume_item(character['inventory']['medicine'][result - 1], character)
 
@@ -104,4 +117,4 @@ def ask_use_items(character):
         print(f"1 - [Leave]")
         print()
         if ask_int(1, 1) == 1:
-            return 0
+            return None

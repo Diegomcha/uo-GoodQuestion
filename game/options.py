@@ -10,13 +10,37 @@ from utils.functions import ask_int
 
 # special_options = [option1.....]
 def print_special_options(special_options):
+    """Method for displaying the special options of a room
+
+    Parameters
+    ----------
+    special_options : list
+        list containing name of the special options
+
+    Returns
+    -------
+    int
+        length of the special options
+    """
     for i, element in enumerate(special_options):
         print(f"{i+3} - [{element}]")
     return len(special_options)
 
 
 def display(special_options, character):
+    """Method for displaying the options in each room 
 
+    Parameters
+    ----------
+    special_options : list
+        list containing the names of the special options
+    character : dict[str, Any]
+        dictionary storing all the attributes of the character
+
+    Returns
+    -------
+    None
+    """
     if not manager['character_displayed']:
         print()
         char.display(character)
@@ -74,10 +98,5 @@ def display(special_options, character):
             character['hp'] = 0
 
         manager['character_displayed'] = False
-        return 0
+        return None
 
-# TO-DO:
-
-    # Item add key (index whatever)
-
-# display([["Pet cat"], ["pick your nose"]])

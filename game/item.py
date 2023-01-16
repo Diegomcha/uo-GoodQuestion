@@ -1,9 +1,22 @@
-from opts import ITEMS, QUALITIES, SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES, PIJAMAS_NAMES, BASE_DAMAGE_WEAPON, ROOMS
+from opts import ITEMS, QUALITIES, SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES, PIJAMAS_NAMES, ROOMS
 from utils.functions import decide_list, decide_index_rated_list, ask_int
 from game.game_manager import manager
 
 
 def generate(available):
+    """Method for generating the item having in mind the qualities and the type of item
+
+    Parameters
+    ----------
+    available : list
+        list containing the types of the items you want to generate
+        (note that the program will pick one)
+
+    Returns
+    -------
+    dict[str, Any]
+        A dicitionary containing the attributes of the item
+    """
     item = {
         'type': decide_list(available) if type(available[0]) is str else available[decide_index_rated_list(available)]['type'],
         'quality': decide_index_rated_list(QUALITIES)
@@ -28,6 +41,18 @@ def generate(available):
 
 
 def generate_key(number):
+    """Method that generates a key
+
+    Parameters
+    ----------
+    number : int
+        id of the key (id must match with the id of the door in order to open it)
+
+    Returns
+    -------
+    dict[str, Any]
+        dictionary containing the type ('key') and the number of it
+    """
     item = {
         'type': 'key',
         'number': number
@@ -36,6 +61,13 @@ def generate_key(number):
 
 
 def display(item):
+    """Method that display the name of the item as well as some qualities
+
+    Parameters
+    ----------
+    item : dict[str, Any]
+        dictionary containing the attributes of the item
+    """
     print(f"· {item['name']} [{QUALITIES[item['quality']]['name']}]")
     print(f"  {item['type']}{' - CONSUMABLE' if item['consumable'] else ''}")
 
@@ -43,6 +75,22 @@ def display(item):
 #
 # Private Method
 def ask_if_continue(lose, win, room):
+    """Method that asks if you want to change one item for another (shown qualities)
+
+    Parameters
+    ----------
+    lose : dict[str, any]
+        dictionary containing the item in your inventory
+    win : dict[str, Any]
+        dictionary containing the item you can get
+    room : dict[str, Any]
+        dictionary containing the attributes of the room
+
+    Returns
+    -------
+    boolean
+        True if the change is performed or if there is no change, else False
+    """
     if lose != None:
         print()
         if win['type'] == 'weapon':
@@ -68,6 +116,7 @@ def ask_if_continue(lose, win, room):
 
 ##
 # Public Method (In order to pick something USE this method)
+
 def pick_items(item, quantity, character):
     room = ROOMS[character['room']['id']]
 
@@ -135,7 +184,15 @@ def pick_items(item, quantity, character):
 
 
 def consume_item(item, character):
+    """Method for consuming an item, adding its attribute to the character and removing it from the inventory
 
+    Parameters
+    ----------
+    item : dict[str, Any]
+        dictionary containing the attributes of the item to be consumed
+    character : dict[str, Any]
+        dictionary storing all the attributes of the character
+    """
     if item['type'] == 'medicine':
 
         afterwards_hp = character['hp'] + item['traits']['hp']
