@@ -761,7 +761,8 @@ ACHIEVEMENTS = {
     "GEORGE_OF_THE_JUNGLE": ["GEORGE OF THE JUNGLE", "Pet the cat 10 times and get his love"],
     "VOLATIN": ["VOLATIN", "Save your mate and jump through the window to escape"],
     "HERO": ["HERO", "Defeat a total of 14 enemies in one run"],
-    "THE_BAD_DECISION": ["THE BAD DECISION", "Finish the game with the bad ending"]
+    "THE_BAD_DECISION": ["THE BAD DECISION", "Finish the game with the bad ending"],
+    "SURVIVOR": ["SURVIVOR", "Heal the equivalent of 100% of your health in one run"]
 }
 """
 List of achievements.

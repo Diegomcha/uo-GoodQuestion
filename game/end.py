@@ -6,7 +6,7 @@ from utils.functions import pause, ask_int
 import opts
 
 
-def write_achivements():
+def write_achivements(maxhp):
     """Method that checks the data stored by the manager and writes the different achivements to the 'data.txt' file
     """
     # If called, game completed
@@ -33,12 +33,14 @@ def write_achivements():
             am.write_achievement(path, ACHIEVEMENTS['UNARMED'])
         if manager['volatin']:
             am.write_achievement(path, ACHIEVEMENTS['VOLATIN'])
+        if manager['recovered_hp'] >= maxhp:
+            am.write_achievement(path, ACHIEVEMENTS['SURVIVOR'])
     else:
         am.write_achievement(path, ACHIEVEMENTS['THE_BAD_DECISION'])
 
 
 def ending(character):
-    print('\'You finally reached the attic, you finally found your friend.\'')
+    print('\'You finally reached the attic, where you find your friend.\'')
     pause('...')
     print(f"Ian: {character['name']}! You were right, I should not have entered, it was like a nightmare. Lets get out of here please...")
     pause('...')
@@ -65,8 +67,8 @@ def ending(character):
         if character['hp'] > 0:
             print("You succesfully landed without any harm.")
             print("After recomposing yourself you looked at your mate and asked him: ")
-            print(f"{character['name']}: Now that I think about it, why didn´t you exit yourself earlier?.")
-            print("Ian replied: Thats a good question.")
+            print(f"{character['name']}: Now that I think about it, why didn\'t you exit yourself earlier?.")
+            print("Ian replied: Thats a Good Question.")
         if character['hp'] <= 0:
             print("Logically ")
 
@@ -75,10 +77,10 @@ def ending(character):
         if character['remaining'] <= 0:
             print("\'As you reached the exit you felt as if something dragged you in again, at that moment you realized your friend was no longer with you.\'")
             pause('...')
-            print("\'While being held, you raised your head just to realize the grotesque appereance of the creature that was , your friend laid behind it. It seems he got him first.\'")
+            print("\'While being held, you raised your head just to realize the grotesque appearance of the creature that was, your friend laid behind it. It seems he got him first.\'")
             print("\'Then and there you came to the conclusion that the noises from earlier where made by that thing and before you could do anything else it brutally murdered you.\'")
             pause('...')
-            print("\'You slowly began to loose your sight when suddenly you heard your friends voice one final time.\'")
+            print("\'You slowly began to lose your sight when suddenly you hear your friend\'s voice one final time.\'")
             pause('...')
             print("Ian: You know, maybe it was a bad decision to come here after all...")
         else:
@@ -87,5 +89,4 @@ def ending(character):
             pause("")
             print("Ian, still in shock, replied: \'Good Question\' ")
 
-
-    write_achivements()
+    write_achivements(character['maxhp'])
