@@ -20,7 +20,7 @@ def generate(available, difficulty, elo):
     dict[str, Any]
         dictionary containing the attributes of the monster
     """
-    monsterinfo = MONSTERS[monster_type_to_id[available[decide_index_rated_list(available)]['type']]]
+    monsterinfo = MONSTERS[available[decide_index_rated_list(available)]['type']]
 
     monster = {
         'name': monsterinfo['display_name'],
