@@ -7,8 +7,10 @@ from opts import ROOMS
 from game.game_manager import manager
 from utils.functions import ask_int
 
-
+# TODO: AAAAAAAAAAAAAA ERROR QUE NO ENTIENDO XD
 # special_options = [option1.....]
+
+
 def print_special_options(special_options):
     """Method for displaying the special options of a room
 
@@ -51,7 +53,7 @@ def display(special_options, character):
             ROOMS[character['room']['id']]['special_options'].append('Open chest')
             display(ROOMS[character['room']['id']]['special_options'], character)
 
-    print()
+    # print() TODO: CHECK if necessary
     print("1 - [Go to another room]")
     print("2 - [Check inventory]")
 

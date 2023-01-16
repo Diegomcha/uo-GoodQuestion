@@ -47,24 +47,22 @@ def main():
 
         while character['remaining'] > 0 and character['hp'] > 0:
             char.set_elo(character)
-            return_value = opt.display(ROOMS[character['room']['id']]['special_options'], character)
-            if return_value == 'Another room':
-                monster = rm.move(character, character['room'])
+            if character['room']['resemblance'] != 'attic':
+                return_value = opt.display(ROOMS[character['room']['id']]['special_options'], character)
+                if return_value == 'Another room':
+                    monster = rm.move(character, character['room'])
 
-                if monster != None:
-                    manager['enemies_found'] += 1
-                    input()
-                    if comb.fight(character, monster) == 'scaped':
-                        character['room'] = character['last_room']
+                    if monster != None:
+                        manager['enemies_found'] += 1
+                        if comb.fight(character, monster) == 'escaped':
+                            character['room'] = character['last_room']
 
-            elif return_value == 'Inventory':
-                inv.display_inventory(character)
-                manager['character_displayed'] = False
-
+                elif return_value == 'Inventory':
+                    inv.display_inventory(character)
+                    manager['character_displayed'] = False
             else:
-                continue
+                break
 
-        print("DEAD!")
         end.write_achivement()
 
         # TODO: Continue...

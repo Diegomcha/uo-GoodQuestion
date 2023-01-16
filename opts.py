@@ -58,7 +58,7 @@ DIFFICULTIES = [
         'name': 'Easy',
         'maxhp': 120,
         'strength': 10,
-        'sneak': 50,
+        'sneak': 30,
         'swiftness': 25,
         'remaining': 50
     },
@@ -66,7 +66,7 @@ DIFFICULTIES = [
         'name': 'Medium',
         'maxhp': 100,
         'strength': 8,
-        'sneak': 40,
+        'sneak': 20,
         'swiftness': 20,
         'remaining': 30
     },
@@ -74,8 +74,8 @@ DIFFICULTIES = [
         'name': 'Hard',
         'maxhp': 80,
         'strength': 6,
-        'sneak': 30,
-        'swiftness': 30,
+        'sneak': 10,
+        'swiftness': 10,
         'remaining': 15
     }
 ]
@@ -124,9 +124,7 @@ ITEMS = {
         'names': ['knife', 'fork', 'machete', 'spike'],
         'special_names': ["cat's paw"],  # TODO: new names
         'consumable': False,
-        'part_of_body': None,
         'duration': -1,
-        'damage': None,
         'traits': [  # TODO: change rates
             {
                 # quality id: 0
@@ -150,9 +148,7 @@ ITEMS = {
         'names': ['half-filled syringe', 'unknown pills', 'inhaler'],
         'special_names': ['glass of glowing liquid'],
         'consumable': True,
-        'part_of_body': None,
         'duration': -1,
-        'damage': None,
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
@@ -176,9 +172,7 @@ ITEMS = {
         'names': ['broken t-shirt', 'shorts', 'sleepers'],
         'special_names': ['dino pijama'],
         'consumable': False,
-        'part_of_body': ['shirt', 'pants', 'shoes', 'pijama'],
         'duration': -1,
-        'damage': None,
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
@@ -203,7 +197,6 @@ ITEMS = {
         'special_names': ['Frosty Freezy Freeze'],
         'consumable': True,
         'duration': 1,
-        'damage': None,
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
@@ -228,7 +221,6 @@ ITEMS = {
         'special_names': ["cat's necklace"],
         'consumable': False,
         'duration': -1,
-        'damage': None,
         'traits': [  # TODO: Change rates
             {
                 # quality id: 0
@@ -253,57 +245,28 @@ ITEMS = {
 List of the types of items.
 """
 
-# Puse los traits en un dictionario asi no hay que poner todas las stats even if no hay changes
-MONSTERS = [  # stats are provisional and in percentages
-    {
-        'name': 'Ghoul',
+MONSTERS = {
+    'ghoul': {
+        'display_name': 'Ghoul',
         'maxhp': 20,
-        'drop': [],
-        'drop_rate': 0,
         'strength': 30,
-        'swiftness': -40,
-        'category': 'Basic',
-        'id': 0
+        'swiftness': 0
+        # 'drop': [],
+        # 'drop_rate': 0
     },
-    {
-        'name': 'Giant rat',
-        'traits': {
-            'maxhp': 50,
-            'strength': -30
-        },
-        'strength': 15,
+    'giant_rat': {
+        'display_name': 'Giant rat',
         'maxhp': 70,
-        'swiftness': 0,
-        'drop': [],
-        'drop_rate': 0,
-        'category': 'Basic',
-        'id': 1
+        'strength': 15,
+        'swiftness': 0
     },
-    {
-        'name': 'Viper',
-        'traits': {
-            'swiftness': 25
-        },
-        'strength': 23,
+    'viper': {
+        'display_name': 'Viper',
         'maxhp': 35,
-        'swiftness': 25,
-        'drop': [],
-        'drop_rate': 0,
-        'category': 'Basic',
-        'id': 3
-    },
-    {
-        'name': 'Ghost',
-        'traits': {},
-        'drop': [],
-        'strength': 10,
-        'swiftness': 0,
-        'maxhp': 20,
-        'drop_rate': 0,
-        'category': 'Basic',
-        'id': 4
-    },
-]
+        'strength': 15,
+        'swiftness': 25
+    }
+}
 """
 List of monsters.
 """
@@ -378,7 +341,7 @@ ROOMS = [
         'resemblance': 'kitchen',
         'items': {
             'rate': 100,
-            'available': ['energetic_drink'],
+            'available': ['energetic_drinks'],
             'forced': None
         },
         'monsters': {
@@ -766,7 +729,7 @@ ROOMS = [
     {
         # 'id': 13,
         'special_options': ['friend', 'window'],
-        'resemblance': 'atic',
+        'resemblance': 'attic',
         # TODO: Add items and monster
         'connections': [6],
         'locked': None,  # None or number of key
@@ -796,8 +759,9 @@ ACHIEVEMENTS = {
     "GOD_LIKE_TREASURE_HUNTER": ["GOD-LIKE-TREASURE HUNTER", "Collect all the items in one run"],
     "SAVIOUR": ["SAVIOUR", "Complete the game once"],
     "GEORGE_OF_THE_JUNGLE": ["GEORGE OF THE JUNGLE", "Pet the cat 10 times and get his love"],
-    "VOLATIN": ["VOLATIN", "Save your mate and jump through the window to scape"],
-    "HERO": ["HERO", "Defeat a total of 30 enemies in one run"]
+    "VOLATIN": ["VOLATIN", "Save your mate and jump through the window to escape"],
+    "HERO": ["HERO", "Defeat a total of 14 enemies in one run"],
+    "THE_BAD_DECISION": ["THE BAD DECISION", "Finish the game with the bad ending"]
 }
 """
 List of achievements.
@@ -808,25 +772,24 @@ PREFABS = {
         'name': 'Boots of the swiftness of a cat',
         'quality': 4,
         'consumable': False,
-        'damage': None,
         'part_of_body': 'shoes',
-        'traits': []
+        'traits': {}
     },
     'kitchen_knife': {
         'type': 'weapon',
         'name': 'Kitchen knife',
         'quality': 2,
         'consumable': False,
-        'damage': 5.5,
         'part_of_body': None,
-        'traits': []
+        'traits': {
+            'strength': 5.5
+        }
     },
     'cat_item': {
         'type': 'faith_item',
         'name': 'Miracolous cat gift',
         'quality': 4,
         'consumable': False,
-        'damage': None,
         'part_of_body': None,
         'traits': []
     }

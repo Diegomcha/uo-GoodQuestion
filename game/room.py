@@ -4,7 +4,7 @@ import game.monsters as mon
 from game.game_manager import manager
 
 from opts import ROOMS
-from utils.functions import decide, ask_int
+from utils.functions import decide, ask_int, pause
 
 
 # Main methods
@@ -30,21 +30,19 @@ def display(room, character):
 
         if room['resemblance'] != 'stairs':
             if room['monster'] == room['item'] == None:
-                print("You find nothing inside.", end="")
-                input()
+                print("You find nothing inside")
             else:
                 if room['item'] != None:
                     it.pick_items(room['item'], 1, character)
 
                 if room['monster'] != None:
-                    print(f"You find a monster!", end="")
-                    return room['monster']
+                    print(f"You find a monster!")
 
     else:
-        print(f"You return to the {room['resemblance']}.", end="")
-        input()
+        print(f"You return to the {room['resemblance']}")
 
-    return None
+    pause()
+    return room['monster']
 
 
 def unlock(character, room):
@@ -116,16 +114,16 @@ def move(character, room):
     if unlock(character, ROOMS[where_to]):
         character['last_room'] = character['room']
         character['visited_rooms'].append(character['room']['id'])
-        character['room'] = generate(where_to, character['sneak'], character['difficulty'], character['elo'])
+        character['room'] = generate(where_to, character['sneak'], character['difficulty']['name'], character['elo'])
+        character['remaining'] -= 1
         char.display(character)
         manager['character_displayed'] = True
         monster = display(character['room'], character)
         if monster != None:
             return monster
     else:
+        character['door_']
         print("Seems to be locked")
-
-    return None
 
 
 # Main
@@ -149,13 +147,14 @@ def generate(id, sneak, difficulty, elo):
         Dict storing the attributes of the room
     """
     room = ROOMS[id]
-    difficulty = difficulty['name']
 
+    item_rate = 0
     try:
         item_rate = room['items']['rate'] * 0.5 if difficulty == 'Hard' else room['items']['rate'] * 0.8 if difficulty == 'Medium' else room['items']['rate']
     except:
         pass
 
+    monster_rate = 0
     try:
         monster_rate = room['monsters']['rate'] - sneak
     except:
@@ -166,22 +165,14 @@ def generate(id, sneak, difficulty, elo):
 
     # generate item
     item = None
-    try:
-        if item_rate > 0:
-            room['items']['rate'] = 0  # removes the possibility of an item appearing when the room has already been visited
-            if decide(item_rate):  # if item is gonna be generated
-                item = it.generate(room['items']['available'])
-    except:
-        pass
+    room['items']['rate'] = 0  # removes the possibility of an item appearing when the room has already been visited
+    if decide(item_rate):  # if item is gonna be generated
+        item = it.generate(room['items']['available'])
 
+    # generate monster
     monster = None
-    try:
-        if monster_rate > 0:
-            if decide(monster_rate):
-                monster = mon.generate(room['monsters']['available'], difficulty, elo)
-    except:
-        monster = None
-        pass
+    if decide(monster_rate):
+        monster = mon.generate(room['monsters']['available'], difficulty, elo)
 
     return {
         'id': id,

@@ -3,7 +3,7 @@ import random
 
 from opts import ROOMS, PREFABS
 from game.game_manager import manager
-from utils.functions import ask_int
+from utils.functions import ask_int, pause
 
 
 def pet_cat(character):
@@ -46,7 +46,7 @@ def open_chest(character):
 
     for i, item in enumerate(ROOMS[character['room']['id']]['chest']):
         if item['type'] == 'weapon':
-            print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Damage: {item['damage']}")
+            print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Damage: {item['traits']['strength']}")
         else:
             print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Traits: {item['traits']}")
     print()
@@ -73,9 +73,9 @@ def knife_poster(character):
         dictionary storing all the attributes of the character
     """
     print('...', end="")
-    input()
+    pause()
     print('You find a poster with the image of your friends and a knife stabbed to it')
-    input()
+    pause()
     print('\t1- [Grab knife]\n\t2- [Leave]')
     print()
 
@@ -95,21 +95,21 @@ def get_toy(type, character):
     """
     if type == 'train':
         print('You grab the train', end="")
-        input()
+        pause()
         if (random.random() > 0.5):
             print("A wheel fell off", end="")
         else:
             print("A rat scared you and the train fell on your feet", end="")
-            input()
+            pause()
             print('You took 5 damage', end=" ")
             character['hp'] -= 5
-        input()
+        pause()
 
     if type == 'plushie':
         print('You squish the plushie and it makes some scary noise', end="")
-        input()
+        pause()
         print('You put it down', end="")
-        input()
+        pause()
 
 
 def open(type, available, character):
@@ -126,10 +126,10 @@ def open(type, available, character):
     """
     loot = None if random.random() < 0.55 else it.generate(available)
     print(f'You opened a {type}', end="")
-    input()
+    pause()
     if loot == None:
         print("You found nothing inside", end="")
     else:
         print(f"You have found an {loot['name']}")
         it.pick_items(loot, 1, character)
-    input()
+    pause()

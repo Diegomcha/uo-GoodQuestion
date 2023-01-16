@@ -65,7 +65,8 @@ def select():
         'visited_rooms': [],
         'remaining': difficulty['remaining'],
         'inventory': {'keys': [], 'medicine': [], 'energetic_drinks': [], 'clothes': {'shirt': None, 'pants': None, 'shoes': None, 'pijama': None}, 'faith_item': None, 'weapon': None},
-        'traits': []
+        'traits': [],
+        'locked_doors_visited': []
     }
 
     # Character
@@ -103,7 +104,7 @@ def select():
 
     character['name'] = BASE_CHARACTERS[id]['name']
     character['hp'] = character['maxhp']
-    character['room'] = rm.generate(0, character['sneak'], character['difficulty'], character['elo'])
+    character['room'] = rm.generate(0, character['sneak'], character['difficulty']['name'], character['elo'])
     character['last_room'] = character['room']['id']
 
     return character
@@ -133,10 +134,10 @@ def display(character):
 
 def combat_display(character, monster):
     monster_name = monster['name'].title() + " (" + monster['category']+")"
-    print('***************************************************************')
+    print('*********************************************************')
     print(f"\t{character['name'].title()}\t\t|\t{monster_name}")
     print(f"\tHP: {character['hp']:.0f}\t\t|\tHP: {monster['hp']}")
     print(f"\tSHIELD: {character['shield']}\t|")
     print(f"\tSTRENGTH: {character['strength']}\t|\tSTRENGTH: {monster['strength']}")
-    print('***************************************************************')
+    print('*********************************************************')
     print()

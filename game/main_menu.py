@@ -1,7 +1,6 @@
 import os
 
-from utils.functions import ask_int, print_file
-from opts import FRIEND
+from utils.functions import ask_int, print_file, pause
 
 TITLE_FILEPATH = os.path.join(os.path.curdir, "utils", "assets", "title.txt")
 CREDITS_FILEPATH = os.path.join(os.path.curdir, "utils", "assets", "credits.txt")
@@ -36,7 +35,7 @@ def display():
 
     if selection == CREDITS:
         print_file(CREDITS_FILEPATH)
-        input()
+        pause()
         return display()
     if selection == EXIT:
         exit()
@@ -52,7 +51,7 @@ def display_lore():
     f = open(LORE_FILEPATH, 'r', encoding='utf-8')
     for line in f:
         if line == '\n':
-            input()
+            pause()
         else:
             print(line, end='')
     f.close()
