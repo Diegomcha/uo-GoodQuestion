@@ -18,7 +18,7 @@ def display_inventory(character):
     if len(character['inventory']['keys']) != 0:
         print(f"\t\t - Keys: ")
         for key in character['inventory']['keys']:
-            if len(character['locked_doors_visited']) != 0 or key['number'] not in character['locked_doors_visited']:
+            if len(character['locked_doors_visited']) == 0 or key['number'] not in character['locked_doors_visited']:
                 print("\t\t\t[?????]")
             else:
                 print(f"\t\t\t[{ROOMS[key['number']]['resemblance'].upper()}]")
