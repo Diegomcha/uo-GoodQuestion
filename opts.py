@@ -60,7 +60,7 @@ DIFFICULTIES = [
         'strength': 10,
         'sneak': 30,
         'swiftness': 25,
-        'remaining': 50
+        'remaining': 30
     },
     {
         'name': 'Medium',
@@ -68,7 +68,7 @@ DIFFICULTIES = [
         'strength': 8,
         'sneak': 20,
         'swiftness': 20,
-        'remaining': 30
+        'remaining': 25
     },
     {
         'name': 'Hard',
@@ -708,16 +708,6 @@ ACHIEVEMENTS = {
 List of achievements.
 """
 PREFABS = {
-    'Boots_of_the_swiftness_of_a_cat': {
-        'type': 'clothes',
-        'name': 'Boots of the swiftness of a cat',
-        'quality': 4,
-        'consumable': False,
-        'part_of_body': 'shoes',
-        'traits': {
-            'sneak': 1
-        }
-    },
     'kitchen_knife': {
         'type': 'weapon',
         'name': 'Kitchen knife',
@@ -725,7 +715,7 @@ PREFABS = {
         'consumable': False,
         'part_of_body': None,
         'traits': {
-            'strength': 5.5
+            'strength': 6
         }
     },
     'cat_item': {
@@ -735,7 +725,7 @@ PREFABS = {
         'consumable': False,
         'part_of_body': None,
         'traits': {
-            'strength': 10
+            'shield': 10
         }
     },
     'basement_key': {
@@ -752,11 +742,12 @@ FRIEND = {
     'name': 'Ian',
     'locked': 13,
     'item': [PREFABS['Boots_of_the_swiftness_of_a_cat']]
-
-
 }
-TOTAL_TREASURES = 0
-
 """
-    Other data
+Definition of the friend
+"""
+
+TOTAL_TREASURES = 0
+"""
+Other data
 """

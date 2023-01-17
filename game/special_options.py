@@ -27,7 +27,7 @@ def pet_cat(character):
     elif manager['times_cat_pet'] == 10:
         it.pick_items(PREFABS['cat_item'], 1, character)
 
-    print()
+    pause()
 
 
 def play_piano(character):
@@ -120,7 +120,7 @@ def get_toy(type, character):
         else:
             print("A rat scared you and the train fell on your feet", end="")
             pause()
-            print('You took 5 damage', end=" ")
+            print('You took 5hp damage', end=" ")
             character['hp'] -= 5
         pause()
 

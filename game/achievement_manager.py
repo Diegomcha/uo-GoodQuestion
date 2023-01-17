@@ -50,17 +50,15 @@ def is_in_file(path, name):
         return -1
 
 
-def write_achievement(path, id):
+def write_achievement(path, achievement):
     """ Checks if the given achivement is in the file, and in case it is not, it writes
 
     Parameters
     ----------
     path : str
         Directory of the file you want to modify
-    name : str
-        The name of the achivement to check
-    description : str
-        The description of the achivement
+    achievement : list
+        List representing achievement
 
     Returns
     -------
@@ -68,13 +66,25 @@ def write_achievement(path, id):
         1 : if already in file
         0 : if written propperly
     """
-    if is_in_file(path, id[0]) == True:
+    if is_in_file(path, achievement[0]) == True:
         return 1
     else:
         write_file = open(path, "a")
-        write_file.write(id[0] + ": "+id[1] + "\n")
+        write_file.write(achievement[0] + ": "+achievement[1] + "\n")
         write_file.close()
+        print_got_achievement(achievement)
         return 0
+
+
+def print_got_achievement(achievement):
+    """Print the achievement got message
+
+    Parameters
+    ----------
+    achievement : list
+        List representing achievement
+    """
+    print("You got the achievement: " + achievement[0])
 
 
 def read_achievements(path):
