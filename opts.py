@@ -738,15 +738,6 @@ PREFABS = {
     }
 }
 
-FRIEND = {
-    'name': 'Ian',
-    'locked': 13,
-    'item': [PREFABS['Boots_of_the_swiftness_of_a_cat']]
-}
-"""
-Definition of the friend
-"""
-
 TOTAL_TREASURES = 0
 """
 Other data
