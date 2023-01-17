@@ -101,6 +101,6 @@ def ending(character):
                 print("Ian, still in shock, replied: \'Good Question\' ")
 
                 manager['good_ending'] = True
-                write_achivements(character['maxhp'])
+            write_achivements(character['maxhp'])
     else:
         print("You died.")
