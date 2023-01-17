@@ -58,6 +58,16 @@ def main():
                     if monster != None:
                         manager['enemies_found'] += 1
                         if comb.fight(character, monster) == 'escaped':
+                            # make monster stay in the room
+                            ROOMS[character['room']['id']]['monsters'] = {
+                                'rate': 100+character['sneak'],
+                                'available': [
+                                    {
+                                        'type': monster['type'],
+                                        'rate': 100
+                                    }
+                                ]
+                            }
                             character['room'] = character['last_room']
 
                 elif return_value == 'Inventory':

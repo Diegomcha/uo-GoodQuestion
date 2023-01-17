@@ -21,9 +21,11 @@ def generate(available, difficulty, elo):
         dictionary containing the attributes of the monster
     """
 
-    monster_info = MONSTERS[available[decide_index_rated_list(available)]['type']]
+    monster_type = available[decide_index_rated_list(available)]['type']
+    monster_info = MONSTERS[monster_type]
     monster = {
         'name': monster_info['display_name'],
+        'type': monster_type,
         'maxhp': monster_info['maxhp'],
         'strength': monster_info['strength'],
         'swiftness': monster_info['swiftness'],
@@ -58,6 +60,7 @@ def generate(available, difficulty, elo):
 def generate_ghost(monster, difficulty, elo):
     ghost = {
         'name': 'Ghost',
+        'type': 'ghost',
         'category': 'Basic',
         'swiftness': 0
     }

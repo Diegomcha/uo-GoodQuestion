@@ -26,6 +26,7 @@ def pet_cat(character):
 
     elif manager['times_cat_pet'] == 10:
         it.pick_items(PREFABS['cat_item'], 1, character)
+        manager['treasures_found'] += 1
 
     pause()
 
