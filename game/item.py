@@ -86,9 +86,12 @@ def ask_if_continue(lose, win, room):
         if win['type'] == 'weapon':
             print(f"Are you willing to change the {lose['type']} [Name: {lose['name']} - Quality: {QUALITIES[lose['quality']]['name']} - Damage: {lose['traits']['strength']}]")
             print(f"For the {win['type']} [Name: {win['name']} - Quality: {QUALITIES[win['quality']]['name']} - Damage: {win['traits']['strength']}]")
-        else:
+        elif win['type'] == 'clothes':
             print(f"Are you willing to change the {lose['type']} [Name: {lose['name']} - Quality: {QUALITIES[lose['quality']]['name']} - Sneak: {lose['traits']['sneak']}]")
             print(f"For the {win['type']} [Name: {win['name']} - Quality: {QUALITIES[win['quality']]['name']} - Sneak: {win['traits']['sneak']}]")
+        else:
+            print(f"Are you willing to change the {lose['type']} [Name: {lose['name']} - Quality: {QUALITIES[lose['quality']]['name']} - Shield: {lose['traits']['shield']}]")
+            print(f"For the {win['type']} [Name: {win['name']} - Quality: {QUALITIES[win['quality']]['name']} - Shield: {win['traits']['shield']}]")
 
         print()
         print(" 1 - [Yes] \n 2 - [No]")

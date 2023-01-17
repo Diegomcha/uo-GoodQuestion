@@ -1,3 +1,6 @@
+from utils.functions import pause
+
+
 def check_file(path):
     """Checks whether data.txt exists or not
 
@@ -85,6 +88,7 @@ def print_got_achievement(achievement):
         List representing achievement
     """
     print("You got the achievement: " + achievement[0])
+    pause()
 
 
 def read_achievements(path):

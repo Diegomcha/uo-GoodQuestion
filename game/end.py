@@ -9,6 +9,7 @@ import opts
 def write_achivements(maxhp):
     """Method that checks the data stored by the manager and writes the different achivements to the 'data.txt' file
     """
+    print(manager)
     # If called, game completed
     if manager['good_ending']:
         am.write_achievement(path, ACHIEVEMENTS['SAVIOUR'])
@@ -22,7 +23,7 @@ def write_achivements(maxhp):
         # ENEMIES
         if manager['enemies_defeated'] == 0:
             am.write_achievement(path, ACHIEVEMENTS['PACIFIST'])
-        if manager['enemies_defeated'] >= 30:
+        if manager['enemies_defeated'] >= 14:
             am.write_achievement(path, ACHIEVEMENTS['HERO'])
         if manager['enemies_found'] == 0:
             am.write_achievement(path, ACHIEVEMENTS['SNEAKY_PEAKY'])

@@ -59,10 +59,12 @@ def open_chest(character):
         for i, item in enumerate(ROOMS[character['room']['id']]['chest']):
             if item['type'] == 'weapon':
                 print(
-                    f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Damage: {item['traits']['strength']}")
+                    f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Strength: {item['traits']['strength']}")
+            elif item['type'] == 'clothes':
+                print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Sneak: {item['traits']['sneak']}")
             else:
-                print(
-                    f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Traits: {item['traits']}")
+                print(f"\t{i +1}- Name: {item['name']}, Quality: {item['quality']}, Shield: {item['traits']['shield']}")
+
         print()
         print(f"\t{i+2}- [Back]")
         print()
