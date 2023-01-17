@@ -9,6 +9,8 @@ import opts
 def write_achivements(maxhp):
     """Method that checks the data stored by the manager and writes the different achivements to the 'data.txt' file
     """
+
+    print(manager)
     print()
     # If called, game completed
     if manager['good_ending']:
@@ -70,6 +72,7 @@ def ending(character):
                 print("After recomposing yourself you looked at your mate and asked him: ")
                 print(f"{character['name']}: Now that I think about it, why didn\'t you exit yourself earlier?.")
                 print("Ian replied: Thats a good question.")
+                manager['good_ending'] = True
             else:
                 print("Logically it wasn\'t a good idea and you both some bones and went unconscious.")
                 pause('(...)')
