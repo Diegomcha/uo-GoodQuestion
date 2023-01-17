@@ -63,7 +63,7 @@ def main():
             else:
                 break
         
-        end.ending()
+        end.ending(character)
 
         # TODO: Continue...
 

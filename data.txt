@@ -2,4 +2,4 @@ PACIFIST: Complete the game without killing any enemy
 SNEAKY PEAKY: Complete the game without finding any enemy (Lucky you) 
 TREASURE HUNTER: Find any object in the house 
 SAVIOUR: Save your mate 
-KEVIN: Save your mate using all the characters 
+KEVIN: Save your mate using all the characters THE BAD DECISION: Finish the game with the bad ending

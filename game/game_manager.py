@@ -8,5 +8,6 @@ manager = {
     'enemies_found': 0,
     'weapons_taken': 0,
     'volatin': False,
-    'character_displayed': True
+    'character_displayed': True,
+    'good_ending':False
 }

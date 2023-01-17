@@ -69,6 +69,8 @@ def ending(character):
             print("After recomposing yourself you looked at your mate and asked him: ")
             print(f"{character['name']}: Now that I think about it, why didn\'t you exit yourself earlier?.")
             print("Ian replied: Thats a Good Question.")
+            
+            write_achivements(character['maxhp'])
         if character['hp'] <= 0:
             print("Logically ")
 
@@ -89,4 +91,4 @@ def ending(character):
             pause("")
             print("Ian, still in shock, replied: \'Good Question\' ")
 
-    write_achivements(character['maxhp'])
+            write_achivements(character['maxhp'])

@@ -730,7 +730,8 @@ ROOMS = [
         # 'id': 13,
         'special_options': ['friend', 'window'],
         'resemblance': 'attic',
-        # TODO: Add items and monster
+        'items': {'rate':0},
+        'monsters':{'rate':0},
         'connections': [6],
         'locked': None,  # None or number of key
         'chest': []
@@ -740,7 +741,8 @@ ROOMS = [
         # 'id': 14,
         'special_options': ['Play with cat'],
         'resemblance': 'basement',
-        # TODO: Add items and monster
+        'items': {'rate':0},
+        'monsters':{'rate':0},
         'connections': [4],
         'locked': 14,  # None or number of key
         'chest': []
