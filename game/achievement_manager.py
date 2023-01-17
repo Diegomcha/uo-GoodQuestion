@@ -87,7 +87,7 @@ def print_got_achievement(achievement):
     achievement : list
         List representing achievement
     """
-    print("You got the achievement: " + achievement[0])
+    print("You got the achievement: " + achievement[0], end="")
     pause()
 
 
