@@ -713,7 +713,6 @@ PREFABS = {
         'name': 'Kitchen knife',
         'quality': 2,
         'consumable': False,
-        'part_of_body': None,
         'traits': {
             'strength': 6
         }
@@ -721,9 +720,8 @@ PREFABS = {
     'cat_item': {
         'type': 'faith_item',
         'name': 'Miracolous cat gift',
-        'quality': 4,
+        'quality': 0,
         'consumable': False,
-        'part_of_body': None,
         'traits': {
             'shield': 10
         }
