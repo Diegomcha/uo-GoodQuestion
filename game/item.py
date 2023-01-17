@@ -217,7 +217,7 @@ def consume_item(item, character):
 
         if ask_int(1, 2) == 1:
             print('Item used')
-            manager['recovered_hp'] = afterwards_hp - character['hp']
+            manager['recovered_hp'] += afterwards_hp - character['hp']
             character['hp'] = afterwards_hp
             character['inventory']['medicine'].remove(item)
         else:
