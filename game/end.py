@@ -40,7 +40,7 @@ def write_achivements(maxhp):
 
 
 def ending(character):
-    if character['hp'] > 0 and character['remanining'] > 0:
+    if character['hp'] > 0 and character['remaining'] > 0:
         print('\'You finally reached the attic, where you find your friend.\'')
         pause('...')
         print(f"Ian: {character['name']}! You were right, I should not have entered, it was like a nightmare. Lets get out of here please...")
