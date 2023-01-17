@@ -113,6 +113,7 @@ def player_turn(monster, character):
             return 'escaped'
         # If fails
         print(f"The {monster['name']} blocked your exit!")
+        pause()
 
 
 def fight(character, monster):

@@ -137,7 +137,7 @@ def ask_use_items(character):
         elif result < i:
             it.consume_item(character['inventory']['medicine'][result], character)
         else:
-            it.consume_item(character['inventory']['energetic_drinks'][result], character)
+            it.consume_item(character['inventory']['energetic_drinks'][result-i], character)
 
     else:
         pause()

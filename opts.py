@@ -738,7 +738,7 @@ PREFABS = {
     }
 }
 
-TOTAL_TREASURES = 0
+TOTAL_TREASURES = 4
 """
 Other data
 """
