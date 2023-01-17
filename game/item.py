@@ -1,5 +1,5 @@
 import random
-from opts import ITEMS, QUALITIES, SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES, PIJAMAS_NAMES, ROOMS
+from opts import ITEMS, PREFABS, QUALITIES, SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES, PIJAMAS_NAMES, ROOMS
 from utils.functions import decide_list, decide_index_rated_list, ask_int, pause
 from game.game_manager import manager
 
@@ -126,6 +126,7 @@ def pick_items(item, quantity, character):
 
     if item['type'] == 'key':
         character['inventory']['keys'].append(item)
+        manager['treasures_found'] += 1
         print(f"You have received a key")
 
     elif item['type'] == 'clothes':
@@ -157,6 +158,8 @@ def pick_items(item, quantity, character):
         print(f"You've received {quantity} {item['name']}{'s' if quantity > 1 else ''}")
 
     elif item['type'] == 'faith_item' and ask_if_continue(character['inventory']['faith_item'], item, room):
+        if item in PREFABS.values():
+            manager['treasures_found'] += 1
         character['inventory']['faith_item'] = item
         character['shield'] = item['traits']['shield']
         print(f"You have received a {item['name']}")
@@ -173,6 +176,9 @@ def pick_items(item, quantity, character):
                 character['inventory']['weapon'] = item
                 character['strength'] = character['difficulty']['strength'] + item['traits']['strength']
                 manager['weapons_taken'] += 1
+                if item in PREFABS.values():
+                    manager['treasures_found'] += 1
+
                 print(f"You have received a {item['name']}")
             else:
                 ROOMS[character['room']['id']]['chest'].append(item)
@@ -181,6 +187,9 @@ def pick_items(item, quantity, character):
             character['inventory']['weapon'] = item
             character['strength'] = character['difficulty']['strength'] + item['traits']['strength']
             manager['weapons_taken'] += 1
+
+            if item in PREFABS.values():
+                manager['treasures_found'] += 1
             print(f"You have received a {item['name']}")
 
     else:
