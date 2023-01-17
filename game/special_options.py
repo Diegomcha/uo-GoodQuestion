@@ -3,7 +3,7 @@ import random
 
 from opts import ROOMS, PREFABS
 from game.game_manager import manager
-from utils.functions import ask_int, pause
+from utils.functions import ask_int, pause, decide
 
 
 def pet_cat(character):
@@ -31,10 +31,18 @@ def pet_cat(character):
 
 
 def play_piano(character):
-    print("A piece fell down revealing a key", end = "")
-    pause()
-    it.pick_items(PREFABS['basement_key'],1, character)
-    pause()
+    if manager['times_played_piano'] == 0:
+        print("A piece fell down revealing a key", end="")
+        pause()
+        it.pick_items(PREFABS['basement_key'], 1, character)
+        pause()
+    else:
+        print('You played the piano')
+        if decide(25):
+            print('A spider scared you and made you fall. You lost 2hp')
+            character['hp'] -= 2
+        pause()
+    manager['times_played_piano'] += 1
 
 
 def open_chest(character):
@@ -90,7 +98,7 @@ def knife_poster(character):
 
     if ask_int(1, 2) == 1:
         it.pick_items(PREFABS['kitchen_knife'], 1, character)
-    else:    
+    else:
         ROOMS[character['room']['id']]['chest'].append(PREFABS['kitchen_knife'])
 
 

@@ -74,10 +74,8 @@ def generate_ghost(monster, difficulty, elo):
         if elo > 90 and decide(50):
             ghost['category'] = 'Special'
 
-    return {
-        **ghost,  # spread operator used to unpack the dictionary into the new one
-        'escape_rate': monster['escape_rate'],
-        'maxhp': monster['maxhp'] if ghost['category'] == 'Special' else round(0.75*monster['maxhp']),
-        'hp': monster['maxhp'] if ghost['category'] == 'Special' else round(0.75*monster['maxhp']),
-        'strength': monster['strength'] if ghost['category'] == 'Special' else round(0.75*monster['strength'])
-    }
+    ghost['escape_rate'] = monster['escape_rate']
+    ghost['maxhp'] = monster['maxhp'] if ghost['category'] == 'Special' else round(0.75*monster['maxhp'])
+    ghost['hp'] = monster['maxhp'] if ghost['category'] == 'Special' else round(0.75*monster['maxhp'])
+    ghost['strength'] = monster['strength'] if ghost['category'] == 'Special' else round(0.75*monster['strength'])
+    return ghost

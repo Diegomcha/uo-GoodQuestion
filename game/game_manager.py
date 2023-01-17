@@ -9,5 +9,7 @@ manager = {
     'weapons_taken': 0,
     'volatin': False,
     'character_displayed': True,
-    'good_ending':False
+    'good_ending': False,
+    'times_played_piano': 0,
+    'attic_key_room': 0
 }

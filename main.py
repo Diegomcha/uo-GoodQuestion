@@ -1,3 +1,4 @@
+import game.item as it
 import game.main_menu as menu
 import game.character as char
 import game.achievement_display as achiev
@@ -40,6 +41,8 @@ def main():
         print()
         print()
 
+        it.generate_attic_key()
+
         # Displays inital Room & character
         char.display(character)
         manager['displayed_character'] = True
@@ -62,10 +65,8 @@ def main():
                     manager['character_displayed'] = False
             else:
                 break
-        
-        end.ending(character)
 
-        # TODO: Continue...
+        end.ending(character)
 
 
 main()

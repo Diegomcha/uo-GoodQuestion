@@ -3,7 +3,7 @@ import game.character as char
 import game.monsters as mon
 from game.game_manager import manager
 
-from opts import ROOMS
+from opts import ROOMS, PREFABS
 from utils.functions import decide, ask_int, pause
 
 
@@ -20,7 +20,7 @@ def display(room, character):
 
     Returns
     -------
-    dict[str, Any]
+    dict[str, Any] / None
         The values of the monster found in the room
         None if the monster does not exist
     """
@@ -29,6 +29,11 @@ def display(room, character):
         print(f"You enter into a room that resembles a {room['resemblance']}")
 
         if room['resemblance'] != 'stairs':
+            if room['id'] == manager['attic_key_room']:
+                pause("...")
+                it.pick_items(PREFABS['attic_key'], 1, character)
+                pause()
+
             if room['monster'] == room['item'] == None:
                 print("You find nothing inside")
             else:
@@ -37,19 +42,21 @@ def display(room, character):
 
                 if room['monster'] != None:
                     print(f"You find a monster!")
+                    pause()
                     return room['monster']
 
     else:
         print(f"You return to the {room['resemblance']}")
 
     pause()
-    return None
+
 
 def search_keys(character, room):
     for key in character['inventory']['keys']:
         if room['locked'] == key['number']:
             return key
     return None
+
 
 def unlock(character, room):
     """Method used for knowing if a room is unlocked
@@ -69,8 +76,8 @@ def unlock(character, room):
     """
     if room['locked'] == None:
         return True
-    
-    key = search_keys(character, room) 
+
+    key = search_keys(character, room)
     if key != None:
         character['inventory']['keys'].remove(key)
         room['locked'] = None
@@ -171,9 +178,6 @@ def generate(id, sneak, difficulty, elo):
         monster_rate = room['monsters']['rate'] - sneak
     except:
         pass
-
-    #item = None
-    #monster = None
 
     # generate item
     item = None

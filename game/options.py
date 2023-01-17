@@ -7,10 +7,8 @@ from opts import ROOMS
 from game.game_manager import manager
 from utils.functions import ask_int
 
-# TODO: AAAAAAAAAAAAAA ERROR QUE NO ENTIENDO XD
+
 # special_options = [option1.....]
-
-
 def print_special_options(special_options):
     """Method for displaying the special options of a room
 
@@ -38,10 +36,6 @@ def display(special_options, character):
         list containing the names of the special options
     character : dict[str, Any]
         dictionary storing all the attributes of the character
-
-    Returns
-    -------
-    None
     """
     if not manager['character_displayed']:
         print()
@@ -51,7 +45,6 @@ def display(special_options, character):
     if len(ROOMS[character['room']['id']]['chest']) != 0:
         if 'Open chest' not in ROOMS[character['room']['id']]['special_options']:
             ROOMS[character['room']['id']]['special_options'].append('Open chest')
-            display(ROOMS[character['room']['id']]['special_options'], character)
 
     # print() TODO: CHECK if necessary
     print("1 - [Go to another room]")
@@ -101,4 +94,3 @@ def display(special_options, character):
 
         manager['character_displayed'] = False
         return None
-

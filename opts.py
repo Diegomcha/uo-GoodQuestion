@@ -122,10 +122,9 @@ BASE_DAMAGE_WEAPON = {'knife': 3, 'fork': 2, 'machete': 6, 'spike': 7, "cat's pa
 ITEMS = {
     'weapon': {
         'names': ['knife', 'fork', 'machete', 'spike'],
-        'special_names': ["cat's paw"],  # TODO: new names
+        'special_names': ["cat's paw"],
         'consumable': False,
-        'duration': -1,
-        'traits': [  # TODO: change rates
+        'traits': [
             {
                 # quality id: 0
                 'strength': 20
@@ -148,8 +147,7 @@ ITEMS = {
         'names': ['half-filled syringe', 'unknown pills', 'inhaler'],
         'special_names': ['glass of glowing liquid'],
         'consumable': True,
-        'duration': -1,
-        'traits': [  # TODO: Change rates
+        'traits': [
             {
                 # quality id: 0
                 'hp': 50
@@ -172,8 +170,7 @@ ITEMS = {
         'names': ['broken t-shirt', 'shorts', 'sleepers'],
         'special_names': ['dino pijama'],
         'consumable': False,
-        'duration': -1,
-        'traits': [  # TODO: Change rates
+        'traits': [
             {
                 # quality id: 0
                 'sneak': 10
@@ -196,8 +193,7 @@ ITEMS = {
         'names': ['PinkBull', 'NotMonster', 'Popstar', 'Freeze'],
         'special_names': ['Frosty Freezy Freeze'],
         'consumable': True,
-        'duration': 1,
-        'traits': [  # TODO: Change rates
+        'traits': [
             {
                 # quality id: 0
                 'swiftness': 20
@@ -220,8 +216,7 @@ ITEMS = {
         'names': ['wristband', 'cross', 'necklace', 'old watch'],
         'special_names': ["cat's necklace"],
         'consumable': False,
-        'duration': -1,
-        'traits': [  # TODO: Change rates
+        'traits': [
             {
                 # quality id: 0
                 'shield': 10
@@ -251,8 +246,6 @@ MONSTERS = {
         'maxhp': 20,
         'strength': 30,
         'swiftness': 0
-        # 'drop': [],
-        # 'drop_rate': 0
     },
     'giant_rat': {
         'display_name': 'Giant rat',
@@ -279,16 +272,11 @@ ROOMS = [
         'resemblance': 'entrance',
         'items': {
             'rate': 100,
-            'available': ['clothes'],
-            'forced': None  # SOlo puede ser un item so no hace falta list
+            'available': ['clothes']
         },
-        'monsters': {
-            'rate': 0,
-            'available': [],
-            'forced': None
-        },
+        'monsters': {'rate': 0},
         'connections': [1, 2, 3, 4, 5],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
@@ -310,8 +298,7 @@ ROOMS = [
                     'type': 'weapon',
                     'rate': 10
                 }
-            ],
-            'forced': None
+            ]
         },
         'monsters': {
             'rate': 60,
@@ -328,11 +315,10 @@ ROOMS = [
                     'type': 'viper',
                     'rate': 10
                 }
-            ],
-            'forced': None
+            ]
         },
         'connections': [0, 5],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
@@ -341,8 +327,7 @@ ROOMS = [
         'resemblance': 'kitchen',
         'items': {
             'rate': 100,
-            'available': ['energetic_drinks'],
-            'forced': None
+            'available': ['energetic_drinks']
         },
         'monsters': {
             'rate': 75,
@@ -363,7 +348,7 @@ ROOMS = [
             'forced': None
         },
         'connections': [0, 3],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
@@ -381,8 +366,7 @@ ROOMS = [
                     'type': 'weapon',
                     'rate': 10
                 }
-            ],
-            'forced': None
+            ]
         },
         'monsters': {
             'rate': 90,
@@ -395,11 +379,10 @@ ROOMS = [
                     'type': 'viper',
                     'rate': 40
                 }
-            ],
-            'forced': None
+            ]
         },
         'connections': [0, 2],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
@@ -408,25 +391,10 @@ ROOMS = [
         'resemblance': 'stairs',
         'items': {
             'rate': 25,
-            'available': ['medicine'],
-            'forced': None
+            'available': ['medicine']
         },
-        # 'monsters': {
-        #     'rate': 80,
-        #     'available': [
-        #         {
-        #             'type': 'giant_rat',
-        #             'rate': 55
-        #         },
-        #         {
-        #             'type': 'viper',
-        #             'rate': 45
-        #         }
-        #     ],
-        #     'forced': None
-        # },
         'connections': [6, 0, 14],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
@@ -448,8 +416,7 @@ ROOMS = [
                     'type': 'clothes',
                     'rate': 50
                 }
-            ],
-            'forced': None
+            ]
         },
         'monsters': {
             'rate': 95,
@@ -462,11 +429,10 @@ ROOMS = [
                     'type': 'viper',
                     'rate': 20
                 }
-            ],
-            'forced': None
+            ]
         },
         'connections': [0, 1],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     # Floor 1
@@ -474,10 +440,7 @@ ROOMS = [
         # 'id': 6,
         'special_options': [],
         'resemblance': 'hall',
-        'items': {
-            'rate': 0,
-            'forced': None
-        },
+        'items': {'rate': 0},
         'monsters': {
             'rate': 100,
             'available': [
@@ -493,11 +456,10 @@ ROOMS = [
                     'type': 'viper',
                     'rate': 10
                 }
-            ],
-            'forced': None
+            ]
         },
         'connections': [4, 7, 8, 9, 10, 11, 13],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
@@ -515,8 +477,7 @@ ROOMS = [
                     'type': 'weapon',
                     'rate': 10
                 }
-            ],
-            'forced': None
+            ]
         },
         'monsters': {
             'rate': 100,
@@ -533,25 +494,17 @@ ROOMS = [
                     'type': 'viper',
                     'rate': 30
                 }
-            ],
-            'forced': None
+            ]
         },
         'connections': [6],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
         # 'id': 8,
         'special_options': [],
         'resemblance': 'diner',
-        'items': {
-            'forced': None  # TODO: Here the key to the basement
-            # {
-            #     'name': 'key',
-            #     'type': 'key',
-            #     'id': 1
-            # }
-        },
+        'items': {'rate': 0},
         'monsters': {
             'rate': 100,
             'available': [
@@ -567,11 +520,10 @@ ROOMS = [
                     'type': 'viper',
                     'rate': 30
                 }
-            ],
-            'forced': None
+            ]
         },
         'connections': [6],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
@@ -593,8 +545,7 @@ ROOMS = [
                     'type': 'faith_item',
                     'rate': 5
                 }
-            ],
-            'forced': None
+            ]
         },
         'monsters': {
             'rate': 100,
@@ -607,11 +558,10 @@ ROOMS = [
                     'type': 'viper',
                     'rate': 30
                 }
-            ],
-            'forced': None
+            ]
         },
         'connections': [6, 12],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
@@ -629,8 +579,7 @@ ROOMS = [
                     'type': 'medicine',
                     'rate': 30
                 }
-            ],
-            'forced': None
+            ]
         },
         'monsters': {
             'rate': 100,
@@ -647,25 +596,17 @@ ROOMS = [
                     'type': 'viper',
                     'rate': 50
                 }
-            ],
-            'forced': None
+            ]
         },
         'connections': [6],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
         # 'id': 11,
         'special_options': ['Get a train toy', 'Get a plushie', 'Open drawer'],
         'resemblance': 'toys room',
-        'items': {
-            'forced': None  # TODO: Here the key to the attic
-            # {
-            #     'name': 'stick',
-            #     'type': 'key',
-            #     'id': 0
-            # }
-        },
+        'items': {'rate': 0},
         'monsters': {
             'rate': 100,
             'available': [
@@ -677,11 +618,10 @@ ROOMS = [
                     'type': 'viper',
                     'rate': 70
                 }
-            ],
-            'forced': None
+            ]
         },
         'connections': [6],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     {
@@ -703,8 +643,7 @@ ROOMS = [
                     'type': 'faith_item',
                     'rate': 5
                 }
-            ],
-            'forced': None
+            ]
 
         },
         'monsters': {
@@ -718,11 +657,10 @@ ROOMS = [
                     'type': 'viper',
                     'rate': 60
                 }
-            ],
-            'forced': None
+            ]
         },
         'connections': [9],
-        'locked': None,  # None or number of key
+        'locked': None,
         'chest': []
     },
     # Floor 3
@@ -730,10 +668,10 @@ ROOMS = [
         # 'id': 13,
         'special_options': ['friend', 'window'],
         'resemblance': 'attic',
-        'items': {'rate':0},
-        'monsters':{'rate':0},
+        'items': {'rate': 0},
+        'monsters': {'rate': 0},
         'connections': [6],
-        'locked': None,  # None or number of key
+        'locked': 13,
         'chest': []
     },
     # Basement
@@ -741,10 +679,10 @@ ROOMS = [
         # 'id': 14,
         'special_options': ['Play with cat'],
         'resemblance': 'basement',
-        'items': {'rate':0},
-        'monsters':{'rate':0},
+        'items': {'rate': 0},
+        'monsters': {'rate': 0},
         'connections': [4],
-        'locked': 14,  # None or number of key
+        'locked': 14,
         'chest': []
     }
 ]
@@ -776,7 +714,9 @@ PREFABS = {
         'quality': 4,
         'consumable': False,
         'part_of_body': 'shoes',
-        'traits': {}
+        'traits': {
+            'sneak': 1
+        }
     },
     'kitchen_knife': {
         'type': 'weapon',
@@ -794,11 +734,17 @@ PREFABS = {
         'quality': 4,
         'consumable': False,
         'part_of_body': None,
-        'traits': []
+        'traits': {
+            'strength': 10
+        }
     },
     'basement_key': {
         'type': 'key',
         'number': 14
+    },
+    'attic_key': {
+        'type': 'key',
+        'number': 13
     }
 }
 

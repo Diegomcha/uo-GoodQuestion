@@ -1,3 +1,4 @@
+import random
 from opts import ITEMS, QUALITIES, SHIRTS_NAMES, PANTS_NAMES, SHOES_NAMES, PIJAMAS_NAMES, ROOMS
 from utils.functions import decide_list, decide_index_rated_list, ask_int, pause
 from game.game_manager import manager
@@ -38,24 +39,15 @@ def generate(available):
     return item
 
 
-def generate_key(number):
-    """Method that generates a key
-
-    Parameters
-    ----------
-    number : int
-        id of the key (id must match with the id of the door in order to open it)
-
-    Returns
-    -------
-    dict[str, Any]
-        dictionary containing the type ('key') and the number of it
+def generate_attic_key():
+    """Method that generates the attic key
     """
-    item = {
-        'type': 'key',
-        'number': number
-    }
-    return item
+    room = manager['attic_key_room']
+
+    while room == 13 or room == 4 or room == 0 or room == 6:
+        room = random.randint(1, 14)
+
+    manager['attic_key_room'] = room
 
 
 def display(item):
@@ -94,9 +86,9 @@ def ask_if_continue(lose, win, room):
         if win['type'] == 'weapon':
             print(f"Are you willing to change the {lose['type']} [Name: {lose['name']} - Quality: {QUALITIES[lose['quality']]['name']} - Damage: {lose['traits']['strength']}]")
             print(f"For the {win['type']} [Name: {win['name']} - Quality: {QUALITIES[win['quality']]['name']} - Damage: {win['traits']['strength']}]")
-        else:  # TODO: bug with the traits
-            print(f"Are you willing to change the {lose['type']} [Name: {lose['name']} - Quality: {QUALITIES[lose['quality']]['name']} - Traits: {lose['traits']}]")
-            print(f"For the {win['type']} [Name: {win['name']} - Quality: {QUALITIES[win['quality']]['name']} - Traits: {win['traits']}]")
+        else:
+            print(f"Are you willing to change the {lose['type']} [Name: {lose['name']} - Quality: {QUALITIES[lose['quality']]['name']} - Sneak: {lose['traits']['sneak']}]")
+            print(f"For the {win['type']} [Name: {win['name']} - Quality: {QUALITIES[win['quality']]['name']} - Sneak: {win['traits']['sneak']}]")
 
         print()
         print(" 1 - [Yes] \n 2 - [No]")
@@ -116,6 +108,17 @@ def ask_if_continue(lose, win, room):
 # Public Method (In order to pick something USE this method)
 
 def pick_items(item, quantity, character):
+    """Method used to pick an item
+
+    Parameters
+    ----------
+    item : dict[str, Any]
+        Item to pick up
+    quantity : int
+        Quantity of items
+    character : dict[str, Any]
+        Character who is going to pick up the item
+    """
     room = ROOMS[character['room']['id']]
 
     if item['type'] == 'key':
@@ -179,8 +182,6 @@ def pick_items(item, quantity, character):
 
     else:
         print("You stay as before")
-        
-    return None
 
 
 def consume_item(item, character):

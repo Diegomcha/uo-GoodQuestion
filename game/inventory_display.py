@@ -18,7 +18,7 @@ def display_inventory(character):
     if len(character['inventory']['keys']) != 0:
         print(f"\t\t - Keys: ")
         for key in character['inventory']['keys']:
-            if len(character['locked_doors_visited']) != 0 and key['number'] not in character['locked_doors_visited']:
+            if len(character['locked_doors_visited']) != 0 or key['number'] not in character['locked_doors_visited']:
                 print("\t\t\t[?????]")
             else:
                 print(f"\t\t\t[{ROOMS[key['number']]['resemblance'].upper()}]")
@@ -113,10 +113,6 @@ def ask_use_items(character):
     ----------
     character : dict[str, Any]
         dictionary storing all the attributes of the character
-
-    Returns
-    -------
-    None
     """
     if len(character['inventory']['medicine']) > 0 or len(character['inventory']['energetic_drinks']) > 0:
         if len(character['inventory']['medicine']) > 0:

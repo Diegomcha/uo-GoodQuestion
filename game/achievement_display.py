@@ -6,15 +6,21 @@ from utils.functions import ask_options
 TOTAL = len(ACHIEVEMENTS)
 
 
-# TODO: change docstring
 def paint(count, total, index, name_from_index, description):
     """ Makes the display of the achievement
-    Args:
-        count (int): total of achievements completed
-        total (int): total of achievements available
-        index (int): index of the achievement
-        name_from_index (String): name of the achievement
-        description (String): description of the achievement
+
+    Parameters
+    ----------
+        count : int
+            Total of achievements completed
+        total : int
+            Total of achievements available
+        index : int: 
+            Index of the achievement
+        name_from_index : str
+            Name of the achievement
+        description : str
+            Description of the achievement
     """
     print(f"----- ACHIEVEMENTS ({count} of {total} unlocked) -----")
     print()
@@ -34,13 +40,11 @@ def paint(count, total, index, name_from_index, description):
         })
 
     if result == KEYS['next']:
-        print(1)
         if index < count - 1:
             paint_logic(index+1)
         else:
             paint_logic(index)
     elif result == KEYS['previous']:
-        print(1)
         if (index > 0):
             paint_logic(index - 1)
         else:
@@ -54,8 +58,11 @@ def paint(count, total, index, name_from_index, description):
 
 def paint_logic(index_to_paint):
     """Gets the data for the paint method
-    Args:
-        index_to_paint (int): Index of the achievement you want to display
+
+    Parameters:
+    ----------
+        index_to_paint : int
+            Index of the achievement you want to display
     """
     data = am.read_achievements(ACHIEVEMENTS_SAVE_PATH)
     count = len(data)

@@ -149,5 +149,3 @@ def pause(msg=""):
     Pauses the program until the user presses enter.
     """
     input(msg)
-    # TODO: If u want we can put here "[ENTER]" or smt like that cause it may be confusing for the user to use
-    # TODO: letme know what u think either way having this function is good for readability
