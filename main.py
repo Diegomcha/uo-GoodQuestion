@@ -43,9 +43,6 @@ def main():
 
         it.generate_attic_key()
 
-        # TODO: Remove this
-        print(manager['attic_key_room'])
-
         # Displays inital Room & character
         char.display(character)
         manager['displayed_character'] = True
