@@ -1,6 +1,8 @@
+import game.room as rm
+import game.item as it
+
 from utils.functions import ask_options, ask_int
 from opts import KEYS, BASE_CHARACTERS, DIFFICULTIES
-import game.item as it
 
 
 def display_difficulties():
@@ -52,15 +54,19 @@ def select():
     character = {
         'name': '',
         'maxhp': difficulty['maxhp'],
-        'hp': 0,
+        'difficulty': difficulty,
+        'hp': 'maxhp',
+        'shield': 0,
         'strength': difficulty['strength'],
         'sneak': difficulty['sneak'],
         'swiftness': difficulty['swiftness'],
-        'room': 0,
         'last_room': 0,
+        'elo': 100,
         'visited_rooms': [],
         'remaining': difficulty['remaining'],
-        'inventory': []
+        'inventory': {'keys': [], 'medicine': [], 'energetic_drinks': [], 'clothes': {'shirt': None, 'pants': None, 'shoes': None, 'pijama': None}, 'faith_item': None, 'weapon': None},
+        'traits': [],
+        'locked_doors_visited': []
     }
 
     # Character
@@ -93,11 +99,19 @@ def select():
 
     # applies traits and name and initializes hp
     for trait, val in BASE_CHARACTERS[id]['traits'].items():
-        character[trait] += (val / 100) * character[trait]
+        character['difficulty'][trait] += (val / 100) * character['difficulty'][trait]
+        character[trait] = character['difficulty'][trait]
+
     character['name'] = BASE_CHARACTERS[id]['name']
     character['hp'] = character['maxhp']
+    character['room'] = rm.generate(0, character['sneak'], character['difficulty']['name'], character['elo'])
+    character['last_room'] = character['room']['id']
 
     return character
+
+
+def set_elo(character):
+    character['elo'] = character['strength']*2 + character['shield']*3 + character['hp']
 
 
 def display(character):
@@ -111,12 +125,19 @@ def display(character):
     """
     title = f"----- {character['name']} ({character['remaining']} turn left) -----"
 
-    print(title)
-    print(f" - Health: {character['hp']} / {character['maxhp']}")
-    print(f" - Strength: {character['strength']}")
-    print(f" - Inventory:{' Empty' if len(character['inventory']) == 0 else ''}")
+    print(f"\t{title}")
+    print(f"\t - Health: {character['hp']} / {character['maxhp']}")
+    print(f"\t - Strength: {character['strength']}")
+    print(f"\t{'-' * len(title)}")
+    print()
 
-    # TODO: CHANGE
-    for item in character['inventory']:
-        it.display(item)
-    print("-"*len(title))
+
+def combat_display(character, monster):
+    monster_name = monster['name'].title() + " (" + monster['category']+")"
+    print('*********************************************************')
+    print(f"\t{character['name'].title()}\t\t|\t{monster_name}")
+    print(f"\tHP: {character['hp']:.0f}\t\t|\tHP: {monster['hp']}")
+    print(f"\tSHIELD: {character['shield']}\t|")
+    print(f"\tSTRENGTH: {character['strength']}\t|\tSTRENGTH: {monster['strength']}")
+    print('*********************************************************')
+    print()

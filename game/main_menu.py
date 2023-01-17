@@ -1,5 +1,8 @@
 import os
-from utils.functions import ask_int, print_file
+import game.achievement_manager as am
+
+from utils.functions import ask_int, print_file, pause
+from opts import ACHIEVEMENTS_SAVE_PATH
 
 TITLE_FILEPATH = os.path.join(os.path.curdir, "utils", "assets", "title.txt")
 CREDITS_FILEPATH = os.path.join(os.path.curdir, "utils", "assets", "credits.txt")
@@ -10,9 +13,8 @@ ACHIEVEMENTS = 2
 CREDITS = 3
 EXIT = 4
 
+
 # Main methods
-
-
 def display():
     """
     Displays main menu.
@@ -26,18 +28,21 @@ def display():
     print_file(TITLE_FILEPATH)
     print()
     print('\t\t1 - [New game]')
-    print('\t\t2 - [Achievements]')
-    print('\t\t3 - [Credits]')
+    i = 2
+    if am.check_file(ACHIEVEMENTS_SAVE_PATH):
+        print('\t\t2 - [Achievements]')
+        i += 1
+    print(f'\t\t{i} - [Credits]')
     print()
-    print('\t\t4 - [Exit] 🥲')
+    print(f'\t\t{i+1} - [Exit]')
     print()
-    selection = ask_int(1, 4)
+    selection = ask_int(1, i+1)
 
-    if selection == CREDITS:
+    if selection == i:
         print_file(CREDITS_FILEPATH)
-        input()
+        pause()
         return display()
-    if selection == EXIT:
+    if selection == i+1:
         exit()
 
     return selection
@@ -47,10 +52,12 @@ def display_lore():
     """
     Displays the lore.
     """
-    f = open(LORE_FILEPATH, 'r')
+    print("\t\t\t\t----- LORE -----")
+    f = open(LORE_FILEPATH, 'r', encoding='utf-8')
     for line in f:
         if line == '\n':
-            input()
+            pause()
         else:
             print(line, end='')
     f.close()
+    print("\t\t\t\t----------------")

@@ -26,6 +26,7 @@ def ask_options(opts):
         print(f"{opt_val} - {opt_name}")
 
     selection = ''
+    print()
     while not selection in opts.keys():
         selection = input('Selection: ').upper().strip()
     print()
@@ -111,7 +112,7 @@ def decide_list(list):
     Any
         The chosen item
     """
-    return random.choice(list)
+    return random.choice(list) if not type(list) == type('str') else list
 
 
 def decide_index_rated_list(list):
@@ -141,3 +142,10 @@ def decide_index_rated_list(list):
             return i
         else:
             last += item['rate']
+
+
+def pause(msg=""):
+    """
+    Pauses the program until the user presses enter.
+    """
+    input(msg)
